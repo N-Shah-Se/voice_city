@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-sm-12">
+        {% set a = namespace(value=0) %}
+        {% set users = [] %}
+        {% for actor in actors %}
+            {% if actor['userName'] not in users %}
+                {% if loop.index <= 4 %}
+                    {% set a.value = a.value + 1 %}
+                    {{ users.append(actor['userName']) }}
+                    <!-- audio start-->
+                    <div class="border-bottom px-3 py-1">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <img {% if actor['profilePicture'] != "" %}
+                                    src="../static/actorprofilepic/{{ actor['profilePicture'] }}"
+                                    {% else %}src="static/img/profile.png"{% endif %}
+                                    class="img-fluid profilesideimg">
+                                <div class="profiletextdiv1">
+                                    <p class="pl-2 mb-0">{{ actor['userName'] }}</p>
+                                    <p>
+                                        <i class="fa fa-map-marker pr-2 ml-2"></i>
+                                        {{ actor['Location'] }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <audio controls controlsList="nodownload" class="w-100">
+                                    <source src="static/audio/{{ actor['playlists']['playlist'][0] }}"
+                                            type="audio/mpeg">
+                                    Your browser does not support the audio element.
+                                </audio>
+                                {% for lang in actor['playlists']['playlist_language'] %}
+                                    <span class="btnnavlink2">{{ lang }}</span>
+                                {% endfor %}
+                                {% for eachCategory in categories %}
+                                    {% if eachCategory['_id']|string == actor['playlists']['playlist_category'] %}
+                                        <span class="btnnavlink2"> {{ eachCategory['Category Name']|capitalize }}</span>
+                                    {% endif %}{% endfor %}
+                                <p class="audiotext1">{{ language }} |
+                                    {% for eachCategory in categories %}
+                                        {% if eachCategory['_id']|string == actor['playlists']['playlist_category'] %}
+                                            {{ eachCategory['Category Name']|capitalize }}
+                                        {% endif %}{% endfor %}</p>
+                            </div>
+                            <div class="col-sm-2">
+                                <a href="/actorprofile?id={{ actor['_id'] }}">
+                                    <button class="btn btn-success mx-2">Profile</button>
+                                </a>
+                            </div>
+                            <div class="col-sm-2">
+                                {% if email != "none" %}
+                                    <button class="btn btn-success">Chat</button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- audio end-->
+
+                {% endif %}
+            {% endif %}
+
+        {% endfor %}
+    </div>
+</div>

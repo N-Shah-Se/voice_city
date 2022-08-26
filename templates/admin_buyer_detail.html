@@ -1,0 +1,449 @@
+{% extends "admin_layout.html" %}
+{% block title %}Buyer-Detail{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style>
+
+        .new-edit-profile-div-1-bottom {
+            background: #757575;
+            height: 50px;
+            margin-bottom: 20px;
+            font-size: 20px;
+            color: white;
+        }
+
+        .new-edit-profile-div-1 {
+            background: whitesmoke;
+            margin-top: 20px;
+            padding: 15px;
+
+        }
+
+        .small-text-1 {
+            margin-top: -15px;
+            position: absolute;
+        }
+
+
+        .mic-span-3 {
+            background: #1e7e34;
+            border-radius: 100%;
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            padding-left: 21px;
+            padding-top: 17px;
+            margin-right: 15px;
+
+        }
+
+        .border-bottom-1-cus {
+            border-bottom: 5px solid #1e7e34;
+            padding-bottom: 5px;
+
+        }
+
+        .play-list-edit-1-button {
+            margin-top: -45px;
+        }
+
+        .play-list-edit-1-button-2 {
+            margin-top: -65px;
+        }
+
+        .new-edit-profile-div-2-bottom {
+            background: #1e7e34;
+            height: 50px;
+            margin-bottom: 20px;
+            font-size: 20px;
+            color: white;
+        }
+
+        .card-body-1 {
+            flex: 1 1 auto;
+            min-height: 1px;
+            padding: 1.25rem;
+            background: whitesmoke;
+            border-top: 3px solid #1e7e34;
+            margin-top: 30px;
+        }
+
+        .profile-icon-1 {
+            font-size: 23px !important;
+
+        }
+
+        .accordion-1 {
+            margin-top: -39px;
+
+        }
+
+        .mic-span-4 {
+            background: #1e7e34;
+            border-radius: 100%;
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            padding-left: 17px;
+            padding-top: 12px;
+        }
+
+        .profile-side-img-1 {
+            border-radius: 50%;
+            height: 70px;
+        }
+
+        .edit-icon-1 {
+            font-size: 25px !important;
+
+        }
+
+        .playlist-name-div-1 {
+            background: whitesmoke;
+            padding: 15px;
+
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <section class="content">
+        <div class="container-fluid">
+            <div class="col-12 col-sm-12">
+            {% if error|length>1 %}
+                            <div class="form-group ">
+                                <div class="alert  alert-danger alert-dismissible fade show"
+                                     role="alert">
+                                    <span class="badge badge-pill badge-danger">Alert</span> {{ error }}
+                                    <button type="button" class="close" data-dismiss="alert"
+                                            aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if message != "" %}
+                            <div class="form-group ">
+                                <div class="alert alert-success alert-dismissible fade show"
+                                     role="alert">
+                                    <span class="badge badge-pill badge-success">Success</span> {{ catupdate }}
+                                    <button type="button" class="close" data-dismiss="alert"
+                                            aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                        {% endif %}
+                <div class="card card-primary card-outline card-outline-tabs">
+                    <div class="card-header p-0 border-bottom-0">
+                        <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill"
+                                   href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home"
+                                   aria-selected="true">Detail</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill"
+                                   href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile"
+                                   aria-selected="false">Projects</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="custom-tabs-four-payment-tab" data-toggle="pill"
+                                   href="#custom-tabs-four-payment" role="tab" aria-controls="custom-tabs-four-payment"
+                                   aria-selected="false">Payments</a>
+                            </li>
+                                <li class="nav-item">
+                                <a class="nav-link" id="custom-tabs-five-bankinfo-tab" data-toggle="pill"
+                                   href="#custom-tabs-five-bankinfo" role="tab"
+                                   aria-controls="custom-tabs-four-payment"
+                                   aria-selected="false">Bank Info</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="tab-content" id="custom-tabs-four-tabContent">
+                            <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel"
+                                 aria-labelledby="custom-tabs-four-home-tab">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Buyer Details</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label>{{ titles[0] }}</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" id="nameActor" name="nameActor"
+                                                       value="{{ buyer_data[titles1[0]] }}"
+                                                       disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label>{{ titles[2] }}</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" id="nameActor" name="nameActor"
+                                                       value="{{ buyer_data[titles1[2]] }}" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label>{{ titles[3] }}</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" id="nameActor" name="nameActor"
+                                                       value="{{ buyer_data[titles1[3]] }}" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label>{{ titles[4] }}</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" id="nameActor" name="nameActor"
+                                                       value="{{ buyer_data[titles1[4]] }}" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label>{{ titles[5] }}</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" id="nameActor" name="nameActor"
+                                                       value="{{ buyer_data[titles1[5]] }}" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label>{{ titles[6] }}</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" id="nameActor" name="nameActor"
+                                                       value="{{ buyer_data[titles1[6]] }}" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label>{{ titles[-1] }}</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" id="nameActor" name="nameActor"
+                                                       value="{{ buyer_data[titles1[-1]].strftime('%d %b, %Y') }}"
+                                                       disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="tab-pane" id="custom-tabs-four-profile" role="tabpanel"
+                                 aria-labelledby="custom-tabs-four-home-tab">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Projects </h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <table id="actorProjects" class="table table-bordered table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>SNo</th>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <th>Budget</th>
+                                                <th>Status</th>
+                                                <th>Date</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for project in buyer_data['projects'] %}
+                                                <tr>
+                                                    <td>{{ loop.index }}</td>
+                                                    <td>{{ project['project_name'] }}</td>
+                                                    <td>{{ project['project_description'] }}</td>
+                                                    <td>$ {{ project['project_cost'] }}</td>
+                                                    <td>{{ project['status'] }}</td>
+                                                    <td>{{ project['timestamp'].strftime('%d %b, %Y (%H %M)') }}</td>
+                                                    <td style="text-align:center;">
+                                                        <button id="edit_{{ project['project_id'] }}_{{ buyer_data["_id"] }}"
+                                                                class="item"
+                                                                style="background: transparent;"
+                                                                data-placement="top" title="View Details"
+                                                                onclick="edit(this.id)">
+                                                            <i class="fa fa-info-circle"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="tab-pane" id="custom-tabs-four-payment" role="tabpanel"
+                                 aria-labelledby="custom-tabs-four-home-tab">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Payments </h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <table id="actorPayments" class="table table-bordered table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>SNo</th>
+                                                <th>Project Name</th>
+                                                <th>Bank</th>
+                                                <th>Account</th>
+                                                <th>Amount</th>
+                                                <th>Date</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for project in buyer_data['projects'] %}
+                                                {% if project['paymentStatus'] == "paid" %}
+                                                    <tr>
+                                                        <td>{{ loop.index }}</td>
+                                                        <td>{{ project['project_name'] }}</td>
+                                                        <td>{{ project['paymentDetail']['bank'] }}</td>
+                                                        <td>{{ project['paymentDetail']['account'] }}</td>
+                                                        <td>$ {{ project['paymentDetail']['amount'] }}</td>
+                                                        <td>{{ project['paymentDetail']['timestamp'].strftime('%d %b, %Y (%H %M)') }}</td>
+                                                        <td style="text-align:center;">
+                                                            <button id="edit_{{ project['project_id'] }}_{{ buyer_data["_id"] }}"
+                                                                    class="item"
+                                                                    style="background: transparent;"
+                                                                    data-placement="top" title="View Details"
+                                                                    onclick="edit(this.id)">
+                                                                <i class="fa fa-info-circle"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                {% endif %}
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                         <div class="tab-pane fade" id="custom-tabs-five-bankinfo" role="tabpanel"
+                                 aria-labelledby="custom-tabs-four-payment-tab">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Bank Information
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                         <div class="row form-group">
+                                <div class="col-sm-3">
+                                    <label class="form-label">Bank Name:</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" value="{% if 'bankName' in buyer_data %}{{ buyer_data['bankName'] }}{% endif %}" class="form-control" name="bankName" readonly>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-3">
+                                    <label class="forrequiredm-label">Acount Title:</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" value="{% if 'accountTitle' in buyer_data %}{{ buyer_data['accountTitle'] }}{% endif %}" class="form-control" name="accountTitle" readonly>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-3">
+                                    <label class="form-label">Acount Number:</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" value="{% if 'accountNo' in buyer_data %}{{ buyer_data['accountNo'] }}{% endif %}"
+                                           class="form-control" name="accountNo" readonly>
+                                </div>
+                            </div>
+
+
+                            <div class="row form-group">
+                                <div class="col-sm-3">
+                                    <label class="form-label">Iban Number</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" value="{% if 'ibannumber' in buyer_data %}{{ buyer_data['ibannumber'] }}{% endif %}"
+                                           class="form-control"  name="ibannumber" readonly>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-3">
+                                    <label class="form-label">Bank Swift Code</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" value="{% if 'swiftcode' in buyer_data %}{{ buyer_data['swiftcode'] }}{% endif %}"
+                                           class="form-control" name="swiftcode" readonly>
+                                </div>
+                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <!-- /.card -->
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+{% endblock %}
+
+{% block script %}
+    <script>
+
+        function edit(id) {
+            var idproject = id.toString().split('_')[1];
+            var idBuyer = id.toString().split('_')[2];
+            var date = new Date();
+            date.setTime(date.getTime() + (1 * 1 * 60 * 60 * 1000));
+            document.cookie = "idproject = " + idproject + "; expires=" + date.toGMTString();
+            document.cookie = "idBuyer = " + idBuyer + "; expires=" + date.toGMTString();
+            window.location.href = "/admin/project-detail";
+        }
+
+        $(function () {
+
+            $('#actorProjects').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+
+        $(function () {
+
+            $('#actorPayments').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,419 @@
+{% extends "layout.html" %}
+{% block title %}Job Detail{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href='{{ url_for("static", filename="css/order.css") }}'/>
+<link rel="stylesheet" href='{{ url_for("static", filename="css/floating.css") }}'>
+{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+
+
+
+    <div class="container postjobcontainer">
+        <div class="row">
+            <div class="col-sm-12">
+                {% if error != "" %}
+                    <div class="form-group ">
+                        <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+                            <span class="badge badge-pill badge-danger">Alert</span> {{ error }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if message|length>1 %}
+                    <div class="form-group ">
+                        <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                            <span class="badge badge-pill badge-success">Success</span> {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="container border py-3 px-3 mx-2" id="myTabContent">
+            <input type="text" readonly required id="project_id" name="project_id" value="{{ project_id }}"
+                   style="display: none;">
+            {#   Project Overview     #}
+            <div class="row">
+                <div class="col-sm-9">
+                    <p class="postjobtext1">Project Overview</p>
+                    <div class="row form-group">
+                        <div class="col-sm-4">
+                            <label class="postjoblabel">Project Name </label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input readonly class="form-control" type="text" name="projectName" id="projectName"
+                                   placeholder="Name of your project"
+                                   required value='{{ job_data["projects"][0]["project_name"] }}'>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-4">
+                            <label class="postjoblabel">Project Description </label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input readonly class="form-control" type="text" name="projectDescription"
+                                   id="projectDescription"
+                                   placeholder="Description about your project" required
+                                   value='{{ job_data["projects"][0]["project_description"] }}'>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-sm-4">
+                            <label class="postjoblabel">Recording Usage </label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input readonly class="form-control" type="text" name="projectUsage" id="projectUsage"
+                                   placeholder="How, where will the recoding used?" required
+                                   value='{{ job_data["projects"][0]["project_usage"] }}'>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="border rounder py-2 pt-4 pb-4 ">
+                        <div class="container">
+                            <p class="mb-2 font-weight-bold">
+                                Budget $ {{ job_data["projects"][0]["project_cost"] }}
+                            </p>
+                            <p class="mb-3">
+                                Send a bid to the buyer to get the chance of project awarded.
+                            </p>
+                            <p>DeadLine: {{ job_data["projects"][0]["project_deadline"][0] }}</p>
+                            <div class="text-center">
+                                <button class="btn btn-success mt-2"
+                                        {% if type != "None" and type == "actor" %}onclick="showModal('{{ job_data["_id"] }}','{{ job_data["projects"][0]["project_id"] }}')"{% else %}
+                                        onclick="loginPlease()"{% endif %}>Send Bid
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            {#   Requiremnts Overview     #}
+            <hr>
+            <div>
+                <p class="postjobtext1">Requirements Overview</p>
+                <div class="row form-group">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-2">
+                        <div class="border rounder py-2 pt-4 pb-4 ">
+                            <div class="container">
+                                <p class="mb-2 font-weight-bold">
+                                    Languages
+                                </p>
+                                {% set a=namespace(value=0) %}
+                                {% for language in job_data["projects"][0]["project_language"] %}
+                                    {% set a.value = a.value + 1 %}
+                                    <p class="btnnavlink2">{{ language|capitalize }}</p>
+                                {% endfor %}
+                                {% if a.value == 0 %}
+                                    <p class="btnnavlink2">N/a</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="border rounder py-2 pt-4 pb-4 ">
+                            <div class="container">
+                                <p class="mb-2 font-weight-bold">
+                                    Accent
+                                </p>
+                                {% set a=namespace(value=0) %}
+                                {% for accent in job_data["projects"][0]["accents"] %}
+                                    {% set a.value = a.value + 1 %}
+                                    <p class="btnnavlink2">{{ accent|capitalize }}</p>
+                                {% endfor %}
+                                {% if a.value == 0 %}
+                                    <p class="btnnavlink2">N/a</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <div class="border rounder py-2 pt-4 pb-4 ">
+                            <div class="container">
+                                <p class="mb-2 font-weight-bold">
+                                    Gender
+                                </p>
+                                {% set a=namespace(value=0) %}
+                                {% for category in categories %}
+                                    {% if category['Type'] == 'gender' %}
+                                        {% if category['_id']|string in job_data["projects"][0]["project_gender_age"] %}
+                                            {% set a.value = a.value + 1 %}
+                                            <span class="btnnavlink2">{{ category['Category Name']|title }}</span>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                                {% if a.value == 0 %}
+                                    <p class="btnnavlink2">N/a</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <div class="border rounder py-2 pt-4 pb-4 ">
+                            <div class="container">
+                                <p class="mb-2 font-weight-bold">
+                                    Age
+                                </p>
+                                {% set a=namespace(value=0) %}
+                                {% for category in categories %}
+                                    {% if category['Type'] == 'age' %}
+                                        {% if category['_id']|string in job_data["projects"][0]["project_gender_age"] %}
+                                            {% set a.value = a.value + 1 %}
+                                            <p class="btnnavlink2">{{ category['Category Name']|title }}</p>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                                {% if a.value == 0 %}
+                                    <p class="btnnavlink2">N/a</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <div class="border rounder py-2 pt-4 pb-4 ">
+                            <div class="container">
+                                <p class="mb-2 font-weight-bold">
+                                    Category
+                                </p>
+                                {% set a=namespace(value=0) %}
+                                {% for category in categories %}
+                                    {% if category['Type'] == 'category' %}
+                                        {% if category['_id']|string in job_data["projects"][0]["project_gender_age"] %}
+                                            {% set a.value = a.value + 1 %}
+                                            <p class="btnnavlink2">{{ category['Category Name']|title }}</p>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                                {% if a.value == 0 %}
+                                    <p class="btnnavlink2">N/a</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {#   Script Overview     #}
+            <hr>
+            <div class="row form-group">
+                <div class="col-sm-9">
+                    <p class="postjobtext1">Script Details</p>
+                    <div class="row form-group">
+                        <div class="col-sm-4">
+                            <label class="postjoblabel">Length of Recording </label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input readonly class="form-control" type="text" name="projectLength" id="projectLength"
+                                   required
+                                   placeholder="Length*"
+                                   value='{{ job_data["projects"][0]["project_length"] }} {{ job_data["projects"][0]["project_length_type"]|string }}'>
+                        </div>
+                    </div>
+                    {% if 'script' in job_data["projects"][0] %}
+                        <div class="row form-group">
+                            <div class="col-sm-4">
+                                <label class="postjoblabel">Script</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" cols="100"
+                                          rows="3">{{ job_data["projects"][0]['script'] }}</textarea>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if 'script file' in job_data["projects"][0] %}
+                        <div class="row form-group">
+                            <div class="col-sm-4">
+                                <label class="postjoblabel">Script File</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <a download
+                                   href="../static/scriptFiles/{{ job_data["projects"][0]['script file'] }}">{{ job_data["projects"][0]['script file'] }}</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-sm-3">
+                    <div class="border rounder py-2 pt-4 pb-4 ">
+                        <div class="container">
+                            <p class="mb-2 font-weight-bold">
+                                Delivery Options
+                            </p>
+                            {% for deliveryOption in job_data["projects"][0]["project_delivery_option"] %}
+                                <p class="btnnavlink2">{{ deliveryOption|title }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>      <!-- /.container -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form action="/send-bid" method="post" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModal">Send Request</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="editModalBody">
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Name
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="actorName" name="actorName" required
+                                       readonly value="{{ username }}"
+                                       maxlength="30">
+                                <input type="text" class="form-control" id="actorId" name="actorId" required readonly
+                                       value="{{ actordata['_id'] }}"
+                                       style="display: none;" maxlength="25">
+                                <input type="text" class="form-control" id="buyrId" name="buyrId" required readonly
+                                       value=""
+                                       style="display: none;" maxlength="25">
+                                <input type="text" class="form-control" id="projId" name="projId" required readonly
+                                       value=""
+                                       style="display: none;" maxlength="25">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Description
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" id="actorDescription" name="actorDescription" class="form-control"
+                                       maxlength="100" required
+                                       placeholder="Write something about your response.">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Completion Time
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" id="actorCmplTime" name="actorCmplTime" class="form-control"
+                                       maxlength="25" required
+                                       placeholder="Delivery Time of job.">
+                            </div>
+                        </div>
+                            <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Offer Amount
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="number" step="0.1" id="amount" name="amount" class="form-control"
+                                       maxlength="25" required
+                                       placeholder="Amount in USD.">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Related Samples
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="file" id="actorSample" name="actorSample" class="form-control"
+                                       maxlength="3" required
+                                       placeholder="Write something about your response." accept="audio/*">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="myLoginModal" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form action="/login" method="post" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModal">Login Please</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="editModalBody">
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Email
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="email" class="form-control" id="email" name="email" required
+                                       maxlength="30">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Password
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="password" id="password" name="password" class="form-control"
+                                       maxlength="100" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        function showModal(byrId, proId) {
+            document.getElementById("buyrId").value = byrId.toString();
+            document.getElementById("projId").value = proId.toString();
+            $('#myModal').modal('show');
+        }
+
+        function loginPlease() {
+            $('#myLoginModal').modal('show');
+        }
+    </script>
+{% endblock %}

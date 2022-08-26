@@ -1,0 +1,192 @@
+{% extends "layout.html" %} {% block title %}About Us{% endblock %} {% block
+head %} {{ super() }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link
+    rel="stylesheet"
+    href='{{ url_for("static", filename="css/order.css") }}'
+/>
+<link
+    rel="stylesheet"
+    href='{{ url_for("static", filename="css/floating.css") }}'
+/>
+{% endblock %} {% block body %}
+
+<link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+/>
+
+{#
+<div class="container divcenter">
+    #} {#
+    <div class="row">
+        #} {#
+        <div class="col-sm-12 mt-5">
+            #} {#
+            <h3>About us</h3>
+            #} {#
+        </div>
+        #} {#
+    </div>
+    #} {#
+</div>
+#}
+<div>
+    <div class="about-wrapper">
+        <div class="container">
+            <div class="about-us-text-div-1">
+                <p class="About-us-text-1">About us</p>
+                <p class="About-us-text-2 text-light">
+                    With Multiple individuals, we are the Asia's First Freelance
+                    marketplace for audio and voice-over products and services
+                    in the Asia.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-sm-6">
+            <p class="pt-5 font-weight-bolder h2 pb-2">Our Story</p>
+            <p>
+                Since 2020, the greatest and most darling brands have endowed us
+                to assist them with finding their voice.
+            </p>
+
+            <p>
+                Our worldwide organization of voice entertainers loans their
+                gifts in more than 100 dialects, and accents to a wide
+                assortment of undertakings, going from publicizing, amusement
+                and gaming, to preparing, corporate substance, mechanical
+                applications, and past.
+            </p>
+
+            <p>
+                We gladly serve clients in more than 160 nations, and our honor
+                winning work environment culture has settled on us a business of
+                decision generally advantageous and most splendid in the
+                business.
+            </p>
+        </div>
+        <div class="col-sm-6">
+            <img
+                src="static/img/about-us-our-story.png"
+                class="img-fluid pt-2"
+            />
+        </div>
+    </div>
+    <p class="text-center h3 font-weight-bold mt-5 pt-1 pb-4">
+        What We Have confidence in
+    </p>
+
+    <div class="row mb-5">
+        <div class="col-sm-6">
+            <div
+                class="border border-black py-3 px-3 text-center hover-1-div-1 About-div-2"
+            >
+                <p class="font-weight-bold h3 pb-2">Vision</p>
+                <p>
+                    We accept the human voice advises, engages, and moves. We
+                    exist to make the world a more certain and available spot
+                    through the intensity of the human voice.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div
+                class="border border-black py-3 px-3 text-center hover-1-div-1 About-div-2"
+            >
+                <p class="font-weight-bold h3 pb-2">Mission</p>
+                <p>
+                    Our main goal is to make the conclusive objective that
+                    associates individuals with the correct voice to rejuvenate
+                    their words.
+                </p>
+            </div>
+        </div>
+    </div>
+    <p class="text-center h3 font-weight-bold pt-1 pb-4">Basic Beliefs</p>
+
+    <div class="row mb-5">
+        <div class="col-sm-3">
+            <div
+                class="border border-black py-3 px-3 text-center hover-1-div-1 About-div-1 mb-5"
+            >
+                <p class="font-weight-bold h3 pb-2">Trust</p>
+                <p>
+                    We act with uprightness and seek after chances of shared
+                    achievement every day.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div
+                class="border border-black py-3 px-3 text-center hover-1-div-1 About-div-1 mb-5"
+            >
+                <p class="font-weight-bold h3 pb-2">Methodology</p>
+                <p>
+                    We establish a free from any and all harm climate for our
+                    clients, partners, and representatives to work. We treat
+                    each other as we need to be dealt with.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div
+                class="border border-black py-3 px-3 text-center hover-1-div-1 About-div-1"
+            >
+                <p class="font-weight-bold h3 pb-2">Effortlessness</p>
+                <p>
+                    We convey a frictionless involvement with each cooperation,
+                    from plan and ease of use to clear correspondence and care.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div
+                class="border border-black py-3 px-3 text-center hover-1-div-1 About-div-1 mb-5"
+            >
+                <p class="font-weight-bold h3 pb-2">Network</p>
+                <p>
+                    We encourage a feeling of the network, uniting our clients.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-sm-12">
+            <div class="border border-black py-3 px-3 hover-1-div-1">
+                <p class="font-weight-bold h3 pb-2 text-center">Innovation</p>
+                <p>
+                    VoiceTie is a suggestion motor that dissects your occupation
+                    posting and matches it with the most ideal ability for the
+                    work.
+                </p>
+                <p>
+                    Secured Payment (SafeBox) holds a customer's assets safely
+                    until a good voice over has been conveyed - and afterward
+                    it's delivered to the ability, guaranteeing they generally
+                    get paid.
+                </p>
+                <p>
+                    Voice Search permits you to look for voice ability by
+                    watchword, gender, age, language, class and that's only the
+                    tip of the iceberg.
+                </p>
+                <p>
+                    Voice Rank empowers you to see top ability (by rating,
+                    recruiting history, and so on), in one simple to explore
+                    catalog.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

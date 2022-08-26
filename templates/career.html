@@ -1,0 +1,360 @@
+{% extends "layout.html" %} {% block title %}Career{% endblock %} {% block head
+%} {{ super() }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link
+    rel="stylesheet"
+    href='{{ url_for("static", filename="css/order.css") }}'
+/>
+<link
+    rel="stylesheet"
+    href='{{ url_for("static", filename="css/floating.css") }}'
+/>
+
+<style>
+    .tab-content > .tab-pane {
+        border: none;
+        padding: 0px;
+    }
+    .career-div-1 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .career-div-1 i {
+        width: 100%;
+    }
+</style>
+
+{% endblock %} {% block body %}
+<link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+/>
+
+<div class="container mt-5">
+    <p class="text-center h5 mb-1 w-50-d-block-mx-auto mt-5">
+        Assemble your vocation at one of Asia's Top Employers
+    </p>
+    <p class="text-center w-50-d-block-mx-auto mt-3">
+        As a colleague, adding to significant work that affects individuals and
+        businesses around the globe.
+    </p>
+
+    <div
+        id="carouselExampleIndicators"
+        class="carousel slide career-slider-1 mt-5 mb-5 d-none"
+        data-ride="carousel"
+    >
+        <ol class="carousel-indicators d-none">
+            <li
+                data-target="#carouselExampleIndicators"
+                data-slide-to="0"
+                class="active"
+            ></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img
+                    class="review-img-1"
+                    src="static/img/careers-jerome-faulkner.jpg"
+                    alt="First slide"
+                />
+                <p class="text-center h5 mb-1 w-50-d-block-mx-auto mt-3">
+                    "You're recognized for your accomplishments."
+                </p>
+                <p class="w-75 mx-auto d-block">
+                    As a developer at Voices City I'm often collaborating with
+                    multiple people. The team-oriented culture provides a
+                    positive work environment where you're encouraged to
+                    contribute and you're recognized for your accomplishments.
+                    There's also no shortage of great social events for bonding
+                    with the team and getting to know your co-workers better.
+                </p>
+            </div>
+            <div class="carousel-item">
+                <img
+                    class="review-img-1"
+                    src="static/img/careers-jerome-faulkner.jpg"
+                    alt="First slide"
+                />
+                <p class="text-center h5 mb-1 w-50-d-block-mx-auto mt-3">
+                    "You're recognized for your accomplishments."
+                </p>
+                <p class="w-75 mx-auto d-block">
+                    As a developer at Voices City I'm often collaborating with
+                    multiple people. The team-oriented culture provides a
+                    positive work environment where you're encouraged to
+                    contribute and you're recognized for your accomplishments.
+                    There's also no shortage of great social events for bonding
+                    with the team and getting to know your co-workers better.
+                </p>
+            </div>
+            <div class="carousel-item">
+                <img
+                    class="review-img-1"
+                    src="static/img/careers-jerome-faulkner.jpg"
+                    alt="First slide"
+                />
+                <p class="text-center h5 mb-1 w-50-d-block-mx-auto mt-3">
+                    "You're recognized for your accomplishments."
+                </p>
+                <p class="w-75 mx-auto d-block">
+                    As a developer at Voices City I'm often collaborating with
+                    multiple people. The team-oriented culture provides a
+                    positive work environment where you're encouraged to
+                    contribute and you're recognized for your accomplishments.
+                    There's also no shortage of great social events for bonding
+                    with the team and getting to know your co-workers better.
+                </p>
+            </div>
+        </div>
+        <a
+            class="carousel-control-prev"
+            href="#carouselExampleIndicators"
+            role="button"
+            data-slide="prev"
+        >
+            <span
+                class="fa fa-caret-left career-slider-next-btn-1"
+                aria-hidden="true"
+            ></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a
+            class="carousel-control-next"
+            href="#carouselExampleIndicators"
+            role="button"
+            data-slide="next"
+        >
+            <span
+                class="fa fa-caret-right career-slider-next-btn-1"
+                aria-hidden="true"
+            ></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <p class="text-center h5 mb-1 w-50-d-block-mx-auto mt-3">
+        Advantages of Being a Voices City Colleague
+    </p>
+
+    <p class="text-center mb-1 w-50-d-block-mx-auto mt-3">
+        Our work culture cultivates an open, community oriented climate with
+        energizing work and reasonable pay. On your compensation, you'll get the
+        accompanying:
+    </p>
+
+    <div class="row mt-5">
+        <div class="col-sm-4 colsm3">
+            <div class="career-div-1">
+                <i class="fa fa-dollar career-div-icon-1"></i>
+                <p class="h5 text-center">Serious Salary</p>
+            </div>
+        </div>
+
+        <div class="col-sm-4 colsm3">
+            <div class="career-div-1">
+                <i class="fa fa-car career-div-icon-1"></i>
+                <p class="h5 text-center">Stopping Credit</p>
+            </div>
+        </div>
+
+        <div class="col-sm-4 colsm3">
+            <div class="career-div-1">
+                <i class="fa fa-suitcase career-div-icon-1"></i>
+                <p class="h5 text-center">Vacation Time</p>
+            </div>
+        </div>
+
+        <div class="col-sm-4 colsm3">
+            <div class="career-div-1">
+                <i class="fa fa-users career-div-icon-1"></i>
+                <p class="h5 text-center">Group Advantages Program</p>
+            </div>
+        </div>
+        <div class="col-sm-4 colsm3">
+            <div class="career-div-1">
+                <i class="fa fa-globe career-div-icon-1"></i>
+                <p class="h5 text-center">Work from Anywhere</p>
+            </div>
+        </div>
+
+        <div class="col-sm-4 colsm3">
+            <div class="career-div-1">
+                <i class="fa fa-history career-div-icon-1"></i>
+                <p class="h5 text-center">Flexible Work Hours</p>
+            </div>
+        </div>
+        <i class="fas fa-stopwatch"></i>
+    </div>
+
+    <p class="text-center h5 mb-1 w-50-d-block-mx-auto mt-3">
+        Extra Advantages
+    </p>
+
+    <p class="text-center mb-1 w-50-d-block-mx-auto mt-3 mb-4">
+        A portion of the other added benefits you'll get as a Voices City
+        colleague include:
+    </p>
+
+    <div class="w-50-d-block-mx-auto">
+        <div class="row">
+            <div class="col-sm-6">
+                <p>
+                    <span class="career-div-bg-icon-1 mr-2"
+                        ><i class="fa fa-check"></i></span
+                    >Unique occasions and gifts
+                </p>
+            </div>
+            <div class="col-sm-6">
+                <p>
+                    <span class="career-div-bg-icon-1 mr-2"
+                        ><i class="fa fa-check"></i></span
+                    >Games and clubs
+                </p>
+            </div>
+
+            <div class="col-sm-6">
+                <p>
+                    <span class="career-div-bg-icon-1 mr-2"
+                        ><i class="fa fa-check"></i></span
+                    >Brilliant, current office
+                </p>
+            </div>
+
+            <div class="col-sm-6">
+                <p>
+                    <span class="career-div-bg-icon-1 mr-2"
+                        ><i class="fa fa-check"></i></span
+                    >Local noble cause inclusion
+                </p>
+            </div>
+
+            <div class="col-sm-6">
+                <p>
+                    <span class="career-div-bg-icon-1 mr-2"
+                        ><i class="fa fa-check"></i></span
+                    >Birthday lunches
+                </p>
+            </div>
+
+            <div class="col-sm-6">
+                <p>
+                    <span class="career-div-bg-icon-1 mr-2"
+                        ><i class="fa fa-check"></i></span
+                    >Free month to month breakfast
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <p class="pt-5 font-weight-bolder h2 pb-2 mt-5">
+                Equivalent Work Openings
+            </p>
+            <p>
+                Voices city values variety. We're glad to be an equivalent open
+                door manager and think about qualified candidates regardless of
+                race, shading, religion, sex, public source, parentage, age,
+                hereditary data, sexual direction, sex personality, conjugal or
+                family status, veteran status, ailment or handicap.
+            </p>
+        </div>
+        <div class="col-sm-6">
+            <p class="pt-5 font-weight-bolder h2 pb-2 mt-5">Accommodation</p>
+            <p>
+                Voices City is focused on giving convenience for candidates
+                inabilities; if it's not too much trouble let us know whether
+                you require accommodation during the enlistment cycle.
+            </p>
+        </div>
+    </div>
+
+    <p class="pt-5 font-weight-bolder h2 pb-2 mt-5 text-center">HOW WE HIRE</p>
+
+    <ul class="nav justify-content-center" id="pills-tab" role="tablist">
+        <li class="nav-item">
+            <a
+                class="nav-link home-new-btn-1 active"
+                id="pills-home-tab"
+                data-toggle="pill"
+                href="#pills-home"
+                role="tab"
+                aria-controls="pills-home"
+                aria-selected="true"
+                >Apply</a
+            >
+        </li>
+        <li class="nav-item">
+            <a
+                class="nav-link home-new-btn-1"
+                id="pills-profile-tab"
+                data-toggle="pill"
+                href="#pills-profile"
+                role="tab"
+                aria-controls="pills-profile"
+                aria-selected="false"
+                >Interview</a
+            >
+        </li>
+        <li class="nav-item">
+            <a
+                class="nav-link home-new-btn-1"
+                id="pills-contact-tab"
+                data-toggle="pill"
+                href="#pills-contact"
+                role="tab"
+                aria-controls="pills-contact"
+                aria-selected="false"
+                >Recruit
+            </a>
+        </li>
+    </ul>
+
+    <div
+        class="tab-content pt-3 border px-3 pb-3 border-black"
+        id="pills-tabContent"
+    >
+        <div
+            class="tab-pane fade show active"
+            id="pills-home"
+            role="tabpanel"
+            aria-labelledby="pills-home-tab"
+        >
+            Essentially present your application through our Careers page. Our
+            HR group surveys each application and chooses up-and-comers who
+            qualify for telephone interviews
+        </div>
+        <div
+            class="tab-pane fade"
+            id="pills-profile"
+            role="tabpanel"
+            aria-labelledby="pills-profile-tab"
+        >
+            Whenever chose, you will get a starter call from somebody on our HR
+            group. After this discussion, you might be welcome to meet with an
+            individual from the HR group, just as the employing director of the
+            division for an Interview.
+        </div>
+        <div
+            class="tab-pane fade"
+            id="pills-contact"
+            role="tabpanel"
+            aria-labelledby="pills-contact-tab"
+        >
+            When second meetings have been finished, we as a rule know with 100%
+            sureness who the best individual for the position is, and will
+            expand you a proper proposition for employment by email. This can
+            happen the following day (or day after), however it can now and then
+            be as brisk as exactly the same day you came in! From that point
+            forward, the ball is in your court to settle on the choice regarding
+            whether you need to join our astounding group.
+        </div>
+    </div>
+</div>
+
+{% endblock %} {% block script %} {% endblock %}

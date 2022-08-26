@@ -1,0 +1,28 @@
+
+.blackcol
+{
+	background: #5a5a5a;
+    height: 600px;
+    width: auto;
+
+}
+
+.redcol {
+    height: 300px;
+    right: 0px;
+    position: absolute !important;
+    border-radius: 5px;
+    bottom: 35px;
+}
+
+#callmessages {
+    flex: 1!important;
+    background: hsl(0, 0%, 80%);
+    overflow: auto;
+    height: 170px;
+}
+
+#main-container {
+    width: 100%;
+height: auto!important;
+    }

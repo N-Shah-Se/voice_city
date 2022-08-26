@@ -1,0 +1,62 @@
+{% extends "layout.html" %} {% block title %}Actors{% endblock %} {% block head
+%} {{ super() }}
+<link
+    rel="stylesheet"
+    href='{{ url_for("static", filename="css/floating.css") }}'
+/>
+{% endblock %} {% block body %}
+<link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+/>
+
+<div class="container mt-1 mb-5">
+    <ul>
+        <li>
+            <a href="/help-equipment" class="hometext6"
+                >What equipment do I need to get started as a voice over
+                artist?</a
+            >
+        </li>
+        <li>
+            <a href="/help-f2f" class="hometext6"
+                >Tips for secure face to face meetings</a
+            >
+        </li>
+        <li><a href="/help-wcc" class="hometext6">Word Count Calculator</a></li>
+
+        <li>
+            <a href="/help-safebox" class="hometext6"
+                >How does the Secure Payment (SafeBox) method work for
+                clients?</a
+            >
+        </li>
+        <li>
+            <a href="/help-sim" class="hometext6"
+                >How do I report scam/inappropriate messages?</a
+            >
+        </li>
+        <li>
+            <a href="/help-ftp" class="hometext6"
+                >What is FTP, ISDN, Phone Patch, Source Connect or ipDTL?</a
+            >
+        </li>
+        <li>
+            <a href="/help-do" class="hometext6"
+                >Communication on Voices City - The Dos and Don'ts</a
+            >
+        </li>
+
+        <li>
+            <a href="/help-scammers" class="hometext6"
+                >BE AWARE FROM SCAMMERS.</a
+            >
+        </li>
+        <li>
+            <a href="/help-member" class="hometext6"
+                >What are the Available membership options on Voicescity?</a
+            >
+        </li>
+    </ul>
+</div>
+{% endblock %}

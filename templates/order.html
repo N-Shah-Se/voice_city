@@ -1,0 +1,294 @@
+{% extends "layout.html" %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href='{{ url_for("static", filename="css/order.css") }}'/>
+
+{% endblock %}
+
+
+{% block body %}
+<div class="container mt-5">
+	<div class="ordermaindiv1 mx-auto d-block border bg-white px-3 py-3 pb-5">
+	<div class="row">
+		<div class="col-sm-10">
+<p class="orderno1">Order #FO411F2C1DAA6
+<span class="ordernospan">view gig</span>
+ </p>
+<p class="ordertext1">Buyer: User (view history)  June 22, 2020</p>
+
+		</div>
+		<div class="col-sm-2">
+		<p class="ordertext2">$5.00</p>
+		</div>
+	</div>
+<div class="col-sm-12">
+	<div class="Itemdiv1">
+<table class="table mt-3 table-borderless">
+  <thead>
+    <tr class="tr1">
+      <td >Item</td>
+      <td >Quantity</td>
+      <td >Duration</td>
+      <td >Amount</td>
+    </tr>
+  </thead>
+  <tbody>			
+    <tr>
+      <td class="td2">web designers website development android de</td>
+      <td class="td1">1</td>
+      <td class="td1">2 Days</td>
+      <td class="td1">$5.00</td>
+    </tr>
+    
+  </tbody>
+</table>	
+<hr>
+<p class="float-right">
+Total $5.00
+</p>
+</div>
+</div>
+	</div>
+
+
+	<div class="ordermaindiv1 mx-auto d-block border bg-white py-3 pb-2 mt-3">
+	<div class="row px-3">
+		<div class="divprofile">
+<img src="static/img/profile.png" class="img-fluid rounded-circle ">
+</div>
+<div class="col">
+<p class="me1">ME</p>
+<p class="ordermessage">Message :Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. </p>
+<p class="orderdate">23:43 June 22, 2020 </p>
+</div>
+</div>
+
+<div class="orderdiv1">
+<i class="fa fa-rocket ordericon1"></i>
+<p class="mb-0 ordertext3">
+ORDER STARTED</p>
+<p class="mb-0 ordertext4">The order countdown is now ticking …</p>
+<p class="mb-0 ordertext4">Don't waste your time reading this message …</p>
+</div>
+
+<div class="orderdiv2">
+<i class="fa fa-inbox ordericon1"></i>
+<p class="mb-0 ordertext3">
+HERE'S YOUR DELIVERY!
+</p>
+<p class="mb-0 ordertext4">This order will be marked as complete in 3 days.</p>
+<div class="row px-3 mt-3">
+		<div class="divprofile">
+<img src="static/img/profile.png" class="img-fluid rounded-circle ">
+</div>
+<div class="col">
+<p class="me1">ME</p>
+<p class="ordermessage">Message :Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. </p>
+<p class="orderdate">23:43 June 22, 2020 </p>
+</div>
+</div>
+</div>
+
+
+
+<div class="orderdiv2">
+<i class="fa fa-inbox ordericon1"></i>
+<p class="mb-0 ordertext3">
+HERE'S YOUR DELIVERY!
+</p>
+<p class="mb-0 ordertext4">This order will be marked as complete in 3 days.</p>
+
+<div class="row px-3 mt-3">
+		<div class="divprofile">
+<img src="static/img/profile.png" class="img-fluid rounded-circle ">
+</div>
+<div class="col">
+<p class="me1">ME</p>
+<p class="ordermessage">Message :Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. </p>
+<p class="orderdate">23:43 June 22, 2020 </p>
+
+</div>
+</div>
+</div>
+
+
+<div class="orderdiv2">
+
+<div class="row px-3 mt-3">
+		<div class="divprofile">
+<img src="static/img/profile.png" class="img-fluid rounded-circle ">
+</div>
+<div class="col">
+<p class="me1">ME</p>
+<p class="ordermessage">Message :Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. </p>
+<p class="orderdate">23:43 June 22, 2020 </p>
+
+
+
+</div>
+
+
+<div class="col-sm-3">
+<div class="revisionbox1">
+		<i class="fa fa-history iconrevision"></i>	
+<p class="revisiontext">revision requested </p>
+		</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="orderdiv3">
+<i class="fa fa-comments"></i>
+<p>ORDER REVIEWS</p>
+</div>
+
+	
+<div class="orderdiv2">
+
+<div class="row px-3 mt-3">
+		<div class="divprofile">
+<img src="static/img/profile.png" class="img-fluid rounded-circle ">
+</div>
+<div class="col-sm-10">
+	<div class="orderreviewdiv1">
+		<p class="username"> User Name
+<span class="fa fa-star checked"> 5</span>
+
+		</p>
+		<p class="Comment"> Comment</p>
+		<p class="Commenttime">5 months ago</p>
+	</div>
+
+<div class="row mt-2">
+<div class="col-sm-6">
+<p class="orderreviewtext1">Communication With Seller</p>
+<p class="orderreviewtext1">Service as Described</p>
+<p class="orderreviewtext1">Buy Again or Recommend</p>
+</div>	
+
+<div class="col-sm-6 float-right">
+<p class="orderreviewtext2">
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>
+</p>
+
+
+<p class="orderreviewtext2">
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>
+</p>
+
+
+<p class="orderreviewtext2">
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>
+</p>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div class="row px-3 mt-3">
+		<div class="divprofile">
+<img src="static/img/profile.png" class="img-fluid rounded-circle ">
+</div>
+<div class="col">
+<p class="me1">You may respond to this review (This will be public)
+</p>
+
+<textarea placeholder="Share your response here" class="orderreviewtextarea">
+	
+</textarea>
+<button class="btn btn-success float-right mt-1">Share Response</button>
+
+</div>
+</div>
+
+
+<div class="row px-3 mt-3 border-top11 pt-3">
+		<div class="divprofile">
+<img src="static/img/profile.png" class="img-fluid rounded-circle ">
+</div>
+<div class="col">
+<p class="me1">user name   5 months ago
+</p>
+<p class="orderreviewtext2">
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>
+</p>
+
+
+
+<p class="orderreviewtext1">Outstanding Experience!
+</p>
+
+
+
+</div>
+</div>
+
+	</div>
+<div class="completeorder">
+<i class="fa fa-inbox completeordericon"></i>
+<p class="completeordertext1">ORDER COMPLETED!</p>
+
+</div>
+
+<p class="completeordertext2">This order is complete. Click here to contact the buyer.</p>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+{% endblock%}

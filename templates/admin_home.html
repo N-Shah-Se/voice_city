@@ -1,0 +1,309 @@
+{% extends "admin_layout.html" %}
+{% block title %}Home{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block body %}
+
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3>{{total_actor}}</h3>
+
+                <p>Total Actors</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <a href="/admin/actors" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>{{totalBronzeActors}}<sup style="font-size: 20px"></sup></h3>
+
+                <p>Total Bronze Actor</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-user-tie"></i>
+              </div>
+              <a href="/admin/actors?type=bronze" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3>{{totalPremiumActors}}</h3>
+
+                <p>Total Premium Actors</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-user-shield"></i>
+              </div>
+              <a href="/admin/actors?type=premium" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3>{{total_buyer}}</h3>
+
+                <p>Total Buyers</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-user-tag"></i>
+              </div>
+              <a href="/admin/buyers" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+                <!-- BAR CHART -->
+                <div class="card mb-3 card-info">
+                    <div class="card-header">
+
+                        <h3 class="card-title"></i>Daily Actors Sign-ups</h3>
+
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse"
+                                    title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-sm-12" id="dailyActors">
+                                <canvas id="actordaily"
+                                      style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"  ></canvas>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <!-- BAR CHART -->
+                <div class="card mb-3 card-olive">
+                    <div class="card-header">
+
+                        <h3 class="card-title"></i>Daily Buyers Sign-ups</h3>
+
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse"
+                                    title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-sm-12" id="dailyBuyers">
+                                <canvas id="buyerdaily"
+                                      style="min-height: 250px; height: 200px; max-height: 250px; max-width: 100%;"  ></canvas>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div>
+      </div>
+    </section>
+{% endblock %}
+
+{% block script %}
+<script>
+  var barLabels = [];
+var actordata = [];
+var graphdata = []
+
+{%for dates in lastweekdays%}
+{%if loop.index > 1%}
+{% for labels in totalActorSignups %}
+var name = '{{labels["_id"]}}';
+{% if labels["_id"] == dates %}
+barLabels.push(name);
+actordata.push({{labels["count"]}})
+
+{%endif%}
+{%endfor%}
+
+if(barLabels.includes('{{dates}}') == false){
+barLabels.push('{{dates}}');
+actordata.push(0)
+}
+{%endif%}
+{%endfor%}
+
+var hue = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+graphdata.push({label: "Actors",data: actordata,borderColor: hue,backgroundColor:hue ,borderWidth: "1"
+        });
+
+var areaChartData = {
+      labels  : barLabels,
+      datasets:graphdata
+    }
+    //-------------
+    //- BAR CHART -
+    //-------------
+    var barChartCanvas = $('#actordaily').get(0).getContext('2d')
+    var barChartData = $.extend(true, {}, areaChartData)
+
+
+    var barChartOptions = {
+      responsive              : true,
+      scales: {
+        xAxes: [{
+
+            ticks: {
+                    beginAtZero: true,
+
+                    stepSize: 1,
+
+                }
+        }],
+        yAxes: [{
+
+            ticks: {
+                    beginAtZero: true,
+
+                    stepSize: 1,
+
+                }
+        }]
+    },
+      maintainAspectRatio     : true,
+      datasetFill             : false,
+       tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.datasets[tooltipItem.datasetIndex].label;
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          console.log(label);
+          return label+":" + value  ;
+        }
+      }
+    }
+    }
+
+    var barChart = new Chart(barChartCanvas, {
+      type: 'horizontalBar',
+      data: barChartData,
+      options: barChartOptions
+    })
+
+<!--    Buyer signups chart-->
+
+    var barLabels = [];
+var actordata = [];
+var graphdata = []
+
+{%for dates in lastweekdays%}
+{%if loop.index > 1%}
+{% for labels in totalBuyerSignups %}
+var name = '{{labels["_id"]}}';
+{% if labels["_id"] == dates %}
+barLabels.push(name);
+actordata.push({{labels["count"]}})
+
+{%endif%}
+{%endfor%}
+
+if(barLabels.includes('{{dates}}') == false){
+barLabels.push('{{dates}}');
+actordata.push(0)
+}
+{%endif%}
+{%endfor%}
+
+var hue = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+graphdata.push({label: "Buyers",data: actordata,borderColor: hue,backgroundColor:hue ,borderWidth: "1"
+        });
+
+var areaChartData = {
+      labels  : barLabels,
+      datasets:graphdata
+    }
+    //-------------
+    //- BAR CHART -
+    //-------------
+    var barChartCanvas = $('#buyerdaily').get(0).getContext('2d')
+    var barChartData = $.extend(true, {}, areaChartData)
+
+
+    var barChartOptions = {
+      responsive              : true,
+      scales: {
+        xAxes: [{
+
+            ticks: {
+                    beginAtZero: true,
+
+                    stepSize: 1,
+
+                }
+        }],
+        yAxes: [{
+
+            ticks: {
+                    beginAtZero: true,
+
+                    stepSize: 1,
+
+                }
+        }]
+    },
+      maintainAspectRatio     : true,
+      datasetFill             : false,
+       tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.datasets[tooltipItem.datasetIndex].label;
+          var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          console.log(label);
+          return label+":" + value  ;
+        }
+      }
+    }
+    }
+
+    var barChart = new Chart(barChartCanvas, {
+      type: 'horizontalBar',
+      data: barChartData,
+      options: barChartOptions
+    })
+</script>
+{% endblock %}

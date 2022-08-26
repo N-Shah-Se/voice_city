@@ -1,0 +1,196 @@
+{% extends "layout.html" %} {% block title %}About Us{% endblock %} {% block
+head %} {{ super() }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link
+    rel="stylesheet"
+    href='{{ url_for("static", filename="css/order.css") }}'
+/>
+<link
+    rel="stylesheet"
+    href='{{ url_for("static", filename="css/floating.css") }}'
+/>
+
+{% endblock %} {% block body %}
+<link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+/>
+
+<div class="container">
+    <div class="row mb-5 mt-4">
+        <div class="col-sm-12">
+            <div class="border border-black shadow py-3 px-3">
+                <p class="font-weight-bold h3 pb-2 text-center">
+                    Voices City Work Overview
+                </p>
+                <p class="text-center w-75 mx-auto d-block">
+                    Voices city is an online Asia's First Freelance center that
+                    connects clients of voice over with several voice talent. At
+                    the point when a work is posted on Voices city, Voice Over
+                    artists send a tryout and an expected statement to finish
+                    the work. Customers would then be able to tune in to the
+                    tryouts, select their favored artist and start take a shot
+                    at the particular work.
+                </p>
+
+                <p class="font-weight-bold h3 pb-4 pt-3 text-center">
+                    Product Highlights
+                </p>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div
+                            class="border border-black px-2 py-2 how-it-works-div-box-1 hover-1-div-1"
+                        >
+                            <i class="fa fa-user-md how-its-work-icon-1"></i>
+                            <p class="h5 mb-1 pt-1">
+                                Limitless Free Employment Postings
+                            </p>
+                            <p>
+                                Posting employment is in every case free on
+                                Voices city. Begin by informing us concerning
+                                your venture and wanted vocal characteristics.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div
+                            class="border border-black px-2 py-2 how-it-works-div-box-1 hover-1-div-1"
+                        >
+                            <i class="fa fa-comments how-its-work-icon-1"></i>
+                            <p class="h5 mb-1 pt-1">
+                                Auto Match with the Artist
+                            </p>
+                            <p>
+                                Our exclusive VoiceTie system will consequently
+                                coordinate your work with the top voice talent.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div
+                            class="border border-black px-2 py-2 how-it-works-div-box-1 hover-1-div-1"
+                        >
+                            <i class="fa fa-microphone how-its-work-icon-1"></i>
+                            <p class="h5 mb-1 pt-1">
+                                Secured Private communication
+                            </p>
+                            <p>
+                                Secure communication takes into consideration
+                                consistent correspondence on positions, opening
+                                extreme inventive way.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div
+                            class="border border-black px-2 py-2 how-it-works-div-box-1 hover-1-div-1"
+                        >
+                            <i class="fa fa-shield how-its-work-icon-1"></i>
+                            <p class="h5 mb-1 pt-1">
+                                Secured Payment (SafeBox) method
+                            </p>
+                            <p>
+                                Get ensured fulfillment with our Secured Payment
+                                (SafeBox) innovation. Payment is just delivered
+                                after conclusive records have been endorsed.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="font-weight-bold h3 pb-2 pt-5 text-center">
+                    The amount of My Voice Over
+                </p>
+                <p class="text-center w-75 mx-auto d-block pb-3">
+                    Making an account and posting work on Voices city is free.
+                    Voice over expenses shift contingent upon the sort of
+                    project you're dealing with, and the artist you choose.
+                </p>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4 colsm3">
+                            <i class="fa fa-paste how-its-work-icon-2"></i>
+                            <p class="how-its-work-text-10">
+                                In your employment posting, you will determine
+                                your financial plan.
+                            </p>
+                        </div>
+                        <div class="col-sm-4 colsm3">
+                            <i class="fa fa-volume-up how-its-work-icon-2"></i>
+                            <p class="how-its-work-text-10">
+                                At that point, voice over artists will give you
+                                a statement alongside their tryout.
+                            </p>
+                        </div>
+                        <div class="col-sm-4 colsm3">
+                            <i class="fa fa-calculator how-its-work-icon-2"></i>
+                            <p class="how-its-work-text-10">
+                                Your total incorporates the artist's expense and
+                                the Voices city handling charge.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="font-weight-bold h3 pb-3 pt-4 text-center">
+                    Qualified Services
+                </p>
+
+                <p class="text-center w-75 mx-auto d-block pb-3">
+                    Voices city provides proficient services if your project is
+                    complicated, or you just don't have the time, and voice city
+                    will complete the task for you:
+                </p>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div
+                            class="border border-black px-2 py-2 how-it-works-div-box-2"
+                        >
+                            <i class="fa fa-user-md how-its-work-icon-3"></i>
+                            <p class="h6 mb-1 pt-1">
+                                The most skilled voice talent source
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div
+                            class="border border-black px-2 py-2 how-it-works-div-box-2"
+                        >
+                            <i class="fa fa-comments how-its-work-icon-3"></i>
+                            <p class="h6 mb-1 pt-1">
+                                Coordinate all project knowledge with the
+                                different stakeholders
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div
+                            class="border border-black px-2 py-2 how-it-works-div-box-2"
+                        >
+                            <i class="fa fa-microphone how-its-work-icon-3"></i>
+                            <p class="h6 mb-1 pt-1">
+                                Help for NDAs, contracts and other legal
+                                conditions or supplier requirements
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div
+                            class="border border-black px-2 py-2 how-it-works-div-box-2"
+                        >
+                            <i class="fa fa-shield how-its-work-icon-3"></i>
+                            <p class="h6 mb-1 pt-1">
+                                Handle localization and translation
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %} {% block script %} {% endblock %}

@@ -1,0 +1,504 @@
+{% extends "layout.html" %}
+{% block title %}Jobs{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href='{{ url_for("static", filename="css/order.css") }}'/>
+{% endblock %}
+{% block body %}
+
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-12">
+            {% if error != "" %}
+                <div class="form-group ">
+                    <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+                        <span class="badge badge-pill badge-danger">Alert</span> {{ error }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            {% endif %}
+            {% if message|length>1 %}
+                <div class="form-group ">
+                    <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                        <span class="badge badge-pill badge-success">Success</span> {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+    <div class="container mt-5 mb-5">
+
+        <h3 class="pt-5">Jobs
+        </h3>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="Jobs-tab" data-toggle="tab" href="#Jobs" role="tab"
+                   aria-controls="Jobs" aria-selected="true">All Jobs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="Review-tab" data-toggle="tab" href="#Review" role="tab"
+                   aria-controls="Review" aria-selected="false">Posted</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="Draft-tab" data-toggle="tab" href="#Draft" role="tab"
+                   aria-controls="Draft" aria-selected="false">Draft</a>
+            </li>
+
+            {#
+            <li class="nav-item">
+                <a class="nav-link" id="Archived-tab" data-toggle="tab" href="#Archived" role="tab"
+                   aria-controls="Archived" aria-selected="false">Archived</a>
+            </li>
+#}
+            {#
+            <li class="nav-item">
+                <a class="nav-link" id="Hiring-tab" data-toggle="tab" href="#Hiring" role="tab"
+                   aria-controls="Hiring" aria-selected="false">Hiring</a>
+            </li>
+#}
+            {#
+            <li class="nav-item">
+                <a class="nav-link" id="Offering-tab" data-toggle="tab" href="#Offering" role="tab"
+                   aria-controls="Offering" aria-selected="false">Offering</a>
+            </li>
+#}
+            <li class="nav-item">
+                <a class="nav-link" id="Working-tab" data-toggle="tab" href="#Working" role="tab"
+                   aria-controls="Working" aria-selected="false">Working</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" id="Done-tab" data-toggle="tab" href="#Done" role="tab"
+                   aria-controls="Done" aria-selected="false">Completed</a>
+            </li>
+        </ul>
+
+
+        <div class="tab-content mt-2" id="myTabContent">
+
+            {#        All Projects Tab   #}
+            <div class="tab-pane fade show active" id="Jobs" role="tabpanel" aria-labelledby="Jobs-tab">
+                <div class="border ">
+                    <!-- job div Start-->
+
+                    {% for project in buyer_data["projects"] %}
+                        <a href="/project-response?id={{ project["project_id"] }}">
+                            <div class="border rounder py-3">
+                                <div class="container">
+                                    <div class="row">
+                                        <div {% if project["status"] == "draft" %} class="col-sm-7" {% else %}
+                                                                                   class="col-sm-7" {% endif %}>
+                                            <p class="jobtitle1">{{ project["project_name"] }}</p>
+                                            <p class="jobno1">#9427247 <span
+                                                    class="postdate">Posted: {% if project["timestamp"] %}
+                                                {{ (project["timestamp"]|string).split(" ")[0] }}{% endif %}</span>
+                                                <span class="postdate">Deadline: {{ project["project_deadline"][0] }}</span>
+                                            </p>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            {% if project["status"] == "draft" %}
+                                                <button class="Draftbtn1">Draft</button>
+                                            {% elif project["status"] == "denied" %}
+                                                <button class="Draftbtn1" style="border: 1px solid red; color: red">
+                                                    Denied
+                                                </button>
+                                            {% elif project["status"] == "hired" %}
+                                                <button class="Draftbtn1" style="border: 1px solid blue; color: blue">
+                                                    Hired
+                                                </button>
+                                            {% elif project["status"] == "offered" %}
+                                                <button class="Draftbtn1"
+                                                        style="border: 1px solid burlywood; color: burlywood">
+                                                    Offered
+                                                </button>
+                                            {% elif project["status"] == "working" %}
+                                                <button class="Draftbtn1"
+                                                        style="border: 1px solid darkgray; color: darkgray">
+                                                    working
+                                                </button>
+                                            {% elif project["status"] == "completed" %}
+                                                <button class="Draftbtn1"
+                                                        style="border: 1px solid #0EB69A; color: #0EB69A">
+                                                    Completed
+                                                </button>
+                                            {% elif project["status"] == "posted" %}
+                                                <button class="Draftbtn1"
+                                                        style="border: 1px solid #b60e92; color: #b60e92">
+                                                    Posted
+                                                </button>
+                                            {% elif project["status"] == "cancelled" %}
+                                                <button class="Draftbtn1"
+                                                        style="border: 1px solid #b60e92; color: #b60e92">
+                                                    Cancelled
+                                                </button>
+                                            {% else %}
+                                                <button class="Draftbtn1"
+                                                        style="border: 1px solid darkorange; color: darkorange">
+                                                    Draft
+                                                </button>
+                                            {% endif %}
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <p class="mb-0 pt-3"> {{ project["responses"]|length }} Responses</p>
+                                            <p class="mb-0"> $ {{ project["project_cost"] }}</p>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <i class="fa fa-angle-right jobicon1"></i>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </a>
+                    {% endfor %}
+                    <!-- job div end-->
+                </div>
+            </div>
+
+            {#        Posted Jobs #}
+            <div class="tab-pane fade show" id="Review" role="tabpanel" aria-labelledby="Review-tab">
+                <div class="border">
+                    {% for project in buyer_data["projects"] %}
+                        {% if project["paymentStatus"] == "paid" %}
+                            {% if project["status"] == "posted" %}
+                                <a href="/project-response?id={{ project["project_id"] }}">
+                                    <!-- job div Start-->
+                                    <div class="border rounder py-3">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-sm-7">
+                                                    <p class="jobtitle1">{{ project["project_name"] }}</p>
+                                                    <p class="jobno1">#9427247 <span
+                                                            class="postdate">Posted: {% if project["timestamp"] %}
+                                                        {{ (project["timestamp"]|string).split(" ")[0] }}{% endif %}</span>
+                                                        <span class="postdate">Deadline: {{ project["project_deadline"][0] }}</span>
+                                                    </p>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    {#                                                <button class="Draftbtn1">Draft</button>#}
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <p class="mb-0 pt-3"> {{ project["responses"]|length }}
+                                                        Responses</p>
+                                                    <p class="mb-0"> $ {{ project["project_cost"] }}</p>
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <i class="fa fa-angle-right jobicon1"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <!-- job div end-->
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            {#        Draft Tab  #}
+            <div class="tab-pane fade show" id="Draft" role="tabpanel" aria-labelledby="Draft-tab">
+                <div class="border">
+                    {% for project in buyer_data["projects"] %}
+                        {% if project["status"] == "draft" %}
+                            <a href="/project-response?id={{ project["project_id"] }}">
+                                <!-- job div Start-->
+                                <div class="border rounder py-3">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-sm-7">
+                                                <p class="jobtitle1">{{ project["project_name"] }}</p>
+                                                <p class="jobno1">#9427247 <span
+                                                        class="postdate">Posted: {% if project["timestamp"] %}
+                                                    {{ (project["timestamp"]|string).split(" ")[0] }}{% endif %}</span>
+                                                    <span class="postdate">Deadline: {{ project["project_deadline"][0] }}</span>
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <button class="Draftbtn1">Draft</button>
+
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <p class="mb-0 pt-3"> {{ project["responses"]|length }} Responses</p>
+                                                <p class="mb-0"> $ {{ project["project_cost"] }}</p>
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <i class="fa fa-angle-right jobicon1"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <!-- job div end-->
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+
+            {#
+            <div class="tab-pane fade show" id="Archived" role="tabpanel" aria-labelledby="Archived-tab">
+                <div class="border divcenter1">
+                    <p class="divcenter font-weight-bold">No Jobs Yet Archived
+                    </p>
+                </div>
+            </div>
+#}
+            {#
+            <div class="tab-pane fade show" id="Hiring" role="tabpanel" aria-labelledby="Hiring-tab">
+                <div class="border">
+                    {% if buyer_data["projects"]|length == 0 %}
+                        <p class="divcenter font-weight-bold">No Jobs Yet Hiring
+                        </p>
+                    {% else %}
+                        {% for project in buyer_data["projects"] %}
+                            {% set a = namespace(value=0) %}
+                            {% set b = buyer_data["projects"]|length %}
+                            {% if project["status"] == "hired" %}
+                                {% set a.value = a.value + 1 %}
+                                <a href="/project-response?id={{ project["project_id"] }}">
+                                    <!-- job div Start-->
+                                    <div class="border rounder py-3">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-sm-7">
+                                                    <p class="jobtitle1">{{ project["project_name"] }}</p>
+                                                    <p class="jobno1">#9427247 <span
+                                                            class="postdate">Posted: {% if project["timestamp"] %}
+                                                        {{ (project["timestamp"]|string).split(" ")[0] }}{% endif %}</span>
+                                                        <span class="postdate">Deadline: {{ project["project_deadline"][0] }}</span>
+                                                    </p>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <button class="Draftbtn1"
+                                                            style="color: blue; border: 1px solid blue">Hired
+                                                    </button>
+
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <p class="mb-0 pt-3"> {{ project["responses"]|length }}
+                                                        Responses</p>
+                                                    <p class="mb-0"> $ {{ project["project_cost"] }}</p>
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <i class="fa fa-angle-right jobicon1"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <!-- job div end-->
+                            {% else %}
+                                {% if a.value == 0 and a.value == b.value %}
+                                    <p class="divcenter font-weight-bold">No Jobs Yet Hiring
+                                    </p>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+#}
+            {# offered projects #}
+            <div class="tab-pane fade show" id="Offering" role="tabpanel" aria-labelledby="Offering-tab">
+                <div class="border">
+                    {% if buyer_data["projects"]|length == 0 %}
+                        <p class="divcenter font-weight-bold">No Jobs Yet Offering
+                        </p>
+                    {% else %}
+                        {% for project in buyer_data["projects"] %}
+                            {% set a = namespace(value=0) %}
+                            {% set b = buyer_data["projects"]|length %}
+                            {% if project["status"] == "offered" %}
+                                {% set a.value = a.value + 1 %}
+                                <a href="/project-response?id={{ project["project_id"] }}">
+                                    <!-- job div Start-->
+                                    <div class="border rounder py-3">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-sm-7">
+                                                    <p class="jobtitle1">{{ project["project_name"] }}</p>
+                                                    <p class="jobno1">#9427247 <span
+                                                            class="postdate">Posted: {% if project["timestamp"] %}
+                                                        {{ (project["timestamp"]|string).split(" ")[0] }}{% endif %}</span>
+                                                        <span class="postdate">Deadline: {{ project["project_deadline"][0] }}</span>
+                                                    </p>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <button class="Draftbtn1"
+                                                            style="border: 1px solid burlywood; color: burlywood">
+                                                        Offered
+                                                    </button>
+
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <p class="mb-0 pt-3"> {{ project["responses"]|length }}
+                                                        Responses</p>
+                                                    <p class="mb-0"> $ {{ project["project_cost"] }}</p>
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <i class="fa fa-angle-right jobicon1"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <!-- job div end-->
+                            {% else %}
+                                {% if a.value == 0 and a.value == b.value %}
+                                    <p class="divcenter font-weight-bold">No Jobs Yet Offered
+                                    </p>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+
+            {# Working projects #}
+            <div class="tab-pane fade show" id="Working" role="tabpanel" aria-labelledby="Working-tab">
+                <div class="border">
+                    {% if buyer_data["projects"]|length == 0 %}
+                        <p class="divcenter font-weight-bold">No Jobs Yet In Working
+                        </p>
+                    {% else %}
+                        {% for project in buyer_data["projects"] %}
+                            {% set a = namespace(value=0) %}
+                            {% set b = buyer_data["projects"]|length %}
+                            {% for biding in bid_data %}
+                                {% if biding["project_id"]|string == project["project_id"]|string %}
+                                    {% if biding["offeraccpt"] %}
+                                        {% if "projectStataus" not in biding %}
+                                            {% if biding['projectStataus'] not in ['completed', 'canceled'] %}
+                                                {#                                    {% if biding["offeraccpt"]["status"] == "accept" %}#}
+                                                {% set a.value = a.value + 1 %}
+                                                <a href="/project-response?id={{ project["project_id"] }}">
+                                                    <!-- job div Start-->
+                                                    <div class="border rounder py-3">
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <div class="col-sm-7">
+                                                                    <p class="jobtitle1">{{ project["project_name"] }}</p>
+                                                                    <p class="jobno1">#9427247 <span
+                                                                            class="postdate">Posted:
+                                                                        {% if project["timestamp"] %}
+                                                                            {{ (project["timestamp"]|string).split(" ")[0] }}{% endif %}</span>
+                                                                        <span class="postdate">Deadline: {{ project["project_deadline"][0] }}</span>
+                                                                    </p>
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    <button class="Draftbtn1"
+                                                                            style="border: 1px solid darkgray; color: darkgray">
+                                                                        working
+                                                                    </button>
+
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    <p class="mb-0 pt-3"> {{ project["responses"]|length }}
+                                                                        Responses</p>
+                                                                    <p class="mb-0"> $ {{ project["project_cost"] }}</p>
+                                                                </div>
+                                                                <div class="col-sm-1">
+                                                                    <i class="fa fa-angle-right jobicon1"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            {% endif %}
+                                        {% endif %}
+                                        <!-- job div end-->
+                                    {% else %}
+                                        {% if loop.last %}
+                                            {% if a.value == 0 and a.value == b.value %}
+                                                <p class="divcenter font-weight-bold">No Jobs Yet In Working
+                                                </p>
+                                            {% elif a.value == 0 %}
+                                                <p class="divcenter font-weight-bold">No Jobs Yet In Working
+                                                </p>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                                {#                                {% endif %}#}
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+            </div>
+
+            {# Completd Projects #}
+            <div class="tab-pane fade show" id="Done" role="tabpanel" aria-labelledby="Done-tab">
+                <div class="border">
+                    {% if buyer_data["projects"]|length == 0 %}
+                        <p class="divcenter font-weight-bold">No Jobs Yet Completed
+                        </p>
+                    {% else %}
+                        {% for project in buyer_data["projects"] %}
+                            {% set a = namespace(value=0) %}
+                            {% set b = buyer_data["projects"]|length %}
+                            {% if project["status"] == "completed" %}
+                                {% set a.value = a.value + 1 %}
+                                <a href="/project-response?id={{ project["project_id"] }}">
+                                    <!-- job div Start-->
+                                    <div class="border rounder py-3">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-sm-7">
+                                                    <p class="jobtitle1">{{ project["project_name"] }}</p>
+                                                    <p class="jobno1">#9427247 <span
+                                                            class="postdate">Posted: {% if project["timestamp"] %}
+                                                        {{ (project["timestamp"]|string).split(" ")[0] }}{% endif %}</span>
+                                                        <span class="postdate">Deadline: {{ project["project_deadline"][0] }}</span>
+                                                    </p>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <button class="Draftbtn1"
+                                                            style="border: 1px solid #0EB69A; color: #0EB69A">
+                                                        Completed
+                                                    </button>
+
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <p class="mb-0 pt-3"> {{ project["responses"]|length }}
+                                                        Responses</p>
+                                                    <p class="mb-0"> $ {{ project["project_cost"] }}</p>
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <i class="fa fa-angle-right jobicon1"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <!-- job div end-->
+                            {% else %}
+                                {% if a.value == 0 and a.value == b.value %}
+                                    <p class="divcenter font-weight-bold">No Jobs Yet Completed
+                                    </p>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+{% endblock %}

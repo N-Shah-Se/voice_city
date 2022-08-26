@@ -1,0 +1,773 @@
+{% extends "admin_layout.html" %}
+{% block title %}Actor-Detail{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style>
+
+        .new-edit-profile-div-1-bottom {
+            background: #757575;
+            height: 50px;
+            margin-bottom: 20px;
+            font-size: 20px;
+            color: white;
+        }
+
+        .new-edit-profile-div-1 {
+            background: whitesmoke;
+            margin-top: 20px;
+            padding: 15px;
+
+        }
+
+        .small-text-1 {
+            margin-top: -15px;
+            position: absolute;
+        }
+
+
+        .mic-span-3 {
+            background: #343a40;
+            border-radius: 100%;
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            padding-left: 21px;
+            padding-top: 17px;
+            margin-right: 15px;
+
+        }
+
+        .border-bottom-1-cus {
+            border-bottom: 5px solid #343a40;
+            padding-bottom: 5px;
+
+        }
+
+        .play-list-edit-1-button {
+            margin-top: -45px;
+        }
+
+        .play-list-edit-1-button-2 {
+            margin-top: -65px;
+        }
+
+        .new-edit-profile-div-2-bottom {
+            background: #343a40;
+            height: 50px;
+            margin-bottom: 20px;
+            font-size: 20px;
+            color: white;
+        }
+
+        .card-body-1 {
+            flex: 1 1 auto;
+            min-height: 1px;
+            padding: 1.25rem;
+            background: whitesmoke;
+            border-top: 3px solid #343a40;
+            margin-top: 30px;
+        }
+
+        .profile-icon-1 {
+            font-size: 23px !important;
+
+        }
+
+        .accordion-1 {
+            margin-top: -39px;
+
+        }
+
+        .mic-span-4 {
+            background: #343a40;
+            border-radius: 100%;
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            padding-left: 17px;
+            padding-top: 12px;
+        }
+
+        .profile-side-img-1 {
+            border-radius: 50%;
+            height: 70px;
+        }
+
+        .edit-icon-1 {
+            font-size: 25px !important;
+
+        }
+
+        .playlist-name-div-1 {
+            background: whitesmoke;
+            padding: 15px;
+
+        }
+
+        .btn-success1 {
+            color: white !important;
+            background: #343a40;
+        !important;
+        }
+
+        .btnnavlink2 {
+            color: white !important;
+            background: #343a40;
+            padding: 5px 15px 5px 15px;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: 0.7s;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <section class="content">
+        <div class="container-fluid">
+            <div class="col-12 col-sm-12">
+                <div class="card card-primary card-outline card-outline-tabs">
+                    <div class="card-header p-0 border-bottom-0">
+                        <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill"
+                                   href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home"
+                                   aria-selected="true">Detail</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill"
+                                   href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile"
+                                   aria-selected="false">Skills</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" id="custom-tabs-four-messages-tab" data-toggle="pill"
+                                   href="#custom-tabs-four-messages" role="tab"
+                                   aria-controls="custom-tabs-four-messages"
+                                   aria-selected="false">PlayList</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" id="custom-tabs-four-settings-tab" data-toggle="pill"
+                                   href="#custom-tabs-four-settings" role="tab"
+                                   aria-controls="custom-tabs-four-settings"
+                                   aria-selected="false">Working</a>
+                            </li>
+
+
+                            <li class="nav-item">
+                                <a class="nav-link" id="custom-tabs-four-payment-tab" data-toggle="pill"
+                                   href="#custom-tabs-four-payment" role="tab"
+                                   aria-controls="custom-tabs-four-payment"
+                                   aria-selected="false">Payment</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="custom-tabs-five-bankinfo-tab" data-toggle="pill"
+                                   href="#custom-tabs-five-bankinfo" role="tab"
+                                   aria-controls="custom-tabs-four-payment"
+                                   aria-selected="false">Bank Info</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content" id="custom-tabs-four-tabContent">
+                            <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel"
+                                 aria-labelledby="custom-tabs-four-home-tab">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="row">
+                                            <div class="col-sm-8">
+                                                <h3 class="card-title">Actor Details</h3>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <form action="/admin/actor-detail" method="post">
+                                                    <input name="actorids" id="actorids" value="{{ actor_data['_id'] }}"
+                                                           readonly required style="display: none;">
+                                                    <span><select name="actorstatuss" id="actorstatuss" required>
+                                                            <option value="active"
+                                                                    {% if actor_data['actorstatus'] == 'active' %}selected{% endif %}>Active</option>
+                                                            <option value="deactive"
+                                                                    {% if actor_data['actorstatus'] == 'deactive' %}selected{% endif %}>Deactive</option>
+                                                        </select></span>
+                                                    <button class="btn btn-success1" style="">Update</button>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        {% if error|length>1 %}
+                                            <div class="form-group ">
+                                                <div class="alert  alert-danger alert-dismissible fade show"
+                                                     role="alert">
+                                                    <span class="badge badge-pill badge-danger">Alert</span> {{ error }}
+                                                    <button type="button" class="close" data-dismiss="alert"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                        {% if message != "" %}
+                                            <div class="form-group ">
+                                                <div class="alert alert-success alert-dismissible fade show"
+                                                     role="alert">
+                                                    <span class="badge badge-pill badge-success">Success</span> {{ catupdate }}
+                                                    <button type="button" class="close" data-dismiss="alert"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label>{{ titles[0] }}</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" id="nameActor" name="nameActor"
+                                                       value="{{ actor_data[titles1[0]] }} {{ actor_data[titles1[1]] }}"
+                                                       disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label>{{ titles[2] }}</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" id="nameActor" name="nameActor"
+                                                       value="{{ actor_data[titles1[2]] }}" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label>{{ titles[3] }}</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" id="nameActor" name="nameActor"
+                                                       value="{{ actor_data[titles1[3]] }}" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label>{{ titles[4] }}</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" id="nameActor" name="nameActor"
+                                                       value="{{ actor_data[titles1[4]] }}" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label>{{ titles[5] }}</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" id="nameActor" name="nameActor"
+                                                       value="{{ actor_data[titles1[5]] }}" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label>{{ titles[6] }}</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" id="nameActor" name="nameActor"
+                                                       value="{{ actor_data[titles1[6]] }}" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label>{{ titles[11] }}</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" id="nameActor" name="nameActor"
+                                                       value="{{ actor_data[titles1[11]].strftime('%d %b, %Y') }}"
+                                                       disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel"
+                                 aria-labelledby="custom-tabs-four-profile-tab">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Actor Skills
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label>{{ titles[7] }}</label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                {% for i in actor_data[titles1[7]] %}
+                                                    <span class="btnnavlink2">{{ i }}</span>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label>{{ titles[12] }}</label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                {% for i in actor_data[titles1[12]] %}
+                                                    <span class="btnnavlink2">{{ i }}</span>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label>{{ titles[8] }}</label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                {%- for category in categories %}
+                                                    {% if category['Type'] == 'age' %}
+                                                        {% if category['_id']|string in actor_data[titles1[8]] %}
+                                                            <span class="btnnavlink2">{{ i }}{{ category['Category Name']|capitalize }}</span>
+                                                        {% endif %}{% endif %}{% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label>{{ titles[13] }}</label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                {%- for category in categories %}
+                                                    {% if category['Type'] == 'gender' %}
+                                                        {% if category['_id']|string in actor_data[titles1[8]] %}
+                                                            <span class="btnnavlink2">{{ i }}{{ category['Category Name']|capitalize }}</span>
+                                                        {% endif %}{% endif %}{% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label>{{ titles[14] }}</label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                {%- for category in categories %}
+                                                    {% if category['Type'] == 'category' %}
+                                                        {% if category['_id']|string in actor_data[titles1[8]] %}
+                                                            <span class="btnnavlink2">{{ i }}{{ category['Category Name']|capitalize }}</span>
+                                                        {% endif %}{% endif %}{% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label>{{ titles[9] }}</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" id="nameActor"
+                                                       name="nameActor"
+                                                       value="{{ actor_data[titles1[9]] }}" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label>{{ titles[10] }}</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" id="nameActor"
+                                                       name="nameActor"
+                                                       value="{{ actor_data[titles1[10]] }}" disabled>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="tab-pane fade" id="custom-tabs-four-messages" role="tabpanel"
+                                 aria-labelledby="custom-tabs-four-messages-tab">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Play Lists
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+
+                                        <div class="row">
+
+                                            {% for eachPlayList in actor_data["playlists"] %}
+                                                {% if eachPlayList["status"] != "deleted" %}
+                                                    <!--audio start  -->
+                                                    <div class="col-sm-4">
+                                                        <section class="audio-player">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <div class="row align-items-center mt-2 mb-2 mx-0">
+                                                                        <div class="col">
+                                                                            <p class="card-title col text-center h4"> {{ eachPlayList["playlist_name"] }}
+                                                                            </p><small
+                                                                                class="mx-auto d-block text-center">Total
+                                                                            samples:
+                                                                            {{ eachPlayList["playlist"]|length }}</small>
+                                                                            {% for lang in eachPlayList['playlist_language'] %}
+                                                                                <span class="btnnavlink2 mt-5">{{ lang }}</span>
+                                                                            {% endfor %}
+                                                                            {% for acnt in eachPlayList['playlist_accents'] %}
+                                                                                <span class="btnnavlink2 mt-5">{{ acnt }}</span>
+                                                                            {% endfor %}
+                                                                            {% for cat in categories %}
+                                                                                {% if cat['_id']|string in eachPlayList['playlist_category'] %}
+                                                                                    <span class="btnnavlink2">{{ cat['Category Name'] }}</span>
+                                                                                {% endif %}
+                                                                            {% endfor %}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="new-edit-profile-div-2-bottom  px-3 py-2">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-9"></div>
+
+                                                                        <div class="col text-right">
+                                                                            <div id="accordion{{ loop.index }}"
+                                                                                 class="pr-3">
+                                                                                <i class="fa fa-caret-down profile-icon-1 "
+                                                                                   data-toggle="collapse"
+                                                                                   data-target="#collapseOne{{ loop.index }}"
+                                                                                   aria-expanded="true"
+                                                                                   aria-controls="collapseOne{{ loop.index }}"></i>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <div id="collapseOne{{ loop.index }}" class="collapse "
+                                                                     aria-labelledby="headingOne"
+                                                                     data-parent="#accordion{{ loop.index }}">
+                                                                    <div class="card-body">
+                                                                        {% for eachsample in eachPlayList["playlist"] %}
+                                                                            <p class="pl-3">{{ eachsample.split(" - ")[1] }}</p>
+                                                                            <audio class="audio"
+                                                                                   controls
+                                                                                   src="../static/samples/{{ eachsample }}">
+                                                                                Your browser does not support the
+                                                                                <code>audio</code> element.
+                                                                            </audio>
+                                                                        {% endfor %}
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                            <audio id="audio-player_{{ loop.index }}" class="d-none"
+                                                                   src="" type="audio/mp3"
+                                                                   controls="controls"></audio>
+                                                        </section>
+
+                                                    </div>
+                                                    <!--audio end  -->
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="custom-tabs-four-settings" role="tabpanel"
+                                 aria-labelledby="custom-tabs-four-settings-tab">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Projects Progress
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+
+                                        <div class="row">
+                                            <div class="col-sm-9">
+                                                {% set a = namespace(value=0) %}
+                                                {% for eachorder in actor_data["projects_progress"] %}
+                                                    {% set a.value = a.value + 1 %}
+                                                    <div class="border rounder py-3">
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <div class="col-sm-5">
+                                                                    <p class="jobtitle1">{{ eachorder["project_name"] }}</p>
+                                                                    <p class="jobno1">Job: #9427247
+                                                                        <span class="postdate">{{ eachorder["post_date"] }}</span>
+                                                                    </p>
+                                                                </div>
+                                                                {#                                                            #}
+                                                                <div class="col-sm-3">
+                                                                    <p class="mb-0 pt-3">
+                                                                        Deadline {{ eachorder["completion_date"][0]|title }}</p>
+                                                                    <p class="mb-0">Cost
+                                                                        $ {{ eachorder["project_cost"] }}</p>
+                                                                    <p class="mb-0">
+                                                                        Script {{ eachorder["project_length"] }} {{ eachorder["project_length_type"] }}</p>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    {#                                                                    {% if eachorder["status"] == "completed" %}#}
+                                                                    <label>{{ eachorder["status"] }}</label>
+                                                                    {#                                                                    {% endif %}#}
+                                                                </div>
+
+                                                                <div class="col-sm-1">
+                                                                    <i class="fa fa-angle-right jobicon1"></i>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                                {% if a.value == 0 %}
+                                                    <p class="divcenter">No orders yet completed.</p>
+                                                {% endif %}
+                                            </div>
+                                            <div class="col-sm-3">
+                                                {% for eachproject in total_projects %}
+                                                    <div class="col-xl-12">
+                                                        <div class="card border-left-secondary shadow h-100 py-2">
+
+                                                            <div class="card-body">
+                                                                <div class="row no-gutters align-items-center">
+                                                                    <div class="col mr-2">
+                                                                        <div class="text-xs font-weight-bold text-secondary text-uppercase mb">
+                                                                            Project(s)
+                                                                        </div>
+                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                                            {{ eachproject["count"] }}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-auto">
+                                                                        <i class="fas fa-calendar fa-2x text-gray"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="custom-tabs-four-payment" role="tabpanel"
+                                 aria-labelledby="custom-tabs-four-payment-tab">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Payment History
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                {% set a = namespace(value=0) %}
+                                                {% set a.value = a.value + 1 %}
+                                                <div class="border rounder py-3">
+                                                    <div class="container">
+                                                        <table id="actorTable"
+                                                               class="table table-bordered table-hover">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>SNo.</th>
+                                                                <th>ID</th>
+                                                                <th>Date/Time</th>
+                                                                <th>Status</th>
+                                                                <th>Message</th>
+                                                                <th>Payment</th>
+                                                                <th>Payment Plan</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            {% for data in transactions %}
+                                                                <tr>
+                                                                    <td>{{ loop.index }}</td>
+                                                                    <td>{{ data['_id'] }}</td>
+                                                                    <td>{{ data['timestamp'].strftime('%d %b, %Y (%H:%M)') }}</td>
+                                                                    <td>{{ data['amountstatus'] }}</td>
+                                                                    <td>{{ data['message'] }}</td>
+                                                                    <td>$ {{ data['amount'] }}</td>
+                                                                    <td>{{ data['plantype'] }}</td>
+                                                                </tr>
+                                                            {% endfor %}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                {% if a.value == 0 %}
+                                                    <p class="divcenter">No Payment yet created.</p>
+                                                {% endif %}
+                                            </div>
+                                            <div class="col-sm-3">
+                                                {% for eachproject in total_projects %}
+                                                    <div class="col-xl-12">
+                                                        <div class="card border-left-secondary shadow h-100 py-2">
+
+                                                            <div class="card-body">
+                                                                <div class="row no-gutters align-items-center">
+                                                                    <div class="col mr-2">
+                                                                        <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
+                                                                            Project(s)
+                                                                        </div>
+                                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                                            {{ eachproject["count"] }}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-auto">
+                                                                        <i class="fas fa-calendar fa-2x text-gray"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="custom-tabs-five-bankinfo" role="tabpanel"
+                                 aria-labelledby="custom-tabs-four-payment-tab">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Bank Information
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                         <div class="row form-group">
+                                <div class="col-sm-3">
+                                    <label class="form-label">Bank Name:</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" value="{% if 'bankName' in actor_data %}{{ actor_data['bankName'] }}{% endif %}" class="form-control" name="bankName" readonly>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-3">
+                                    <label class="forrequiredm-label">Acount Title:</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" value="{% if 'accountTitle' in actor_data %}{{ actor_data['accountTitle'] }}{% endif %}" class="form-control" name="accountTitle" readonly>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-3">
+                                    <label class="form-label">Acount Number:</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" value="{% if 'accountNo' in actor_data %}{{ actor_data['accountNo'] }}{% endif %}"
+                                           class="form-control" name="accountNo" readonly>
+                                </div>
+                            </div>
+
+
+                            <div class="row form-group">
+                                <div class="col-sm-3">
+                                    <label class="form-label">Iban Number</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" value="{% if 'ibannumber' in actor_data %}{{ actor_data['ibannumber'] }}{% endif %}"
+                                           class="form-control"  name="ibannumber" readonly>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-3">
+                                    <label class="form-label">Bank Swift Code</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" value="{% if 'swiftcode' in actor_data %}{{ actor_data['swiftcode'] }}{% endif %}"
+                                           class="form-control" name="swiftcode" readonly>
+                                </div>
+                            </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <!-- /.card -->
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+{% endblock %}
+
+{% block script %}
+    <script>
+
+        $('.panel-collapse').on('show.bs.collapse', function () {
+            $(this).siblings('.panel-heading').addClass('active');
+        });
+
+        $('.panel-collapse').on('hide.bs.collapse', function () {
+            $(this).siblings('.panel-heading').removeClass('active');
+        });
+
+        <!-- Play sample -->
+        function playSample(name) {
+            var fileName = "static/actorprofilepic/" + name;
+            var vid = document.getElementById("Audio1").src;
+            if (vid == "") {
+                document.getElementById("cangeclass").classList.add('fa-pause');
+                document.getElementById("cangeclass").classList.remove('fa-play');
+                $("#Audio1").attr("src", fileName).trigger("play");
+            } else {
+                var vidOld = vid.toString().split("/actorprofilepic/")[1];
+                vidOld = vidOld.replace("%20", " ");
+                if (vidOld == name) {
+                    var vidPause = document.getElementById("Audio1");
+                    if (vidPause.paused) {
+                        document.getElementById("cangeclass").classList.add('fa-pause');
+                        document.getElementById("cangeclass").classList.remove('fa-play');
+                        $("#Audio1").attr("src", fileName).trigger("play");
+                    } else {
+                        document.getElementById("cangeclass").classList.remove('fa-pause');
+                        document.getElementById("cangeclass").classList.add('fa-play');
+                        vidPause.pause()
+                    }
+                } else {
+                    document.getElementById("cangeclass").classList.add('fa-pause');
+                    document.getElementById("cangeclass").classList.remove('fa-play');
+                    $("#Audio1").attr("src", fileName).trigger("play");
+                }
+            }
+
+        }
+
+
+    </script>
+    <script>
+
+        document.addEventListener('play', function (e) {
+            var audios = document.getElementsByTagName('audio');
+            for (var i = 0, len = audios.length; i < len; i++) {
+                if (audios[i] != e.target) {
+                    audios[i].pause();
+                    audios[i].volume = 0.5;
+                }
+            }
+        }, true);
+
+        $(function () {
+
+            $('#actorTable').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+
+    </script>
+{% endblock %}

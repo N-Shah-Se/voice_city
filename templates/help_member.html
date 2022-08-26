@@ -1,0 +1,137 @@
+{% extends "layout.html" %} {% block title %}Actors{% endblock %} {% block head
+%} {{ super() }}
+<link
+    rel="stylesheet"
+    href='{{ url_for("static", filename="css/floating.css") }}'
+/>
+{% endblock %} {% block body %}
+<link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+/>
+
+<div class="container mt-1 mb-5">
+    <p class="h1">What are the Available membership options on Voicescity?</p>
+    <p class="h5 font-weight-light">
+        There's a broad selection of tiered memberships you can choose from
+        Voicescity:
+    </p>
+    <br />
+    <table style="width: 100%">
+        <tr>
+            <th>Membership</th>
+            <th>Annual Price</th>
+            <th>Job Invitations</th>
+            <th>Customer Support</th>
+        </tr>
+        <tr>
+            <td>Basic</td>
+            <td>Free</td>
+            <td>10</td>
+            <td>Email</td>
+        </tr>
+        <tr>
+            <td>Silver</td>
+            <td>$199</td>
+            <td>30</td>
+            <td>Live Chat</td>
+        </tr>
+        <tr>
+            <td>Gold</td>
+            <td>$299</td>
+            <td>Unlimited</td>
+            <td>Live Chat & Phone Support</td>
+        </tr>
+    </table>
+    <br />
+    <p class="h5 font-weight-light">
+        The main differences among these memberships are:
+    </p>
+    <ol>
+        <li class="h5 font-weight-light">
+            <strong>INVITATIONS:</strong> The number of project invitations you
+            receive. You will thus increase your chances of getting booked by a
+            client because you’ll be able to submit more project proposals.
+        </li>
+        <li class="h5 font-weight-light">
+            <strong>SEARCH RESULTS:</strong> The number of times you appear in
+            searches performed by clients. This will increase your visibility
+            considerably as well as the chances of your profile card being
+            clicked on by a client on the search page.
+        </li>
+        <li class="h5 font-weight-light">
+            <strong>COMPETITIVENESS:</strong> The number of voice actors you’ll
+            be competing against. The higher the tier of your membership, the
+            sooner you get invited to projects and the smaller the group of
+            actors that get invited in each batch of email invitations.
+        </li>
+        <li class="h5 font-weight-light">
+            <strong>SUPPORT:</strong> The level of customer support you receive.
+            The higher your membership tier, the sooner we’ll be able to address
+            your queries and attend to your requests.
+        </li>
+    </ol>
+    <p class="h3">How to select the most suitable membership for you:</p>
+    <p class="h5 font-weight-light">
+        All voice actors start with a free, <strong>Basic</strong> membership.
+        However, when you're ready to formalize your voice-over career and
+        audition for more clients, you can choose to upgrade to one of our paid
+        tier memberships.
+    </p>
+    <p class="h5 font-weight-light">
+        The higher your <strong>paid</strong> membership, the more projects
+        you'll be invited to. The same applies to the number of times you'll
+        appear in searches performed by clients
+    </p>
+    <p class="h5 font-weight-light">
+        Our <strong>Silver</strong> membership is our mid-level tier, provide
+        you with space where you can upload and showcase samples, as well as
+        reveal your work experience. As a <strong>Silver</strong> member, you'll
+        receive limited invitations and can apply for limited matching jobs. The
+        cost of the <strong>Silver</strong> membership is
+        <strong>$199</strong> per year.
+    </p>
+    <p class="h5 font-weight-light">
+        <strong>Gold</strong> is our exclusive, top-level tier aimed at highly
+        successful professionals. They're given preferred access to all projects
+        matching their profile. There is a substantial waiting list and the cost
+        of the <strong>gold</strong> membership is <strong>$299</strong> per
+        year.
+    </p>
+    <ul>
+        <li class="h5 font-weight-light">
+            You can upgrade your account
+            <a
+                href="https://www.voicescity.com/paymentplans"
+                style="color: blue"
+                >here.</a
+            >
+        </li>
+        <li class="h5 font-weight-light">
+            Students are welcome to make use of lower-level paid memberships.
+        </li>
+        <li class="h5 font-weight-light">
+            If you're 17 or under, please reach out to us at
+            <a href="mailto:info@voicescity.com" style="color: blue"
+                >info@voicescity.com</a
+            >
+            and we can provide you with an exclusive membership deal.
+        </li>
+        <li class="h5 font-weight-light">
+            If you’re A Transgender We welcome you to our platform and offer you
+            first year exclusive membership for <strong>free</strong>.
+        </li>
+    </ul>
+
+    <p class="h4">SPECIAL INSTRUCTIONS:</p>
+    <p class="h5 font-weight-light">
+        Voices City Platform Totally Free For Our Clients, We Charges Only 20%
+        Platform Fee from Negotiated Amount After Job Done By Voice Over Artists
+        Successfully.
+    </p>
+    <p class="h5 font-weight-light">
+        <strong>Terms and conditions Applied.</strong>
+    </p>
+    <p><a href="/help" style="color: blue">Back to main menu</a></p>
+</div>
+{% endblock %}

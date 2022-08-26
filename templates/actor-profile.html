@@ -1,0 +1,494 @@
+{% extends "layout.html" %} {% block title %}Actor Profile{% endblock %} {%
+block head %} {{ super() }}
+<link
+    rel="stylesheet"
+    href='{{ url_for("static", filename="css/floating.css") }}'
+/>
+{% endblock %} {% block body %}
+
+<link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+/>
+
+<div class="container mt-5 mb-5">
+    {% if error != "" %}
+    <div class="form-group">
+        <div
+            class="alert alert-danger alert-dismissible fade show"
+            role="alert"
+        >
+            <span class="badge badge-pill badge-danger">Alert</span> {{ error }}
+            <button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close"
+            >
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+    {% endif %} {% if message != "" %}
+    <div class="form-group">
+        <div
+            class="alert alert-success alert-dismissible fade show"
+            role="alert"
+        >
+            <span class="badge badge-pill badge-success">success</span> {{
+            message }}
+            <button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close"
+            >
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<div class="container">
+    <div class="card shadow-sm p-3 mb-5 bg-white rounded w-100">
+        <p class="h4 font-weight-normal">
+            <span class=""><i class="fa fa-user mic-span-4"></i></span>
+            About {{ actordata['userName']|title }}
+        </p>
+
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6 text-center">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <i class="fa fa-calendar mr-2"></i>Member since<br />
+                        {{ actordata["timeStamp"].strftime('%d %b, %Y') }}
+                    </div>
+                    <div class="col-sm-6">
+                        <img
+                            src="static/actorprofilepic/
+
+
+
+                                    {%- if 'profilePicture' in actordata -%}{%- if actordata['profilePicture']|length > 1 -%}{{ actordata['profilePicture'] }}{%- else -%}profile.png{% endif %}{%- else -%}profile.png{% endif %}"
+                            class="img-fluid profile-side-img-1"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="modal-body">
+                <p class="h4 font-weight-normal">Personal Info</p>
+                <div class="row form-group">
+                    <div class="col-sm-6">
+                        <label>First Name</label>
+                        <input
+                            readonly
+                            type="text"
+                            class="form-control"
+                            value="{%- if 'firstName' in actordata -%}{{ actordata['firstName'] }}{%- endif -%}"
+                            name="firstName"
+                            placeholder="First name"
+                        />
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Last Name</label>
+                        <input
+                            readonly
+                            type="text"
+                            class="form-control"
+                            value="{%- if 'lastName' in actordata -%}{{ actordata['lastName'] }}{%- endif -%}"
+                            name="lastName"
+                            placeholder="Last name"
+                        />
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-sm-6">
+                        <label>Your professional headline</label>
+                        <input
+                            readonly
+                            type="text"
+                            name="proHeadlines"
+                            value="
+
+
+
+
+                                           {%- if 'proHeadlines' in actordata -%}{{ actordata['proHeadlines'] }}{% endif %}"
+                            class="form-control"
+                            placeholder="Your professional headline"
+                        />
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Tell others more about you</label>
+                        <input
+                            readonly
+                            type="text"
+                            name="moreAboutYou"
+                            value="
+
+
+
+
+                                           {%- if 'moreaboutyou' in actordata -%}{{ actordata['moreaboutyou'] }}{% endif %}"
+                            class="form-control"
+                            placeholder="Tell others more about you"
+                        />
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-sm-6">
+                        <label>Location</label>
+                        <input
+                            readonly
+                            type="text"
+                            name="Location"
+                            value="{% if 'Location' in actordata %}{{ actordata['Location'] }}{% endif %}"
+                            class="form-control"
+                            placeholder="Location"
+                        />
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Country</label>
+                        <input
+                            readonly
+                            type="text"
+                            name="Location"
+                            value="{% if 'Location' in actordata %}{{ actordata['Country'] }}{% endif %}"
+                            class="form-control"
+                            placeholder="Location"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="modal-body">
+                <p class="h4 font-weight-normal">Skills</p>
+                <div class="row form-group">
+                    <div class="col-sm-6 mt-3">
+                        <label>Language(s)</label>
+                        <br />
+                        {%- if 'languages' in actordata -%}{% for i in
+                        actordata['languages'] %}
+                        <span class="btnnavlink2 mb-2 mt-2 ml-2">{{ i }}</span>
+                        {% endfor %}{%- endif -%}
+                    </div>
+
+                    <div class="col-sm-6 mt-3">
+                        <label>Accent(s)</label>
+                        <br />
+                        {%- if 'accents' in actordata -%}{% for i in
+                        actordata['accents'] %}
+                        <span class="btnnavlink2" mb-2 mt-2 ml-2>{{ i }}</span>
+                        {% endfor %}{%- endif -%}
+                    </div>
+                    <div class="col-sm-6 mt-3">
+                        <label>Gender</label>
+                        <br />
+                        {%- if actordata['catdata'] -%}{% for cat in categories
+                        %}{% if cat['Type'] == 'gender' %} {% if
+                        cat['_id']|string in actordata['catdata'] %}
+                        <span class="btnnavlink2 mb-2 mt-2 ml-2"
+                            >{{ cat['Category Name']|title }}</span
+                        >
+                        {% endif %}{% endif %}{% endfor %}{% endif %}
+                    </div>
+
+                    <div class="col-sm-6 mt-3">
+                        <label>Age(s)</label>
+                        <br />
+                        {%- if actordata['catdata'] -%}{% for cat in categories
+                        %}{% if cat['Type'] == 'age' %} {% if cat['_id']|string
+                        in actordata['catdata'] %}
+                        <span class="btnnavlink2 mb-2 mt-2 ml-2"
+                            >{{ cat['Category Name']|title }}</span
+                        >
+                        {% endif %}{% endif %}{% endfor %}{% endif %}
+                    </div>
+                    <div class="col-sm-6 mt-3">
+                        <label>Category(s)</label>
+                        <br />
+                        {%- if actordata['catdata'] -%}{% for cat in categories
+                        %}{% if cat['Type'] == 'category' %} {% if
+                        cat['_id']|string in actordata['catdata'] %}
+                        <span class="btnnavlink2 mb-2 mt-2 ml-2"
+                            >{{ cat['Category Name']|title }}</span
+                        >
+                        {% endif %}{% endif %}{% endfor %}{% endif %}
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-6">
+                        <label>Additional vocal abilities</label>
+                        <input
+                            class="form-control mb-3"
+                            value="
+
+
+
+
+
+                                           {%- if 'addVocalAbilities' in actordata -%}{{ actordata['addVocalAbilities'] }}{%- endif -%}"
+                            readonly
+                        />
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Experience, training, and equipment</label>
+                        <input
+                            class="form-control mb-3"
+                            value="
+
+
+
+
+                                           {%- if 'expTrainEquip' in actordata -%}{{ actordata['expTrainEquip'] }}{%- endif -%}"
+                            readonly
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="modal-body">
+                <p class="h4 font-weight-normal">About Studio</p>
+                <div class="row form-group">
+                    <div class="col-sm-6 mt-3">
+                        <label>Studio Equipments</label>
+                        <br />
+                        <input class="form-control" type="text" {% if
+                        'studio_equipment' in actordata %}value="{{
+                        actordata['studio_equipment'] }}" {% else
+                        %}placeholder='Studio Equipment' {% endif %} readonly
+                        disabled>
+                    </div>
+
+                    <div class="col-sm-6 mt-3">
+                        <label>Studio Microphone</label>
+                        <br />
+                        <input class="form-control" type="text" {% if
+                        'studio_microphone' in actordata %}value="{{
+                        actordata['studio_microphone'] }}" {% else
+                        %}placeholder='Detail about microphone' {% endif %}
+                        readonly disabled>
+                    </div>
+                    <div class="col-sm-6 mt-3">
+                        <label>Turnaround Time</label>
+                        <br />
+                        <input class="form-control" type="text" {% if
+                        'studio_turnaroundtime' in actordata %}value="{{
+                        actordata['studio_turnaroundtime'] }}" {% else
+                        %}placeholder='Average Turnaround time' {% endif %}
+                        readonly disabled>
+                    </div>
+
+                    <div class="col-sm-6 mt-3">
+                        <label>Studio Sessions</label>
+                        <br />
+                        {%- if 'studio_sessions' in actordata -%}{% for i in
+                        actordata['studio_sessions'] %}
+                        <span class="btnnavlink2 mb-2 mt-2 ml-2">{{ i }}</span>
+                        {% endfor %}{%- endif -%}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="modal-body">
+                <p class="h4 font-weight-normal">Playlists</p>
+            </div>
+            <div class="container">
+                <div class="row">
+                    {% for eachPlayList in actordata["playlists"] %} {% if
+                    eachPlayList["status"] != "deleted" %}
+                    <!--audio start  -->
+                    <div class="col-sm-4" style="padding-bottom: 10px">
+                        <section class="audio-player">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div
+                                        class="row align-items-center mt-2 mb-2 mx-0"
+                                    >
+                                        <div class="col">
+                                            <p
+                                                class="card-title col text-center h4"
+                                            >
+                                                {{ eachPlayList["playlist_name"]
+                                                }}
+                                            </p>
+                                            <small
+                                                class="mx-auto d-block text-center"
+                                                >Total samples: {{
+                                                eachPlayList["playlist"]|length
+                                                }}</small
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="row mr-4">
+                                        {% for i in
+                                        eachPlayList["playlist_language"] %}
+                                        <span
+                                            class="btnnavlink2 mb-2 mt-2 ml-2"
+                                        >
+                                            {{ i }}</span
+                                        >
+                                        {% endfor %} {% for i in
+                                        actordata['accents'] %}
+                                        <span
+                                            class="btnnavlink2 mb-2 mt-2 ml-2"
+                                        >
+                                            {{ i }}</span
+                                        >
+                                        {% endfor %} {% for i in categories %}
+                                        {% if i['_id']|string in
+                                        eachPlayList["playlist_category"]|capitalize
+                                        %}
+                                        <span
+                                            class="btnnavlink2 mb-2 mt-2 ml-2"
+                                        >
+                                            {{ i['Category Name']|capitalize
+                                            }}</span
+                                        >
+                                        {% endif %} {% endfor %}
+                                    </div>
+                                </div>
+                                <div
+                                    class="new-edit-profile-div-2-bottom px-3 py-2"
+                                >
+                                    <div class="row">
+                                        <div class="col-sm-9"></div>
+                                        <div class="col text-right"></div>
+                                        <div class="col text-right">
+                                            <div
+                                                id="accordion{{ loop.index }}"
+                                                class="pr-3"
+                                            >
+                                                <i
+                                                    class="fa fa-caret-down profile-icon-1"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapseOne{{ loop.index }}"
+                                                    aria-expanded="true"
+                                                    aria-controls="collapseOne{{ loop.index }}"
+                                                ></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div
+                                    id="collapseOne{{ loop.index }}"
+                                    class="collapse"
+                                    aria-labelledby="headingOne"
+                                    data-parent="#accordion{{ loop.index }}"
+                                >
+                                    <div class="card-body">
+                                        {% for eachsample in
+                                        eachPlayList["playlist"] %}
+                                        <audio
+                                            controls
+                                            src="../static/samples/{{ eachsample }}"
+                                        >
+                                            Your browser does not support the
+                                            <code>audio</code> element.</audio
+                                        >{{ eachsample.split(" - ")[1] }} {%
+                                        endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <audio
+                                id="audio-player_{{ loop.index }}"
+                                class="d-none"
+                                src=""
+                                type="audio/mp3"
+                                controls="controls"
+                            ></audio>
+                        </section>
+                    </div>
+                    <!--audio end  -->
+
+                    {% endif %} {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %} {% block script %}
+
+<script>
+    $(".panel-collapse").on("show.bs.collapse", function () {
+        $(this).siblings(".panel-heading").addClass("active");
+    });
+
+    $(".panel-collapse").on("hide.bs.collapse", function () {
+        $(this).siblings(".panel-heading").removeClass("active");
+    });
+
+    <!-- Play sample -->
+    function playSample(name) {
+        var fileName = "static/actorprofilepic/" + name;
+        var vid = document.getElementById("Audio1").src;
+        if (vid == "") {
+            document.getElementById("cangeclass").classList.add("fa-pause");
+            document.getElementById("cangeclass").classList.remove("fa-play");
+            $("#Audio1").attr("src", fileName).trigger("play");
+        } else {
+            var vidOld = vid.toString().split("/actorprofilepic/")[1];
+            vidOld = vidOld.replace("%20", " ");
+            if (vidOld == name) {
+                var vidPause = document.getElementById("Audio1");
+                if (vidPause.paused) {
+                    document
+                        .getElementById("cangeclass")
+                        .classList.add("fa-pause");
+                    document
+                        .getElementById("cangeclass")
+                        .classList.remove("fa-play");
+                    $("#Audio1").attr("src", fileName).trigger("play");
+                } else {
+                    document
+                        .getElementById("cangeclass")
+                        .classList.remove("fa-pause");
+                    document
+                        .getElementById("cangeclass")
+                        .classList.add("fa-play");
+                    vidPause.pause();
+                }
+            } else {
+                document.getElementById("cangeclass").classList.add("fa-pause");
+                document
+                    .getElementById("cangeclass")
+                    .classList.remove("fa-play");
+                $("#Audio1").attr("src", fileName).trigger("play");
+            }
+        }
+    }
+</script>
+
+<script>
+    document.addEventListener(
+        "play",
+        function (e) {
+            var audios = document.getElementsByTagName("audio");
+            for (var i = 0, len = audios.length; i < len; i++) {
+                if (audios[i] != e.target) {
+                    audios[i].pause();
+                    audios[i].volume = 0.5;
+                }
+            }
+        },
+        true
+    );
+</script>
+
+{% endblock %}

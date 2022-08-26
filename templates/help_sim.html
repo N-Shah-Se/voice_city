@@ -1,0 +1,70 @@
+{% extends "layout.html" %} {% block title %}Actors{% endblock %} {% block head
+%} {{ super() }}
+<link
+    rel="stylesheet"
+    href='{{ url_for("static", filename="css/floating.css") }}'
+/>
+{% endblock %} {% block body %}
+<link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+/>
+
+<div class="container mt-1 mb-5">
+    <p class="h1">How do I report scam/inappropriate messages?</p>
+    <p class="h5 font-weight-light">
+        In an effort to prevent delays that could threaten a voice actor's
+        chance of being hired for legitimate work, we have reverted our message
+        set up so that most messages aren't blocked.
+    </p>
+    <p class="h5 font-weight-light">
+        This means that you will receive messages from any registered client, so
+        it's up to you to determine who you want to work with and recognize
+        potential leads for your business, as well as differentiate between
+        scams and legitimate work.
+    </p>
+    <p class="h3">Voicescity gives the following advice on avoiding scams:</p>
+    <ul>
+        <li class="h5 font-weight-light">Trust your instincts</li>
+        <li class="h5 font-weight-light">Never wire funds</li>
+        <li class="h5 font-weight-light">
+            Don't extend payments to anyone you haven't met in person
+        </li>
+        <li class="h5 font-weight-light">
+            Remember to always protect your work and consider using watermarks
+        </li>
+        <li class="h5 font-weight-light">
+            Ask questions before disclosing your personal information
+        </li>
+    </ul>
+    <p class="h3">Red flags to look out for:</p>
+    <ul>
+        <li class="h5 font-weight-light">
+            The message has suspicious content.
+        </li>
+        <li class="h5 font-weight-light">
+            The contact asks you to provide sensitive or personal information.
+        </li>
+        <li class="h5 font-weight-light">
+            You are required to make a payment or perform some transaction.
+        </li>
+        <li class="h5 font-weight-light">
+            You are requested to provide services that differ from the ones
+            listed on your profile.
+        </li>
+    </ul>
+    <p class="h5 font-weight-light">
+        If you come across a suspicious or inappropriate message, please let us
+        know immediately by contacting
+        <a href="mailto:help@voicescity.com" style="color: blue"
+            >help@voicescity.com</a
+        >, or by clicking 'flag' on the message itself.
+    </p>
+    <p class="h5 font-weight-light">
+        We will then take the necessary action by reviewing the user's activity
+        and/or legitimacy and block them if needed.
+    </p>
+
+    <p><a href="/help" style="color: blue">Back to main menu</a></p>
+</div>
+{% endblock %}

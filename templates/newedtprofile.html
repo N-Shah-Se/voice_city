@@ -1,0 +1,1558 @@
+{% extends "layout.html" %}
+{% block title %}Actor Home{% endblock %}
+{% block head %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/flick/jquery-ui.css">
+    <link rel="stylesheet" href="static/audio/css/audio-player.css">
+    {{ super() }}
+{% endblock %}
+{% block body %}
+    <div class="container mt-5 mb-5">
+        <p class="profiletext1 pt-5 mb-5">Edit Profile/Add Demo</p>
+        {% if error != "NULL" %}
+            <div class="form-group ">
+                <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+                    <span class="badge badge-pill badge-danger">Alert</span> {{ error }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        {% endif %}
+        {% if message != "NULL" %}
+            <div class="form-group ">
+                <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                    <span class="badge badge-pill badge-success">success</span> {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        {% endif %}
+
+    </div>
+    {#About container#}
+    <div class="container">
+        <div class="card shadow-sm p-3 mb-5 bg-white rounded w-100 ">
+            <p class="h4 font-weight-normal"><span class=""><i class="fa fa-user mic-span-4"></i></span>
+                About {{ username }}
+            </p>
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6 text-center">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <i class="fa fa-calendar mr-2"></i>Member since<br>
+                            {{ joindate }}
+                        </div>
+                        <div class="col-sm-6">
+                            <img src="static/actorprofilepic/
+
+
+
+
+
+
+                                    {%- if 'profilePicture' in actordata -%}{% if actordata['profilePicture'] != "" %}{{ actordata['profilePicture'] }}{% else %}profile.png{% endif %}{% else %}profile.png{% endif %}"
+                                 class="img-fluid profile-side-img-1">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+            <hr>
+            <i class="fa fa-edit text-right edit-icon-1" data-toggle="modal" data-target="#exampleModalCenter2"></i>
+        </div>
+    </div>
+
+    {#Bank container#}
+    <div class="container d-none">
+        <div class="card shadow-sm p-3 mb-5 bg-white rounded w-100 ">
+            <p class="h4 font-weight-normal"><span class=""><i class="fa fa-user mic-span-4"></i></span>
+               Payment Information
+            </p>
+        <br>
+            <div class="row form-group">
+                <div class="col-sm-3">
+                    <label class="form-label">Bank Name:</label>
+                </div>
+                <div class="col-sm-6">
+                  <strong>{% if 'bankName' in actordata %}{{ actordata['bankName'] }}{% endif %}</strong>
+                </div>
+
+            </div>
+
+                            <div class="row form-group">
+                                <div class="col-sm-3">
+                                    <label class="forrequiredm-label">Acount Title:</label>
+                                </div>
+                                <div class="col-sm-6">
+                                   <strong>{% if 'accountTitle' in actordata %}{{ actordata['accountTitle'] }}{% endif %}</strong>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-3">
+                                    <label class="form-label">Acount Number:</label>
+                                </div>
+                                <div class="col-sm-6">
+                                <strong>{% if 'accountNo' in actordata %}{{ actordata['accountNo'] }}{% endif %}</strong>
+
+                                </div>
+                            </div>
+
+
+                            <div class="row form-group">
+                                <div class="col-sm-3">
+                                    <label class="form-label">Iban Number: </label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <strong>{% if 'ibannumber' in actordata %}{{ actordata['ibannumber'] }}{% endif %}</strong>
+
+
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-3">
+                                    <label class="form-label">Bank Swift Code:</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <strong>{% if 'swiftcode' in actordata %}{{ actordata['swiftcode'] }}{% endif %}</strong>
+
+                                </div>
+                            </div>
+            <hr>
+            <i class="fa fa-edit text-right edit-icon-1" data-toggle="modal" data-target="#exampleModalCenterpayment"></i>
+        </div>
+    </div>
+    {#Service Container#}
+    <div class="container">
+        <div class="card shadow-sm p-3 mb-5 bg-white rounded w-100 ">
+            <p class="h4 font-weight-normal"><span class=""><i class="fa fa-user mic-span-4"></i></span> Skills and
+                services
+                offered
+            </p>
+
+            <div class="container pt-3">
+                <div class="row form-group">
+                    <div class="col-sm-6">
+                        <label>Language</label>
+                        <br>
+                        {% if 'languages' in actordata %}
+                            {% for language in actordata["languages"] %}
+                                <span class="btnnavlink2">{{ language }}</span>
+                            {% endfor %}
+                        {% else %}
+                            <span class="btnnavlink2">N/a</span>
+                        {% endif %}
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Accents</label>
+                        <br>
+                        {% if 'accents' in actordata %}
+                            {% for accent in actordata["accents"] %}
+                                <span class="btnnavlink2">{{ accent }}</span>
+                            {% endfor %}
+                        {% else %}
+                            <span class="btnnavlink2">N/a</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-6">
+                        <label>Gender</label>
+                        <br>
+                        {% if 'catdata' in actordata %}
+                            {% for catdata in catTabledata %}
+                                {% if catdata["Type"] == "gender" %}
+                                    {%- if catdata['_id']|string in actordata["catdata"] -%}
+                                        <span class="btnnavlink2">{{ catdata['Category Name']|capitalize }}</span>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <span class="btnnavlink2">N/a</span>
+                        {% endif %}
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Age</label>
+                        <br>
+                        {% if 'catdata' in actordata %}
+                            {% for catdata in catTabledata %}
+                                {% if catdata["Type"] == "age" %}
+                                    {%- if catdata['_id']|string in actordata["catdata"] -%}
+                                        <span class="btnnavlink2">{{ catdata['Category Name']|capitalize }}</span>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <span class="btnnavlink2">N/a</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-6">
+                        <label>Category</label>
+                        <br>
+                        {% if 'catdata' in actordata %}
+                            {% for catdata in catTabledata %}
+                                {% if catdata["Type"] == "category" %}
+                                    {%- if catdata['_id']|string in actordata["catdata"] -%}
+                                        <span class="btnnavlink2">{{ catdata['Category Name']|capitalize }}</span>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <span class="btnnavlink2">N/a</span>
+                        {% endif %}
+                    </div>
+                    <div class="col-sm-6">
+
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-12">
+                        <label>Additional vocal abilities</label>
+                        <input class="form-control mb-3"
+                               value="
+
+
+                                       {%- if 'addVocalAbilities' in actordata -%}{{ actordata['addVocalAbilities'] }}{% endif %}"
+                               readonly>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-12">
+                        <label>Experience and training</label>
+                        <input class="form-control mb-3"
+                               value="
+
+
+                                       {%- if 'expTrainEquip' in actordata -%}{{ actordata['expTrainEquip'] }}{% endif %}"
+                               readonly>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <i class="fa fa-edit text-right edit-icon-1" data-toggle="modal" data-target="#exampleModalCenter"></i>
+        </div>
+    </div>
+    {#Equipmet Container#}
+    <div class="container">
+        <div class="card shadow-sm p-3 mb-5 bg-white rounded w-100 ">
+            <p class="h4 font-weight-normal"><span class=""><i class="fa fa-user mic-span-4"></i></span> Studio
+            </p>
+
+            <div class="container pt-3">
+                <div class="row form-group">
+                    <div class="col-sm-6">
+                        <label>Turnaround Time</label>
+                        <input class="form-control mb-3" type="text" id="turnaround" name="turnaround" readonly
+                               disabled value="
+
+
+                                {%- if actordata['studio_turnaroundtime'] %}{{ actordata['studio_turnaroundtime'] }}{% endif %}">
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Directed Sessions</label>
+                        <br>
+                        {% if 'studio_sessions' in actordata %}
+                            {% for delivery in actordata["studio_sessions"] %}
+                                <span class="btnnavlink2">{{ delivery }}</span>
+                            {% endfor %}
+                        {% else %}
+                            <span class="btnnavlink2">N/a</span>
+                        {% endif %}
+
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-sm-6">
+                        <label>Special Equipment</label>
+                        <input class="form-control mb-3" type="text" id="1equipment" name="1equipment" readonly disabled
+                               value="
+
+
+                                       {%- if actordata['studio_equipment'] %}{{ actordata['studio_equipment'] }}{% endif %}">
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Microphone</label>
+                        <input class="form-control mb-3" type="text" id="1microphone" name="1microphone" readonly
+                               disabled value="
+
+
+                                {%- if actordata['studio_turnaroundtime'] %}{{ actordata['studio_microphone'] }}{% endif %}">
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <i class="fa fa-edit text-right edit-icon-1" data-toggle="modal" data-target="#exampleModalCenter22"></i>
+        </div>
+    </div>
+    {#Demo Container#}
+    <div class="container">
+        <div class="card shadow-sm p-3 mb-5 bg-white rounded w-100 ">
+            <p class="h4 font-weight-normal"><span class=""><i class="fa fa-microphone mic-span-1"></i></span> Playlist
+                {{ actordata["playlists"]|length }}
+            </p>
+
+            <div class="container">
+                <div class="row">
+                    {% for eachPlayList in actordata["playlists"] %}
+                        {% if eachPlayList["status"] != "deleted" %}
+                            <!--audio start  -->
+                            <div class="col-sm-4">
+                                <section class="audio-player">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="row align-items-center mt-2 mb-2 mx-0">
+                                                <div class="col">
+                                                    <p class="card-title col text-center h4"> {{ eachPlayList["playlist_name"] }}
+                                                    </p><small class="mx-auto d-block text-center">Total samples:
+                                                    {{ eachPlayList["playlist"]|length }}</small>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                {% for i in eachPlayList["playlist_language"] %}
+                                                        <span class="btnnavlink2 mb-2 mt-2 ml-2"> {{ i }}</span>
+                                                    {% endfor %}
+                                                    {% for i in eachPlayList['playlist_accents'] %}
+                                                        <span class="btnnavlink2 mb-2 mt-2 ml-2"> {{ i }}</span>
+                                                    {% endfor %}
+                                                    {% for i in catTabledata %}
+                                                        {% if i['_id']|string in eachPlayList["playlist_category"] %}
+                                                            <span class="btnnavlink2 mb-2 mt-2 ml-2"> {{ i['Category Name']|capitalize }}</span>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="new-edit-profile-div-2-bottom  px-3 py-2">
+                                            <div class="row">
+                                                <div class="col-sm-9"></div>
+                                                <div class="col text-right">
+                                                    <div class="btn-group dropleft">
+                                                        <i class="fa fa-ellipsis-v px-2" data-toggle="dropdown"
+                                                           aria-haspopup="true"
+                                                           aria-expanded="false"></i>
+                                                        <div class="dropdown-menu">
+                                                            <button id="{{ eachPlayList['_id'] }}, {{ loop.index }}"
+                                                                    class="dropdown-item btn" data-toggle="modal"
+                                                                    onclick="editPlaylist(this.id)">
+                                                                Edit
+                                                            </button>
+                                                            <a class="dropdown-item"
+                                                               href="/delete-plalist?id={{ eachPlayList['_id'] }}">Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col text-right">
+                                                    <div id="accordion{{ loop.index }}" class="pr-3">
+                                                        <i class="fa fa-caret-down profile-icon-1 "
+                                                           data-toggle="collapse"
+                                                           data-target="#collapseOne{{ loop.index }}"
+                                                           aria-expanded="true"
+                                                           aria-controls="collapseOne{{ loop.index }}"></i>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div id="collapseOne{{ loop.index }}" class="collapse "
+                                             aria-labelledby="headingOne"
+                                             data-parent="#accordion{{ loop.index }}">
+                                            <div class="card-body">
+                                                {% for eachsample in eachPlayList["playlist"] %}
+                                                    <audio
+                                                            controls
+                                                            src="../static/samples/{{ eachsample }}">
+                                                        Your browser does not support the
+                                                        <code>audio</code> element.
+                                                    </audio>{{ eachsample.split(" - ")[1] }}
+                                                {% endfor %}
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <audio id="audio-player_{{ loop.index }}" class="d-none" src="" type="audio/mp3"
+                                           controls="controls"></audio>
+                                </section>
+
+                            </div>
+                            <!--audio end  -->
+
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+
+                <hr>
+                <div class="text-right">
+                    <button type="button" class="btn" data-toggle="modal" data-target="#exampleModalCenter3"><i
+                            class="fa fa-plus pr-2"></i>Add
+                    </button>
+                    {#                    #}
+                    {#                    <button type="button" class="btn" data-toggle="modal" data-target="#exampleModalCenter5">View All#}
+                    {#                    </button>#}
+
+                </div>
+
+            </div>
+        </div>
+        <audio controls id="Audio1" style="display: none"></audio>
+    </div>
+
+    <!-- Modal -->
+    <!--Skills edit modal-->
+    <!-- Complete-->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle"> Skills and services offered
+
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/edit-skills" enctype="multipart/form-data" method="post">
+                    <div class="modal-body">
+
+                        <div class="row form-group">
+                            <div class="col-sm-6">
+                                <label>Language</label>
+                                <select name="languages" class="selectpicker form-control mb-3" multiple
+                                        data-live-search="true">
+                                    <option></option>
+                                    {% for language in languages %}
+                                        <option value="{{ language }}" {%if "languages" in actordata%} {% if language in actordata[
+                        "languages"] %} selected{% endif %}{%endif%}>{{ language }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Gender</label>
+                                <select id="genderAge" name="genderAge" class="selectpicker form-control mb-3"
+                                        data-live-search="true">
+                                    <option value="">Select gender</option>
+                                    {% for catdata in catTabledata %}
+                                        {% if catdata["Type"] == "gender" %}
+                                            <option value="{{ catdata['_id'] }}" {%if "catdata" in actordata%}
+                                                    {% if catdata['_id']|string in actordata["catdata"] %}
+                                                    selected{% endif %}{%endif%}>{{ catdata['Category Name']|capitalize }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-sm-6">
+                                <label>Age</label>
+                                <select id="genderAge" name="genderAge" class="selectpicker form-control mb-3" multiple
+                                        data-live-search="true">
+                                    <option value="">Select Age</option>
+                                    {% for catdata in catTabledata %}
+                                        {% if catdata["Type"] == "age" %}
+                                            <option value="{{ catdata['_id'] }}"{%if "catdata" in actordata%}
+                                                    {% if catdata['_id']|string in actordata["catdata"] %}
+                                                    selected{% endif %}{%endif%}>{{ catdata['Category Name']|capitalize }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Category</label>
+                                <select id="genderAge" name="genderAge" class="selectpicker form-control mb-3" multiple
+                                        data-live-search="true">
+                                    <option value="">Select Category</option>
+                                    {% for catdata in catTabledata %}
+                                        {% if catdata["Type"] == "category" %}
+                                            <option value="{{ catdata['_id'] }}" {%if "catdata" in actordata%}
+                                                    {% if catdata['_id']|string in actordata["catdata"] %}
+                                                    selected{% endif %}{%endif%}>{{ catdata['Category Name']|capitalize }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-sm-6">
+                                <label>Accents</label>
+                                <select name="accents" id="accents" class="selectpicker form-control mb-3" multiple
+                                        data-live-search="true">
+                                    <option value="" disabled>Select accents</option>
+                                    {% for accent in accents %}
+                                        <option value="{{ accent }}" {%if "accents" in actordata%} {% if accent in actordata[
+                        "accents"] %} selected{% endif %}{%endif%}>{{ accent }}</option>
+                                    {% endfor %}
+                                </select>
+
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Additional vocal abilities</label>
+                                <input class="form-control mb-3" name="addVocalAbilities"
+                                       value="
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                               {%- if 'addVocalAbilities' in actordata -%}{{ actordata['addVocalAbilities'] }}{% endif %}">
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-sm-12">
+                                <label>Experience and training</label>
+                                <input class="form-control mb-3" name="expTrainEquip"
+                                       value="
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                               {%- if 'expTrainEquip' in actordata -%}{{ actordata['expTrainEquip'] }}{% endif %}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <!--Profile edit modal-->
+    <!--Complete-->
+    <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle2">About you
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/actor-editprofile" method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="row form-group">
+                            <div class="col-sm-9">
+                                <label>Profile picture
+                                </label>
+                                <div class="input-field">
+                                    <div class="input-images" style="padding-top: .5rem;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-sm-4">
+                                <label>User Name</label>
+                                <input type="text" class="form-control"
+                                       value="{% if 'userName' in actordata %}{{ actordata['userName'] }}{% endif %}"
+                                       name="userName"
+                                       placeholder="User Name">
+                            </div>
+                            <div class="col-sm-4">
+                                <label>First Name</label>
+                                <input type="text" class="form-control"
+                                       value="{% if 'firstName' in actordata %}{{ actordata['firstName'] }}{% endif %}"
+                                       name="firstName" placeholder="First name">
+                            </div>
+                            <div class="col-sm-4">
+                                <label>Last Name</label>
+                                <input type="text" class="form-control"
+                                       value="{% if 'lastName' in actordata %}{{ actordata['lastName'] }}{% endif %}"
+                                       name="lastName"
+                                       placeholder="Last name">
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-sm-6">
+                                <label>Your professional headline</label>
+                                <input type="text" name="proHeadlines"
+                                       value="
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                               {%- if 'proHeadlines' in actordata -%}{{ actordata['proHeadlines'] }}{% endif %}"
+                                       class="form-control" placeholder="Your professional headline">
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Tell others more about you</label>
+                                <input type="text" name="moreAboutYou"
+                                       value="
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                               {%- if 'moreAboutYou' in actordata -%}{{ actordata['moreAboutYou'] }}{% endif %}"
+                                       class="form-control" placeholder="Tell others more about you">
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-sm-6">
+                                <label>City</label>
+                                <input type="text" name="Location"
+                                       value="{%- if 'Location' in actordata -%}{{ actordata['Location'] }}{% endif %}"
+                                       class="form-control" placeholder="City">
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Country</label>
+                                <select id="userCountry" name="userCountry" data-live-search="true"
+                                        class="selectpicker form-control" required>
+                                    <option value="">Select your Country</option>
+                                    {% for country in countries %}
+                                        <option value="{{ country }}"
+                                                {% if country ==  actordata["Country"] %}selected{% endif %}>{{ country }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+     <!-- Modal -->
+    <!--payment edit modal-->
+    <!--Complete-->
+    <div class="modal fade" id="exampleModalCenterpayment" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle2">Bank Info
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/editbankinfo" method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                         <div class="row form-group">
+                                <div class="col-sm-3">
+                                    <label class="form-label">Bank Name:</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" value="{% if 'bankName' in actordata %}{{ actordata['bankName'] }}{% endif %}" list="banknameslist" class="form-control" name="bankName" required>
+                                    <datalist id="banknameslist">
+                                        {%for names in banklistarray%}
+
+                                      <option value="{{names}}">
+
+                                        {%endfor%}
+                                      
+                                    </datalist>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-3">
+                                    <label class="forrequiredm-label">Acount Title:</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" value="{% if 'accountTitle' in actordata %}{{ actordata['accountTitle'] }}{% endif %}" class="form-control" name="accountTitle" required>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-3">
+                                    <label class="form-label">Acount Number:</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" value="{% if 'accountNo' in actordata %}{{ actordata['accountNo'] }}{% endif %}"
+                                           class="form-control" name="accountNo" required>
+                                </div>
+                            </div>
+
+
+                            <div class="row form-group">
+                                <div class="col-sm-3">
+                                    <label class="form-label">Iban Number</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" value="{% if 'ibannumber' in actordata %}{{ actordata['ibannumber'] }}{% endif %}"
+                                           class="form-control"  name="ibannumber" required>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-3">
+                                    <label class="form-label">Bank Swift Code</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" value="{% if 'swiftcode' in actordata %}{{ actordata['swiftcode'] }}{% endif %}"
+                                           class="form-control" name="swiftcode">
+                                </div>
+                            </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <!--Experiance Education Equipment-->
+    <!--Complete-->
+    <div class="modal fade" id="exampleModalCenter22" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle"> Studio
+
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/edit-studio" enctype="multipart/form-data" method="post">
+                    <div class="modal-body">
+
+                        <div class="row form-group">
+                            <div class="col-sm-6">
+                                <label>Turnaround Time</label>
+                                <input class="form-control mb-3" type="text" id="turnaroundtime" required
+                                       name="turnaroundtime" value="
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        {%- if actordata['studio_turnaroundtime'] %}{{ actordata['studio_turnaroundtime'] }}{% endif %}">
+                                <span>(e.g. Less than 24 hours, 48 hours)</span>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Directed Sessions</label>
+                                <select class="selectpicker form-control mb-3" multiple data-live-search="true"
+                                        id="sessions" name="sessions" required>
+                                    <option value="">Select</option>
+                                    {% for delivery in delivery_options %}
+                                        <option value="{{ delivery }}" {%if "studio_sessions" in actordata%}
+                                                {%- if delivery|string in actordata["studio_sessions"] -%}selected{% endif %}{%endif%}>{{ delivery }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-sm-6">
+                                <label>Special Equipment</label>
+                                <input class="form-control mb-3" type="text" id="equipment" name="equipment" required
+                                       value="
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                               {%- if actordata['studio_equipment'] %}{{ actordata['studio_equipment'] }}{% endif %}">
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Microphone</label>
+                                <input class="form-control mb-3" type="text" id="microphone" name="microphone" value="
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        {%- if actordata['studio_microphone'] %}{{ actordata['studio_microphone'] }}{% endif %}">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Button trigger modal -->
+    <!-- Modal -->
+    <!-- Create new play list modal-->
+    <div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle3">Create playlist</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/add-playlist" method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+
+                        <p>Playlists are like folders where you can group multiple samples within the same project
+                            category,
+                            such as 'commercial'.
+                        </p>
+
+                        <p class="h4">About your playlist
+                        </p>
+
+                        <div class="row form-group">
+                            <div class="col-sm-6">
+                                <label>Playlist name</label>
+                                <input type="text" name="playlistName" id="playlistName" class="form-control"
+                                       placeholder="Playlist name" required>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Add sample</label>
+                                <input type="file" id="sampleFiles" name="sampleFiles" class="form-control"
+                                       placeholder="Sample files" required>
+                                <span><small>Must be mp3</small></span>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-sm-6">
+                                <label>Language</label>
+                                <select name="playlistLanguage" id="playlistLanguage"
+                                        class="selectpicker form-control mb-3"
+                                        data-live-search="true" required>
+                                    <option value="" disabled>Select Language</option>
+                                    {%if "languages" in actordata%}
+                                    {% for language in languages %}
+                                        {% if language in actordata["languages"] %}
+                                            <option value="{{ language }}">{{ language }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {%endif%}
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Accents</label>
+                                <select name="playlistaccents" id="playlistaccents"
+                                        class="selectpicker form-control mb-3"
+                                        data-live-search="true" required>
+                                    <option value="" disabled>Select Accent</option>
+                                    {%if "accents" in actordata%}
+                                    {% for accent in accents %}
+                                        {% if accent in actordata["accents"] %}
+                                            <option value="{{ accent }}">{{ accent }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {%endif%}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-sm-6">
+                                <label>Age</label>
+                                <select name="playListCategory" id="playListCategory"
+                                        class="selectpicker form-control mb-3"
+                                        data-live-search="true" required>
+                                         {%if "catdata" in actordata%}
+                                    {% for category in catTabledata %}
+                                        {% if category['Type'] == 'age' %}
+                                            {% if category['_id']|string in actordata["catdata"] %}
+                                                <option value="{{ category['_id'] }}">{{ category['Category Name']|capitalize }}</option>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    {%endif%}
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Gender</label>
+                                <select name="playListCategory" id="playListCategory"
+                                        class="selectpicker form-control mb-3"
+                                        data-live-search="true" required>
+                                         {%if "catdata" in actordata%}
+                                    {% for category in catTabledata %}
+
+                                        {% if category['Type'] == 'gender' %}
+                                            {% if category['_id']|string in actordata["catdata"] %}
+                                                <option value="{{ category['_id'] }}">{{ category['Category Name']|capitalize }}</option>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    {%endif%}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-sm-6">
+                                <label>Category</label>
+                                <select name="playListCategory" id="playListCategory"
+                                        class="selectpicker form-control mb-3"
+                                        data-live-search="true" required>
+                                         {%if "catdata" in actordata%}
+                                    {% for category in catTabledata %}
+                                        {% if category['Type'] == 'category' %}
+                                            {% if category['_id']|string in actordata["catdata"] %}
+                                                <option value="{{ category['_id'] }}">{{ category['Category Name']|capitalize }}</option>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    {%endif%}
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter4" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle4">Add Samples</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Samples are short audio clips that showcase your voice over work.</p>
+
+                    <p class="h4">About your sample
+                    </p>
+
+
+                    <div class="form-group">
+                        <label>Sample name</label>
+                        <input type="text" class="form-control" placeholder="Sample name">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Languages</label>
+                        <input type="text" class="form-control" placeholder="Languages">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Additional sample details </label>
+                        <input type="text" class="form-control" placeholder="Additional sample details">
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade w-100" id="exampleModalCenter5" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content w-100">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle5">Add Samples</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <p class="h4">sheraz moihsin playlists
+
+                    </p>
+
+                    <p class="h4 font-weight-normal"><span class=""><i class="fa fa-microphone mic-span-1"></i></span>
+                        Playlists (2)</p>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="new-edit-profile-div-1">
+                                    <p class="new-edit-profile-div-1-text-1 font-weight-normal"><span class=""><i
+                                            class="fa fa-play mic-span-2"></i></span>All my samples<br>
+                                        <small class="ml-5 pl-3 small-text-1">No samples are included yet</small>
+                                    </p>
+                                </div>
+
+                                <div class="new-edit-profile-div-1-bottom text-right px-3 py-2">
+                                    <div class="btn-group dropleft ">
+
+
+                                        <i class="fa fa-ellipsis-v px-2" data-toggle="dropdown" aria-haspopup="true"
+                                           aria-expanded="false"></i>
+                                        <div class="dropdown-menu">
+
+
+                                            <a class="dropdown-item" href="#">Edit</a>
+                                            <a class="dropdown-item" href="#">Delete</a>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <!-- Default dropleft button -->
+
+
+                            </div>
+                            <div class="col-sm-6">
+
+                                <div class="new-edit-profile-div-1">
+                                    <p class="new-edit-profile-div-1-text-1 font-weight-normal"><span class=""><i
+                                            class="fa fa-play mic-span-3"></i></span>sadsad<br>
+                                        <small class="ml-5 pl-3 small-text-1">Duration: 6:30 - Total samples: 1</small>
+                                    <h6 class="mb-0 text-right  accordion-1">
+                                        <a class="collapsed " role="button" data-toggle="collapse"
+                                           data-toggle="collapse"
+                                           data-target="#collapseThree" aria-expanded="false"
+                                           aria-controls="collapseThree">
+                                            <i class="fa fa-caret-down profile-icon-1"></i>
+                                        </a>
+                                    </h6></p>
+                                    <div class="accordion" id="accordionExample">
+
+                                    </div>
+
+                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body-1">
+                                            <p class="new-edit-profile-div-1-text-1 font-weight-normal"><span
+                                                    class=""><i
+                                                    class="fa fa-play mic-span-3"></i></span>sadsad<br>
+                                                <small class="ml-5 pl-3 small-text-1">Duration: 6:30 - Total samples:
+                                                    1</small>
+                                            <h6 class="mb-0 text-right  accordion-1">
+                                                <i class="fa fa-share-alt mr-2"></i>
+                                                <i class="fa fa-ellipsis-v mr-2"></i>
+                                                </a>
+                                            </h6>
+
+
+                                        </div>
+                                    </div>
+
+                                    </p>
+                                </div>
+
+
+                                <div class="new-edit-profile-div-2-bottom  px-3 py-2">
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <button class="btn text-uppercase text-light"><i
+                                                    class="fa fa-share-alt mr-2"></i> Share playlist
+                                            </button>
+
+                                        </div>
+                                        <div class="col-sm-6 text-right">
+                                            <div class="btn-group dropleft">
+                                                <i class="fa fa-ellipsis-v px-2" data-toggle="dropdown"
+                                                   aria-haspopup="true"
+                                                   aria-expanded="false"></i>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="#">Edit</a>
+                                                    <a class="dropdown-item" href="#">Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter6" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle6">Create playlist</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Playlists are like folders where you can group multiple samples within the same project category,
+                        such as 'commercial'. Drag and drop samples to reorder.
+                    </p>
+
+                    <p class="h4">About your playlist
+
+                    </p>
+
+                    <div class="form-group">
+                        <label>Playlist name</label>
+                        <input type="text" class="form-control" placeholder="Playlist name">
+                    </div>
+
+                    <div class="playlist-name-div-1">
+
+                        <p class="new-edit-profile-div-1-text-1 font-weight-normal"> <span class=""><i
+                                class="fa fa-play mic-span-2"></i>
+<small class="ml-1 pt-4 small-text-1">No samples are included yet</small>
+    </span>
+                        </p>
+
+
+                        <p class="new-edit-profile-div-1-text-1 font-weight-normal"><span class=""><i
+                                class="fa fa-play mic-span-2"></i></span>All my samples<br>
+                            <small class="ml-5 pl-3 small-text-1">No samples are included yet</small>
+
+                        </p>
+                        <div class="text-right">
+                            <button type="button" class="btn text-right" onclick="showmodal()"><i
+                                    class="fa fa-plus pr-2"></i>Add
+                            </button>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    {#    Edit playlist modal #}
+    <div class="modal fade" id="exampleModalCenter7" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form action="/edit-playlist" method="post" enctype="multipart/form-data" id="editModalPlaylist">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle7">Edit Playlist</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="editModalBody">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block script %}
+
+    <script type="text/javascript">
+        $('.panel-collapse').on('show.bs.collapse', function () {
+            $(this).siblings('.panel-heading').addClass('active');
+        });
+
+        $('.panel-collapse').on('hide.bs.collapse', function () {
+            $(this).siblings('.panel-heading').removeClass('active');
+        });
+
+        function showmodal() {
+            $("#exampleModalCenter3").modal('hide');
+            $("#exampleModalCenter4").modal('show');
+        }
+
+
+        let preloaded = [];
+        {% if "profilePicture" in actordata %}
+        {% if actordata['profilePicture'] != "" %}
+            preloaded.push({
+                id: '{{actordata["profilePicture"]}}',
+                src: '../static/actorprofilepic/{{actordata["profilePicture"]}}'
+            })
+        {% else  %}
+            preloaded.push({
+                id: 'profile.png',
+                src: '../static/actorprofilepic/profile.png'
+            })
+        {%endif%}
+        {%endif%}
+        console.log(preloaded);
+
+
+        $('.input-images').imageUploader({
+            preloaded: preloaded,
+            imagesInputName: 'profilePic',
+            preloadedInputName: 'oldprofilePic',
+            maxFiles: 1,
+            maxSize: 2 * 1024 * 1024
+        });
+
+        <!-- Play sample -->
+        function playSample(name) {
+            var fileName = "static/samples/" + name;
+            var vid = document.getElementById("Audio1").src;
+            if (vid == "") {
+                document.getElementById("cangeclass").classList.add('fa-pause');
+                document.getElementById("cangeclass").classList.remove('fa-play');
+                $("#Audio1").attr("src", fileName).trigger("play");
+            } else {
+                var vidOld = vid.toString().split("/samples/")[1];
+                vidOld = vidOld.replace("%20", " ");
+                if (vidOld == name) {
+                    var vidPause = document.getElementById("Audio1");
+                    if (vidPause.paused) {
+                        document.getElementById("cangeclass").classList.add('fa-pause');
+                        document.getElementById("cangeclass").classList.remove('fa-play');
+                        $("#Audio1").attr("src", fileName).trigger("play");
+                    } else {
+                        document.getElementById("cangeclass").classList.remove('fa-pause');
+                        document.getElementById("cangeclass").classList.add('fa-play');
+                        vidPause.pause()
+                    }
+                } else {
+                    document.getElementById("cangeclass").classList.add('fa-pause');
+                    document.getElementById("cangeclass").classList.remove('fa-play');
+                    $("#Audio1").attr("src", fileName).trigger("play");
+                }
+            }
+
+        }
+
+        function editPlaylist(id) {
+
+            $('#editModalBody').html("");
+            var playlistId = id.toString().split(',')[0];
+            var playlistIndex = parseInt(id.toString().split(',')[1]) - 1;
+            console.log(playlistIndex, playlistId)
+            {% for samlist in actordata["playlists"] %}
+                var smpId = '{{ samlist["_id"] }}'
+                if (smpId.toString() == playlistId.toString()) {
+                    $('#editModalBody').append(`
+                    <p>Playlists are like folders where you can group multiple samples within the same project category,
+                        such as 'commercial'.
+                    </p>
+                    <p class="h4">About your playlist
+
+                    </p>
+
+                    <div class="form-group">
+                        <label>Playlist Name</label>
+                        <input type="text" id="playlist_name" name="playlist_name"
+                               value="{{ samlist["playlist_name"] }}"
+                               class="form-control" placeholder="Playlist name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Playlist Sample (New)</label>
+                        <br>
+                        <input type="file" id="playlist_sample" name="playlist_sample">
+                        <span><small>Must be mp3</small></span>
+                    </div>
+
+                    <div class="playlist-name-div-1 mb-3">
+
+                        <p class="new-edit-profile-div-1-text-1 font-weight-normal border-bottom-1-cus">
+                            <span class="">All my samples<br>
+                                <i class="fa fa-play mic-span-2"></i>
+                                {% if samlist["playlist"]|length > 0 %}
+                                    <small class="ml-1 pt-4 small-text-1">Old Samples</small>
+                                {% else %}
+                                    <small class="ml-1 pt-4 small-text-1">No samples are included yet</small>
+                                {% endif %}
+                            </span>
+                        </p>
+                        {% for sample in samlist["playlist"] %}
+                        <p class="new-edit-profile-div-1-text-1 font-weight-normal mb-5"><span class=""><i
+                                class="fa fa-play mic-span-2"></i></span>{{ sample.split(" - ")[1] }}<br>
+                        </p>
+                        <div class="text-right  play-list-edit-1-button-2 ">
+                            <i class="fa fa-times"></i>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                    <label>Language</label>
+                    <br>
+                    <select id="playlist_language" name="playlist_language" class="selectpicker form-control mb-3" data-live-search="true">
+                        {% for i in languages %}
+                        {%if "languages" in actordata%}
+                        {% if i in actordata["languages"] %}
+                        <option value="{{ i }}" {% if i in samlist["playlist_language"] %}selected{% endif %}>{{ i }}</option>
+                        {%endif%}
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                    </div>
+
+                    <label>Gender and Age</label>
+                    <br>
+                    <select id="playlist_category" name="playlist_category" class="selectpicker form-control mb-3" data-live-search="true">
+                        <option value="" disabled></option>
+                        {% for category in samlist["catdata"] %}
+                            <option value="{{ category }}"{% if category|string in samlist["playlist_category"] %}
+                         selected {% endif %}></option>
+                        {% endfor %}
+                    </select>
+            `);
+                }
+            {% endfor %}
+            console.log("doan")
+            $("#exampleModalCenter7").modal("show");
+        }
+
+
+    </script>
+
+
+
+
+    {#    <script src="https://code.jquery.com/jquery-3.2.1.min.js"#}
+    {#            integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f"#}
+    {#            crossorigin="anonymous"></script>#}
+    <script src="static/audio/js/jquery-ui-slider.js" charset="utf-8"></script>
+    {#    <script src="static/audio/js/audioPlayer.js" charset="utf-8"></script>#}
+
+
+    <script>
+
+        document.addEventListener('play', function (e) {
+            var audios = document.getElementsByTagName('audio');
+            for (var i = 0, len = audios.length; i < len; i++) {
+                if (audios[i] != e.target) {
+                    audios[i].pause();
+                    audios[i].volume = 0.5;
+                }
+            }
+        }, true);
+
+    </script>
+{% endblock %}

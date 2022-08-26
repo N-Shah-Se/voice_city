@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/forget_password.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/png" href="static/img/fav.png">
+
+
+    <title>Resend Verification Email</title>
+</head>
+
+<body>
+     <a class="close-btn" href="/"></a>
+
+    <section class="header_form">
+        <div class="header_div">
+            <div class="container">
+                <div class="row mt-5">
+                    <div class="col-lg-6 col-sm-12 contain-6">
+                        <div class="contain">
+                            <div class="logo_form">
+                                <img src="static/img/login/logo.png" class="img-fluid" alt="">
+                            </div>
+                            <br>
+
+                            <br>
+                            <br>
+                            <div class="header_text">
+                                <h1>Asia's First Freelance Voice Over Marketplace</h1>
+                                <br>
+
+                                <div class="pera">
+                                    <p>Sign up in moments. Place your work for free. Access the Asia's finest expert
+                                        voice
+                                        artists.
+                                        <br>
+                                        Voicescity is utilized by the Asia's greatest reliable brands
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12">
+                        <div class="contain_form">
+                            <div class="heading_userform">
+                                <h1>Resend Verification Email</h1>
+                            </div>
+
+                            <form id="login" action="/resend_verification" method="post">
+
+                                   {% if loginerror != "NULL" %}
+                                <div class="alert alert-danger alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert"></button>
+                                    <strong>ALERT!</strong> {{loginerror}}
+                                  </div>
+                                {% endif %}
+
+                            {% if message|length>1 %}
+                                <div class="alert alert-success alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert"></button>
+                                    <strong>Success!</strong> {{ message }}
+                                  </div>
+                                {% endif %}
+
+                            <div class="forget_password_page">
+                            <div class="form-group">
+                                Enter Email
+                                <input type="email" class="form-control" id="email" name="email" autocomplete="off"
+                                    aria-describedby="email" placeholder="Enter email" required>
+                            </div>
+
+
+
+                            <div class="button_recover text-center">
+                                <button type="submit" class="Login-Form-Btn-1 btn mt-3  ">Resend Email</button>
+                            </div>
+
+
+
+                            <hr style="border-top: 1px solid #be9e65">
+
+
+                            <h6 class="text-center"><a href="/login"> Back to login<i class="fa fa-level-up"></i> </a> </h6>
+                            </p>
+
+
+                        </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <script>
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#password');
+        togglePassword.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            // toggle the eye slash icon
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        const togglePassword1 = document.querySelector('#togglePassword1');
+        const password1 = document.querySelector('#checkpassword');
+        togglePassword1.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = password1.getAttribute('type') === 'password' ? 'text' : 'password';
+            password1.setAttribute('type', type);
+            // toggle the eye slash icon
+            this.classList.toggle('fa-eye-slash');
+        });
+    </script>
+
+
+
+
+    <script src="static/css/bootstrap.min.js"></script>
+    <script src="static/css/jquery-3.2.1.slim.min.js"></script>
+    <script src="static/css/popper.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,182 @@
+{% extends "layout.html" %}
+{% block head %}{{ super() }}{% endblock %}
+{% block title %}Home{% endblock %}
+{% block body %}
+
+    {% if error|length>1 %}
+        <div class="form-group ">
+            <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+                <span class="badge badge-pill badge-danger">Alert</span> {{ error }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    {% endif %}
+    {% if message|length>1 %}
+        <div class="form-group ">
+            <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                <span class="badge badge-pill badge-success">Success</span> {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    {% endif %}
+
+
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-sm-9">
+                <p class="profiletext1 pt-5 mb-1">Welcome Back, {{ username|title }}</p>
+            </div>
+            <div class="col-sm-3">
+                <a href="/editprofile">
+                    <button class="btn btn-success">Edit Profile</button>
+                </a>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <section class="col-sm-9">
+                <div class="border rounder py-2 pt-4 pb-4">
+                    <div class="container">
+                        <h5 class="font-weight-bold pt-3 pb-5 ml-5">
+                            Find Voice Actors
+                        </h5>
+                        <div class="row" onclick="window.location='/post-job'" style="cursor:pointer;">
+                            <div class="col-sm-1">
+                            </div>
+                            <div class="col-sm-2">
+                                <img src="static/img/job-posting.png" class="img-fluid">
+                            </div>
+                            <div class="col-sm-8">
+                                <h5 class="font-weight-bold">
+                                    Post Your Job
+                                </h5>
+                                <p>
+                                    Get custom auditions from professional voice actors.
+                                </p>
+
+
+                            </div>
+                            <div class="col-sm-1">
+                                <i class="fa fa-chevron-right pt-4"></i>
+
+                            </div>
+                        </div>
+
+
+                        <div class="row" onclick="window.location='/search'" style="cursor:pointer;">
+                            <div class="col-sm-1">
+                            </div>
+                            <div class="col-sm-2">
+                                <img src="static/img/audition-file.png" class="img-fluid">
+                            </div>
+                            <div class="col-sm-8">
+                                <h5 class="font-weight-bold">
+                                    Search for Voice Actors
+                                </h5>
+                                <p>
+                                    Search talent demos by keywords, language, or location.
+                                </p>
+
+
+                            </div>
+                            <div class="col-sm-1">
+                                <i class="fa fa-chevron-right pt-4"></i>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+                <div class="border rounder py-2 pb-4">
+                    <div class="container">
+                        <h5 class="font-weight-bold pt-3 pb-2 ml-3">
+                            Additional Resources
+                        </h5>
+                        <div class="row ml-3">
+                            <div class="col-sm-6">
+
+                                <div class="row">
+                                    <div class="col-sm-1">
+                                        <i class="fa fa-book"></i>
+                                    </div>
+                                    <div class="col-sm-11">
+                                        <p class="mb-0 font-weight-bold">Rates & Pricing</p>
+                                        <p class="mb-1">
+                                            Not sure how to budget your project? Take a look at our industry guideline.
+                                        </p><a href="/voiceover-rates">Visit Rates & Pricing
+                                    </a>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-sm-6">
+
+                                <div class="row">
+                                    <div class="col-sm-1">
+                                        <i class="fa fa-book"></i>
+                                    </div>
+                                    <div class="col-sm-11">
+                                        <p class="mb-0 font-weight-bold">Blog & Product Updates
+                                        </p>
+                                        <p class="mb-1">
+                                            Regularly updated with new content for voice actors of all levels.
+                                        </p><a href="#">Visit the Blog
+                                    </a>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+            </section>
+            <section class="col-sm-3">
+
+                <div class="border rounder py-2 pt-4 pb-4 ">
+                    <div class="container">
+                        <p class="mb-2 font-weight-bold">
+                            Manage My Team
+                        </p>
+                        <p class="mb-5">
+                            As an Owner you can change Team Roles, add Members and Managers, and collaborate with them
+                            on
+                            projects.
+                        </p>
+
+                        <a href="/teaminvite">
+                            <button class="profilebtn1">Add Member</button>
+                        </a>
+
+
+                        <a href="/manageteam">
+                            <button class="profilebtn1 mt-2">View Team</button>
+                        </a>
+
+
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+
+    </div>
+
+
+{% endblock %}

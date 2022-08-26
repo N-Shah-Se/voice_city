@@ -1,0 +1,438 @@
+{% extends "layout.html" %}
+{% block title %}Jobs{% endblock %}
+{% block head %}
+    {{ super() }}
+<link rel="stylesheet" href='{{ url_for("static", filename="css/floating.css") }}'>
+
+{% endblock %}
+{% block body %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+
+
+
+    <div class="container">
+        {% if error != "" %}
+            <div class="form-group ">
+                <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+                    <span class="badge badge-pill badge-danger">Alert</span> {{ error }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        {% endif %}
+        {% if message|length > 1 %}
+            <div class="form-group ">
+                <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                    <span class="badge badge-pill badge-success">success</span> {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        {% endif %}
+{#        <div class="row pt-5">#}
+{#            <div class="col-sm-9"></div>#}
+{#            <div class="col-sm-3">#}
+{#                <div class="border rounder py-2 pt-2 pb-2 ">#}
+{#                    <div class="container">#}
+{#                        <div class="text-center">#}
+{#                            <button class="btn btnnavlink2 mb-1">Bid Info</button>#}
+{#                        </div>#}
+{#                        <p class="mb-2 font-weight-bold">#}
+{#                            Bids Send {{ current_month_bids }}#}
+{#                        </p>#}
+{#                        <p class="mb-1">#}
+{#                            {{ current_month_bids }} bids send in this month out of {{ total_bids }}#}
+{#                            using {{ bid_package }} package.#}
+{#                        </p>#}
+                        {#                        <p>DeadLine: {{ job_data["projects"][0]["project_deadline"][0] }}</p>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+
+        <div class="row pt-5">
+            <div class="col-sm-9">
+                <h3 class="pt-1">Jobs
+                </h3>
+
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="Hiring-tab" data-toggle="tab" href="#Hiring" role="tab"
+                           aria-controls="Hiring" aria-selected="true">New Jobs</a>
+                    </li>
+                    {##}
+                    {#            <form class="form-inline my-2 my-lg-0 ml-5">#}
+                    {#                <div class="form-group has-search">#}
+                    {#                    <input type="text" class="form-control input1" placeholder="Search">#}
+                    {#                    <span class="fa fa-search form-control-feedback bluecolor"></span>#}
+                    {##}
+                    {#                </div>#}
+                    {#            </form>#}
+                    <button class="Filtersbtn1" onclick="myFunction()">
+                        <i class="fa fa-filter pr-2"></i>Filters
+                    </button>
+                </ul>
+            </div>
+            <div class="col-sm-3">
+                <div class="border rounder py-2 pt-2 pb-2 ">
+                    <div class="container">
+                        <div class="text-center">
+                            <button class="btn btnnavlink2 mb-1" onclick=toOrder()>Bid Info</button>
+                        </div>
+                        <p class="mb-2 font-weight-bold">
+                            Bids Send {{ current_month_bids }}
+                        </p>
+                        <p class="mb-1">
+                            {{ current_month_bids }} bids send in this month out of {{ total_bids }}
+                            using {{ bid_package }} package.
+                        </p>
+                        {#                        <p>DeadLine: {{ job_data["projects"][0]["project_deadline"][0] }}</p>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="Filtershow">
+            <div class="container">
+                <form action="/search-job" method="get">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label>Langauge</label>
+                            <select id="langaue" name="language" class="form-control selectpicker"
+                                    data-live-search="true">
+                                <option value="" selected="">Please Select</option>
+                                {% for language in languages %}
+                                    <option value="{{ language }}">{{ language }}</option>
+                                {% endfor %}
+                            </select>
+
+                            <label>Accent</label>
+                            <select id="accent" name="accent" class="form-control selectpicker"
+                                    data-live-search="true">
+                                <option value="" selected="">Please Select</option>
+                                {% for accent in accents %}
+                                    <option value="{{ accent }}">{{ accent }}</option>
+                                {% endfor %}
+                            </select>
+
+                            <label>Categories</label>
+                            <select id="category" name="category" class="form-control selectpicker"
+                                    data-live-search="true">
+                                <option value="" selected="">Please Select</option>
+                                {% for category in categories %}
+                                    {% if category['Type'] == "category" %}
+                                        <option value="{{ category["_id"] }}">{{ category["Category Name"]|title }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+
+                            <label>Age</label>
+                            <select id="category" name="category" class="form-control selectpicker"
+                                    data-live-search="true">
+                                <option value="" selected="">Please Select</option>
+                                {% for category in categories %}
+                                    {% if category['Type'] == "age" %}
+                                        <option value="{{ category["_id"] }}">{{ category["Category Name"]|title }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                            <label>Voice Gender</label>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3">
+
+                                        {% for category in categories %}
+                                            {% if category['Type'] == "gender" %}
+                                                <span class="radiobtn1">
+                                                    <input type="radio" id="category" name="category"
+                                                           value="{{ category["_id"] }}">
+                                                    <label for="male">{{ category["Category Name"]|title }}</label>
+                                                </span>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {#
+                        <div class="col-sm-6">
+                            <label>Budget Range</label>
+                            <div class="row">
+                                <div class="col">
+                                    <input type="number" id="minBudget" name="minBudget"
+                                           class="form-control mb-3" placeholder="Min ($)"></div>
+                                <div class="col">
+                                    <input type="number" id="maxBudget" name="maxBudget"
+                                           class="form-control mb-3" placeholder="Max ($)"></div>
+                            </div>
+                            <label>Deadline Range</label>
+                            <div class="row">
+                                <div class="col">
+                                    <select id="deadLine" name="deadLine" class="form-control selectpicker"
+                                            data-live-search="true">
+                                        <option value="" selected="">Please Select</option>
+                                        {% for duration in dead_line %}
+                                            <option value="{{ duration }}">{{ duration|title }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <label>Voice Gender</label>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3">
+
+                                        {% for category in categories %}
+                                            {% if category['Type'] == "gender" %}
+                                                <span class="radiobtn1">
+                                                    <input type="radio" id="male" name="gender"
+                                                           value="{{ category["Category Name"]|lower }}">
+                                                    <label for="male">{{ category["Category Name"]|title }}</label>
+                                                </span>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        #}
+                        <div class="col-sm-10">
+                        </div>
+                        <div class="col-sm-1">
+                            <button type="submit" class="btn btn-success">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+
+        <div class="tab-content mt-2" id="myTabContent">
+            <div class="tab-pane fade show active" id="Hiring" role="tabpanel" aria-labelledby="Hiring-tab">
+                {% set a = namespace(value=0) %}
+                {% for job in data_job %}
+                    {% if job["projects"]["status"] == "posted" %}
+                        {% set a.value= a.value + 1 %}
+                        <div class="border rounder py-3">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-9">
+
+                                        <p class="jobtitle1">{{ job["projects"]["project_name"] }}</p>
+                                        <p class="jobno1">#{{ a.value }} <span
+                                                class="postdate">Posted: {{ job["projects"]["timestamp"].strftime('%d-%b, %Y') }}</span>
+                                        </p>
+                                        {% for language in job["projects"]["project_language"] %}
+                                            <span class="btnnavlink2">{{ language|capitalize }}</span>
+                                        {% endfor %}
+
+                                        {% for category in catdata %}
+                                            {% if category['_id']|string in job["projects"]["project_gender_age"] %}
+                                                <span class="btnnavlink2">{{ category['Category Name']|title }}</span>
+                                            {% endif %}
+                                        {% endfor %}
+
+
+                                        <p class="Finishedtime">{{ job["projects"]["project_length_type"] }}
+                                            Count: {{ job["projects"]["project_length"] }}
+                                            {#  Finished Time:{{ job["project_deadline"][0] }}#}
+                                        </p>
+                                        <div class="jobsideprofile">
+                                            <img src="static/img/profile.png" class="img-fluid profilesideimg">
+                                            <span class="pl-2">{{ job['userName'] }}</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <p class="font-weight-bold mb-0"> $ {{ job["projects"]["project_cost"] }}</p>
+                                        <p class="mb-0"> {{ job["responses"] }} Responses</p>
+                                        {#                                        <p class="mb-0"> 20% VoiceTie</p>#}
+                                        <p class="mb-0"> Deadline: {{ job["projects"]["project_deadline"][0] }}</p>
+                                        <p class="mb-0">
+                                            Posted: {{ job["projects"]["timestamp"].strftime('%b %d, %Y') }}</p>
+
+                                        <button class="btn btn-success mt-3"
+                                                {% if type != "None" and type == "actor" %}onclick="showModal('{{ job["_id"] }}','{{ job["projects"]["project_id"] }}')"{% else %}
+                                                onclick="loginPlease()"{% endif %}>Reply To Job
+                                        </button>
+                                        <a href="/order-detail?jobid={{ job["projects"]["project_id"] }}&byrid={{ job["_id"] }}">
+                                            <button type="button" class="btn btn-success mt-3">
+                                                Job Details
+                                            </button>
+                                        </a>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <!-- job div end-->
+
+            </div>
+
+        </div>
+
+
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form action="/send-bid" method="post" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModal">Send Request</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="editModalBody">
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Name
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="actorName" name="actorName" required
+                                       readonly value="{{ username }}"
+                                       maxlength="30">
+                                <input type="text" class="form-control" id="actorId" name="actorId" required readonly
+                                       value="{{ actordata['_id'] }}"
+                                       style="display: none;" maxlength="25">
+                                <input type="text" class="form-control" id="buyrId" name="buyrId" required readonly
+                                       value=""
+                                       style="display: none;" maxlength="25">
+                                <input type="text" class="form-control" id="projId" name="projId" required readonly
+                                       value=""
+                                       style="display: none;" maxlength="25">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Description
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" id="actorDescription" name="actorDescription" class="form-control"
+                                       maxlength="100" required
+                                       placeholder="Write something about your response.">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Completion Time
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="date" id="actorCmplTime" name="actorCmplTime" class="form-control"
+                                       min="{{ min_date }}" required
+                                       placeholder="Delivery Time of job.">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Related Samples
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="file" id="actorSample" name="actorSample" class="form-control"
+                                       maxlength="3" required
+                                       placeholder="Write something about your response." multiple accept="audio/*">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="myLoginModal" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form action="/login" method="post" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModal">Login Please</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="editModalBody">
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Email
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="email" class="form-control" id="email" name="email" required
+                                       maxlength="30">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Password
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="password" id="password" name="password" class="form-control"
+                                       maxlength="100" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("Filtershow");
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+        }
+
+        function showModal(byrId, proId) {
+            console.log(byrId, proId);
+            document.getElementById("buyrId").value = byrId.toString();
+            document.getElementById("projId").value = proId.toString();
+            $('#myModal').modal('show');
+        }
+
+        function loginPlease() {
+            $('#myLoginModal').modal('show');
+        }
+        function toOrder() {
+            window.location.href = "/orders?sendoffer=yes";
+        }
+    </script>
+
+{% endblock %}

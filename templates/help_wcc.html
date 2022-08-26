@@ -1,0 +1,32 @@
+{% extends "layout.html" %} {% block title %}Actors{% endblock %} {% block head
+%} {{ super() }}
+<link
+    rel="stylesheet"
+    href='{{ url_for("static", filename="css/floating.css") }}'
+/>
+{% endblock %} {% block body %}
+<link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+/>
+
+<div class="container mt-1 mb-5">
+    <p class="h1">Word Count Calculator</p>
+    <p class="h5 font-weight-light">
+        It may be difficult to predict the whole cost of a voice-over service
+        because of various related services that are determined by price per
+        word. The word count calculator has here! You don't have to try too hard
+        to comprehend how much a service will cost when this feature is in
+        place. Using the calculator, you can figure out the total cost of your
+        script. By preparing an exact budget, you'll be able to anticipate your
+        cash flow, and clients will be able to correctly project their revenue -
+        a perfect solution for our clients to estimate their projects
+    </p>
+    <p class="h5 font-weight-light">
+        <strong>Keep in mind:</strong> The procedure above is found on voices
+        city mobile apps and voices city website almost the same.
+    </p>
+
+    <p><a href="/help" style="color: blue">Back to main menu</a></p>
+</div>
+{% endblock %}

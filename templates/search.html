@@ -1,0 +1,272 @@
+{% extends "layout.html" %}
+{% block title %}Search{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block body %}
+
+    <div class="container mt-1 mb-5">
+        <p class="profiletext1 pt-5 mb-5">Search</p>
+        <div class="row">
+            <section class="col-sm-2">
+                <form action="/actors" method="get">
+                    <p class="audiotext2">Refine Results</p>
+                    <div class="mb-3">
+                        <select class="selectpicker form-control  mt-2" id="category" name="category"
+                                data-live-search="true">
+                            {% for eachCategory in categories %}
+                                {% if eachCategory['Type'] == "gender" %}
+                                    <option value="{{ eachCategory['_id'] }}"
+                                            {% if eachCategory['_id']|string == category|string %}selected{% endif %}>{{ eachCategory['Category Name']|title }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label class="postjoblabel">Category
+                        </label>
+                        <select class="selectpicker form-control  mt-2" id="category" name="category"
+                                data-live-search="true">
+                            {% for eachCategory in categories %}
+                                {% if eachCategory['Type'] == "category" %}
+                                    <option value="{{ eachCategory['_id'] }}"
+                                            {% if eachCategory['_id']|string == category|string %}selected{% endif %}>{{ eachCategory['Category Name']|title }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="postjoblabel">Age
+                        </label>
+                        <select class="selectpicker form-control  mt-2" id="category" name="category"
+                                data-live-search="true">
+                            {% for eachCategory in categories %}
+                                {% if eachCategory['Type'] == "age" %}
+                                    <option value="{{ eachCategory['_id'] }}"
+                                            {% if eachCategory['_id']|string == category|string %}selected{% endif %}>{{ eachCategory['Category Name']|title }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label class="postjoblabel">Language
+                        </label><br>
+                        <select id="language" name="language" class="selectpicker form-control  mt-2"
+                                data-live-search="true">
+                            {% for langauge in languages %}
+                                <option value="{{ langauge }}">{{ langauge }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="postjoblabel">Accent
+                        </label><br>
+                        <select id="accent" name="accent" class="selectpicker form-control  mt-2"
+                                data-live-search="true">
+                            {% for accent in accents %}
+                                <option value="{{ accent }}"
+                                >{{ accent }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-3 text-center">
+                        <button type="submit" {#  onclick="searchActors()"#} class="btn btn-success">Search</button>
+                    </div>
+
+                </form>
+            </section>
+            <section class="col-sm-10">
+                <div class="border rounder">
+                    {% set a = namespace(value=0) %}
+                    {% for actor in actors %}
+                        {% if search_item == "" %}
+                            {% for play in actor['playlists'] %}
+                                {% if language in play['playlist_language'] or category in play['playlist_category'] %}
+                                    {% set a.value = a.value + 1 %}
+                                    <!-- audio start-->
+                                    <div class="border-bottom px-3 py-1">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <img {% if actor['profilePicture'] == "" %}src="../static/actorprofilepic/{{ actor['profilePicture'] }}"
+                                                     {% else %}src="static/img/profile.png"{% endif %}
+                                                     class="img-fluid profilesideimg">
+                                                <div class="profiletextdiv1">
+                                                    <p class="pl-2 mb-0">{{ actor['userName'] }}</p>
+                                                    <p>
+                                                        <i class="fa fa-map-marker pr-2 ml-2"></i>{{ actor['Location'] }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <audio controls controlsList="nodownload" class="w-100">
+                                                    <source src="static/audio/music.mp3" type="audio/mpeg">
+                                                    Your browser does not support the audio element.
+                                                </audio>
+                                                <p class="audiotext1">{{ language }} |
+                                                    {% for eachCategory in categories %}
+                                                        {% if eachCategory['_id']|string == category %}
+                                                            {{ eachCategory['Category Name']|capitalize }}
+                                                        {% endif %}{% endfor %}</p>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <button class="btn btn-success mx-2">Profile</button>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                {% if email != "none" %}
+                                                    <button class="btn btn-success">Chat</button>
+                                                {% endif %}
+                                            </div>
+                                            {#                                        <div class="col-sm-3">#}
+                                            {#                                            <button class="profilebtn1 mt-2">Invite To Team</button>#}
+                                            {#                                        </div>#}
+                                        </div>
+                                    </div>
+                                    <!-- audio end-->
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            {% if actor["firstName"]|lower == search_item|lower or actor["lastName"]|lower == search_item|lower or
+                            actor["userName"]|lower == search_item|lower or search_item|upper in actor["languages"] or
+                                    search_item in actor["catdata"]|lower %}
+                                {% set a.value = a.value + 1 %}
+                                <!-- audio start-->
+                                <div class="border-bottom px-3 py-1">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <img {% if actor['profilePicture'] == "" %}src="../static/actorprofilepic/{{ actor['profilePicture'] }}"
+                                                 {% else %}src="static/img/profile.png"{% endif %}
+                                                 class="img-fluid profilesideimg">
+                                            <div class="profiletextdiv1">
+                                                <p class="pl-2 mb-0">{{ actor['userName'] }}</p>
+                                                <p>
+                                                    <i class="fa fa-map-marker pr-2 ml-2"></i>{{ actor['Location'] }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <audio controls controlsList="nodownload" class="w-100">
+                                                <source src="static/audio/music.mp3" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                            {% if search_item == "" %}
+                                                <p class="audiotext1">{{ language }} |
+                                                    {% for eachCategory in categories %}
+                                                        {% if eachCategory['_id']|string == category %}
+                                                            {{ eachCategory['Category Name']|capitalize }}
+                                                        {% endif %}{% endfor %}</p>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-sm-4  pt-2">
+                                            <a href="/actor-profile?id={{ actor['_id'] }}">
+                                                <button class="btn btn-success mx-2">Profile</button>
+                                            </a>
+                                                                                {% if email != None %}
+                                            {#    <p>{{ email }}</p>#}
+                                                <button class="btn btn-success chat-search-btn-1">Chat</button>
+                                            {% endif %}
+                                        </div>
+                                        {#                                        <div class="col-sm-3">#}
+                                        {#                                            <button class="profilebtn1 mt-2">Invite To Team</button>#}
+                                        {#                                        </div>#}
+                                    </div>
+                                </div>
+                                <!-- audio end-->
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+
+
+
+                    {#
+                    <!-- audio start-->
+                    <div class="border-bottom px-3 py-3">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <img src="static/img/profile.png" class="img-fluid profilesideimg">
+                                <div class="profiletextdiv1">
+                                    <p class="pl-2 mb-0">User Name </p>
+                                    <p>
+                                        <i class="fa fa-map-marker pr-2 ml-2"></i>Karachi
+                                    </p>
+                                </div>
+
+
+                            </div>
+                            <div class="col-sm-6">
+                                <audio controls controlsList="nodownload" class="w-100">
+                                    <source src="static/audio/music.mp3" type="audio/mpeg">
+                                    Your browser does not support the audio element.
+                                </audio>
+                                <p class="audiotext1">Young Adult (18-35) | English (North American)
+                                </p>
+                            </div>
+                            <div class="col-sm-3">
+                                <button class="profilebtn1 mt-2">Invite To Team</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- audio end-->
+
+                    <!-- audio start-->
+                    <div class="border-bottom px-3 py-3">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <img src="static/img/profile.png" class="img-fluid profilesideimg">
+                                <div class="profiletextdiv1">
+                                    <p class="pl-2 mb-0">User Name </p>
+                                    <p>
+                                        <i class="fa fa-map-marker pr-2 ml-2"></i>Karachi
+                                    </p>
+                                </div>
+
+
+                            </div>
+                            <div class="col-sm-6">
+                                <audio controls controlsList="nodownload" class="w-100">
+                                    <source src="static/audio/music.mp3" type="audio/mpeg">
+                                    Your browser does not support the audio element.
+                                </audio>
+                                <p class="audiotext1">Young Adult (18-35) | English (North American)
+                                </p>
+                            </div>
+                            <div class="col-sm-3">
+                                <button class="profilebtn1 mt-2">Invite To Team</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- audio end-->
+#}
+                    {% if a.value == 0 %}
+                        <p style="text-align: center">No matching actors found for {{ languages[0] }}
+                            and {{ categories[0]["Category Name"]|capitalize }}</p>
+                    {% endif %}
+
+                </div>
+
+            </section>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        function searchActors() {
+            {#alert("hit")#}
+            var gender = document.getElementById('gender').value;
+            var category = document.getElementById('category').value;
+            var language = document.getElementById('language').value;
+            console.log(gender, category, language)
+            window.location.href = "http://127.0.0.1:5000/search?gender=" + gender + "&category=" + category + "" + "&langauge=" + language;
+        }
+    </script>
+
+{% endblock %}

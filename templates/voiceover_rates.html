@@ -1,0 +1,164 @@
+{% extends "layout.html" %}
+{% block title %}Rates{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block body %}
+
+
+    <div class="container">
+        {% if error|length > 1 %}
+            <div class="form-group ">
+                <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+                    <span class="badge badge-pill badge-danger">Alert</span> {{ error }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        {% endif %}
+        {% if message|length > 1 %}
+            <div class="form-group ">
+                <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                    <span class="badge badge-pill badge-success">success</span> {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        {% endif %}
+        <h1 class="pt-5">Voice over Rates</h1>
+        <div class="row pt-5">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-5">
+                <div class="border rounder pl-2 pr-2 pt-4 pb-4">
+                    Requirements for Voice Actor
+                    <br>
+                    <div class="pt-2">
+                        <label>Age</label>
+                        <select id="age" name="age" class="form-control selectpicker mt-2"
+                                data-live-search="true" onchange="changeCost(this.value)">
+                            <option value="" selected="">Please Select</option>
+                            {% for category in categories %}
+                                {% if category['Type'] == "age" %}
+                                    <option value="{{ category["_id"] }}">{{ category["Category Name"]|title }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="pt-3">
+                        <label>Voice Gender</label>
+                        <div class="col">
+                            <div class="mb-3">
+                                         <div class="row">
+
+                                {% for category in categories %}
+                                    {% if category['Type'] == "gender" %}
+                                        <div class="btnnavlink2 mb-2 col mx-1">
+                                                    <input type="radio" id="{{ category["_id"] }}" name="gender"
+                                                           value="{{ category["_id"] }}"
+                                                           onchange="changeCost(this.value)">
+                                                    <label for="male">{{ category["Category Name"]|title }}</label>
+                                                </div>
+
+                                    {% endif %}
+                                {% endfor %}
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-sm-5 pt-2">
+                <div class="border rounder pl-2 pr-2 pt-2 pb-2">
+                    Detail about script
+                    <div class="input-group mb-3 mt-3">
+                        <input type="text" class="form-control" placeholder="Number of words"
+                               name="scriptLength" id="scriptLength" aria-label="Recipient's username"
+                               aria-describedby="basic-addon2" oninput="changeCost(this.value)">
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon2">Words</span>
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+                <div class="border rounder pl-2 pr-2 pt-2 pb-2">
+                    Your Estimation
+                    <div class="input-group mb-3 mt-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">USD $</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Cost in USD $" aria-label="Username"
+                               aria-describedby="basic-addon1" name="scriptCost" id="scriptCost">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+
+            </div>
+        </div>
+
+        <div class="row pt-5" id="newRecord">
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        function changeCost(value) {
+            {#alert(value);#}
+            var age = document.getElementById('age').value;
+            {#var gender = document.getElementById('gender').value;#}
+            var gender = document.getElementsByName('gender');
+            var gender_value;
+            for (var i = 0; i < gender.length; i++) {
+                if (gender[i].checked) {
+                    gender_value = gender[i].value;
+                }
+            }
+
+            var scriptLength = document.getElementById('scriptLength').value;
+            {#console.log(age, gender_value, scriptLength);#}
+            {% for i in categories %}
+                if ("{{ i['_id']|string }}" == age.toString()) {
+                    {#fetchActors();#}
+                    var ppw = {{ i['Price per Word'] }};
+                    var stnd = {{ i['Standard Price'] }};
+                    var total = parseInt(stnd) + parseInt(ppw) * scriptLength;
+                    document.getElementById('scriptCost').value = total.toString();
+
+                }
+                {#else if ("{{ i['_id']|string }}" == gender_value.toString() && "{{ i['_id']|string }}" == age.toString()) {#}
+                {#var ppw = {{ i['Price per Word'] }};#}
+                {#    var stnd = {{ i['Standard Price'] }};#}
+                {#    var total = parseInt(stnd) + parseInt(ppw) * scriptLength;#}
+                {#    document.getElementById('scriptCost').value = total.toString();#}
+                {#
+                }#}
+            {% endfor %}
+        }
+
+        function fetchActors() {
+            var age = document.getElementById('age').value;
+            alert("the age");
+            jQuery.ajax({
+                type: 'GET',
+                url: '/voiceover-actors',
+                data: {
+                    age: age
+                },
+                success: function (response) {
+                    console.log(response);
+                    $("#newRecord").html(response);
+                }
+            });
+        }
+    </script>
+{% endblock %}

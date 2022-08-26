@@ -1,0 +1,57 @@
+{% extends "layout.html" %} {% block title %}Actors{% endblock %} {% block head
+%} {{ super() }}
+<link
+    rel="stylesheet"
+    href='{{ url_for("static", filename="css/floating.css") }}'
+/>
+{% endblock %} {% block body %}
+<link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+/>
+
+<div class="container mt-1 mb-5">
+    <p class="h1">
+        What equipment do I need to get started as a voice over artist?
+    </p>
+    <p class="h5 font-weight-light">
+        We strongly suggest that you have a functional home studio with a
+        treated voice booth (or walk-in closet!) to submit proposals. Most
+        clients will expect you to be able to record professional, high-quality
+        audio in your home studio.
+    </p>
+    <p class="h5 font-weight-light">
+        If you are building a recording space, make sure you treat it well to
+        prevent room echoes and reflections from ruining your audio. You will
+        also need some basic equipment:
+    </p>
+    <ul>
+        <li class="h5 font-weight-light">A computer</li>
+        <li class="h5 font-weight-light">
+            A microphone with a USB connection, or a recording interface that
+            has one.
+        </li>
+        <li class="h5 font-weight-light">
+            A pop filter to prevent blasts of breath caused by plosive
+            consonants such as p's and b's.
+        </li>
+        <li class="h5 font-weight-light">Recording and editing software.</li>
+    </ul>
+    <p class="h5 font-weight-light">
+        An excellent resource to consult is the 'Setting up a home recording
+        studio' section from the Voice over Guide on The Booth, especially our
+        Equipment for voice overs piece
+    </p>
+    <p class="h5 font-weight-light">
+        Clients will take into account the audio quality as well as your voice
+        when listening to your proposals so give yourself every advantage by
+        ensuring your recordings are as high-quality as possible.
+    </p>
+    <p class="h5 font-weight-light">
+        In some cases, local voice actors make be requested to record in the
+        client's studio, but this rarely happens in today's world of online
+        voice casting.
+    </p>
+    <p><a href="/help" style="color: blue">Back to main menu</a></p>
+</div>
+{% endblock %}

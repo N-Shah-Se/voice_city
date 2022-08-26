@@ -1,0 +1,174 @@
+{% extends "layout.html" %} {% block title %}Contact Us{% endblock %} {% block
+head %} {{ super() }}
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+    xmlns="http://www.w3.org/1999/html"
+></script>
+<link
+    rel="stylesheet"
+    href='{{ url_for("static", filename="css/contactstyle.css") }}'
+/>
+<link
+    rel="stylesheet"
+    href='{{ url_for("static", filename="css/floating.css") }}'
+/>
+{% endblock %} {% block body %}
+<link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+/>
+
+<body>
+    <section>
+        <div class="container">
+            <div class="contactinfo d-none">
+                <div>
+                    <h2>Contact us</h2>
+                    <ul class="info">
+                        <p class="pera">
+                            We're open for any suggestion or just to have a chat
+                        </p>
+                        <li>
+                            <span
+                                ><img
+                                    src="static/img/login/pin.png"
+                                    alt="location"
+                            /></span>
+                            <span
+                                >63 WAVERLEY ROAD BIRMINGHAM, <br />
+                                UNITED KINGDOM
+                            </span>
+                        </li>
+
+                        <li>
+                            <span
+                                ><img
+                                    src="static/img/login/mail.png"
+                                    alt="location"
+                            /></span>
+                            <span> info@voicescity.com</span>
+                        </li>
+                        <li>
+                            <span
+                                ><img
+                                    src="static/img/login/call.png"
+                                    alt="location"
+                            /></span>
+                            <span>+44 788888 9671</span>
+                        </li>
+                        <li>
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d4861.607558771596!2d-1.8566000000000003!3d52.464581!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4870bb9825d17fd1%3A0xf7f264c8855a2d82!2s63%20 Waverley%20Rd%2C%20Birmingham%20B10%200EQ%2C%20UK!5e0!3m2!1 sen!2sus!4v1632394290069!5m2!1 sen!2sus"
+                                width="300"
+                                height="100"
+                                style="border: 0"
+                                allowfullscreen=""
+                                loading="lazy"
+                            ></iframe>
+                        </li>
+                    </ul>
+                </div>
+                <ul class="sci">
+                    <li>
+                        <a
+                            href="https://www.facebook.com/Voices-City-332687944647576/"
+                            ><img src="static/img/login/1.png" alt="" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/VoicesCity2?s=08"
+                            ><img src="static/img/login/2.png" alt="" />
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="https://www.instagram.com/invites/contact/?i=1m3jhaema7vre&utm_content=kwyjr4v"
+                            ><img src="static/img/login/3.png" alt="" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.pinterest.com/voicescity/"
+                            ><img src="static/img/login/9.png" alt="" />
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="https://www.linkedin.com/in/voices-city-33990a205"
+                            ><img src="static/img/login/5.png" alt="" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://vm.tiktok.com/ZSJhu7dos/"
+                            ><img src="static/img/login/6.png" alt="" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            ><img src="static/img/login/7.png" alt="" />
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="https://youtube.com/channel/UC4hbJ2BBcxvw_ffVdRpXWNA"
+                            ><img src="static/img/login/8.png" alt="" />
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <form
+                action="/contact-us"
+                method="post"
+                id="contactForm"
+                name="contactForm"
+                class="contactForm"
+            >
+                <div class="contactform">
+                    {% if message|length>1 %}
+                    <script>
+                        alert(
+                            "Your response has been submitted\n Some one will react out shortly"
+                        );
+                    </script>
+                    {% endif %}
+                    <h2>Send a Message</h2>
+                    <div class="formbox">
+                        <div class="inputbox w50">
+                            <input type="text" name="fname" required />
+                            <span>First Name</span>
+                        </div>
+                        <div class="inputbox w50">
+                            <input type="text" name="lname" required />
+                            <span>Last Name</span>
+                        </div>
+                        <div class="inputbox w50">
+                            <input type="text" name="email" required />
+                            <span>Email Address</span>
+                        </div>
+                        <div class="inputbox w50">
+                            <input type="text" name="phone" required />
+                            <span>Mobile Number</span>
+                        </div>
+                        <div class="inputbox w100">
+                            <textarea name="message" required></textarea>
+                            <span>Write Your message here.....</span>
+                        </div>
+                        <div class="inputbox w100">
+                            <input type="submit" value="send" />
+                        </div>
+                        <span
+                            >For any further queries, email us at:
+                            <a
+                                href="mailto:info@voicescity.com"
+                                style="color: blue"
+                                >info@voicescity.com</a
+                            ></span
+                        >
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+
+{% endblock %} {% block script %} {% endblock %}

@@ -1,0 +1,736 @@
+{% extends "layout.html" %}
+{% block title %}Jobs{% endblock %}
+{% block head %}
+    {{ super() }}
+    {#    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>#}
+    {#    <link rel="stylesheet" href='{{ url_for("static", filename="css/order.css") }}'/>#}
+<link rel="stylesheet" href='{{ url_for("static", filename="css/floating.css") }}'>
+
+
+{% endblock %}
+{% block body %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+
+
+    <div class="container mt-5 mb-5">
+        {% if error != "" %}
+            <div class="form-group ">
+                <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+                    <span class="badge badge-pill badge-danger">Alert</span> {{ error }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        {% endif %}
+        {% if message != "" %}
+            <div class="form-group ">
+                <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                    <span class="badge badge-pill badge-success">success</span> {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        {% endif %}
+        <h3 class="pt-5">Order Jobs
+        </h3>
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="Jobs-tab" data-toggle="tab" href="#Jobs" role="tab"
+                   aria-controls="Jobs" aria-selected="true">All Jobs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="COMPLETED-tab" data-toggle="tab" href="#COMPLETED" role="tab"
+                   aria-controls="COMPLETED" aria-selected="false">Completed</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="New-tab" data-toggle="tab" href="#New" role="tab"
+                   aria-controls="New" aria-selected="false">New Order</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" id="sentoffer-tab" data-toggle="tab" href="#sentoffer" role="tab"
+                   aria-controls="sentoffer" aria-selected="false">Sent Offers</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" id="offerreceived-tab" data-toggle="tab" href="#offerreceived" role="tab"
+                   aria-controls="offerreceived" aria-selected="false">Offers Received</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" id="working-tab" data-toggle="tab" href="#working" role="tab"
+                   aria-controls="working" aria-selected="false">Working</a>
+            </li>
+
+
+        </ul>
+
+
+        {# All Orders#}
+        <div class="tab-content mt-2" id="myTabContent">
+
+            {# All Orders #}
+            <div class="tab-pane fade show active" id="Jobs" role="tabpanel" aria-labelledby="Jobs-tab">
+                <div class="border ">
+                    <!-- job div Start-->
+                    {% set a = namespace(value=0) %}
+                    {% for eachjob in bid_data %}
+                        {% set a.value=a.value + 1 %}
+                        <div class="border rounder py-3">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <p class="jobtitle1">{{ eachjob['projects']["project_name"] }}</p>
+                                        <p class="jobno1">Job: #9427247
+                                            <span class="postdate">{{ eachjob['projects']["timestamp"].strftime('%d %b,%Y (%H:%M)') }}</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        {% if eachjob['projects']["status"] == "posted" %}
+                                            <p class="mb-0 pt-3">
+                                                Deadline {{ eachjob['projects']["project_deadline"][0]|title }}</p>
+                                            <p class="mb-0">Cost $ {{ eachjob['projects']["project_cost"] }}</p>
+                                            <p class="mb-0">
+                                                Script {{ eachjob['projects']["project_length"] }} {{ eachjob['projects']["project_length_type"] }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-sm-2">
+                                        {% if 'offeraccpt' in eachjob['biddetails'] %}
+                                            {% if 'status' in eachjob['biddetails']['offeraccpt'] %}
+                                                <button class="Draftbtn1">{{ eachjob['biddetails']['offeraccpt']['status'] }}</button>
+                                            {% endif %}
+                                        {% else %}
+                                            {% if 'requestby' in eachjob['biddetails'] %}
+                                                {% if eachjob['biddetails']['requestby'] == 'actor' %}
+                                                    <button class="Draftbtn1">Pending</button>
+                                                {% elif eachjob['biddetails']['requestby'] == 'buyer' %}
+                                                    <button class="Draftbtn1">Offer received</button>
+                                                {% endif %}
+                                            {% else %}
+                                                <button class="Draftbtn1">Request</button>
+                                            {% endif %}
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <a href="/chat?id={{ eachjob['_id'] }}">
+                                            <button class="Draftbtn1">Chat</button>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-sm-1">
+                                        <a href="/order-detail?jobid={{ eachjob["projects"]["project_id"] }}&byrid={{ eachjob["_id"] }}">
+                                            <i class="fa fa-angle-right jobicon1"></i>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% if a.value == 0 %}
+                        <p class="divcenter">No orders yet Generated.</p>
+                    {% endif %}
+                    <!-- job div end-->
+                </div>
+            </div>
+
+            {# Completed Orders #}
+            <div class="tab-pane fade show" id="COMPLETED" role="tabpanel" aria-labelledby="COMPLETED-tab">
+                <div class="border ">
+                    <!-- job div Start-->
+                    {% set a = namespace(value=0) %}
+                    {% for eachjob in cmp_data %}
+                        {% if 'offeraccpt' in eachjob['biddetails'] %}
+                            {% if 'status' in eachjob['biddetails']['offeraccpt'] %}
+                                {% if eachjob['biddetails']['offeraccpt']['status'] == 'completed' %}
+                                    {% set a.value=a.value + 1 %}
+                                    <div class="border rounder py-3">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <p class="jobtitle1">{{ eachjob['projects']["project_name"] }}</p>
+                                                    <p class="jobno1">Job: #9427247
+                                                        <span class="postdate">{{ eachjob['projects']["timestamp"].strftime('%d %b,%Y (%H:%M)') }}</span>
+                                                    </p>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    {% if eachjob['projects']["status"] == "posted" %}
+                                                        <p class="mb-0 pt-3">
+                                                            Deadline {{ eachjob['projects']["project_deadline"][0]|title }}</p>
+                                                        <p class="mb-0">Cost
+                                                            $ {{ eachjob['projects']["project_cost"] }}</p>
+                                                        <p class="mb-0">
+                                                            Script {{ eachjob['projects']["project_length"] }} {{ eachjob['projects']["project_length_type"] }}</p>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    {% if 'offeraccpt' in eachjob['biddetails'] %}
+                                                        {% if 'status' in eachjob['biddetails']['offeraccpt'] %}
+                                                            <a href="/receive-revision?project_id={{ eachjob["projects"]["project_id"] }}&buyer_id={{ eachjob["_id"] }}">
+                                                                <button class="btn btn-primary mt-4">Order Detail
+                                                                </button>
+                                                            </a>
+                                                            {#                                                            <button class="Draftbtn1">{{ eachjob['biddetails']['offeraccpt']['status'] }}</button>#}
+                                                        {% endif %}
+                                                    {% endif %}
+
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <a href="/chat?id={{ eachjob['_id'] }}">
+                                                        <button class="Draftbtn1">Chat</button>
+                                                    </a>
+                                                </div>
+
+                                                <div class="col-sm-1">
+                                                    <a href="/order-detail?jobid={{ eachjob["projects"]["project_id"] }}&byrid={{ eachjob["_id"] }}">
+                                                        <i class="fa fa-angle-right jobicon1"></i>
+                                                    </a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if a.value == 0 %}
+                        <p class="divcenter">No orders yet Completed.</p>
+                    {% endif %}
+                    <!-- job div end-->
+
+                </div>
+
+
+            </div>
+
+            {# New Accepeted Orders #}
+            <div class="tab-pane fade show" id="New" role="tabpanel" aria-labelledby="New-tab">
+                <div class="border ">
+                    <!-- job div Start-->
+                    {% set a = namespace(value=0) %}
+                    {% for eachjob in bid_data %}
+                        {% if 'offeraccpt' in eachjob['biddetails'] %}
+                            {% if 'status' in eachjob['biddetails']['offeraccpt'] %}
+                                {% if eachjob['biddetails']['offeraccpt']['status'] == 'accepted' %}
+                                    {% set a.value=a.value + 1 %}
+                                    <div class="border rounder py-3">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <p class="jobtitle1">{{ eachjob['projects']["project_name"] }}</p>
+                                                    <p class="jobno1">Job: #9427247
+                                                        <span class="postdate">{{ eachjob['projects']["timestamp"].strftime('%d %b,%Y (%H:%M)') }}</span>
+                                                    </p>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    {% if eachjob['projects']["status"] == "posted" %}
+                                                        <p class="mb-0 pt-3">
+                                                            Deadline {{ eachjob['projects']["project_deadline"][0]|title }}</p>
+                                                        <p class="mb-0">Cost
+                                                            $ {{ eachjob['projects']["project_cost"] }}</p>
+                                                        <p class="mb-0">
+                                                            Script {{ eachjob['projects']["project_length"] }} {{ eachjob['projects']["project_length_type"] }}</p>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    {% if 'offeraccpt' in eachjob['biddetails'] %}
+                                                        {% if 'status' in eachjob['biddetails']['offeraccpt'] %}
+                                                            <button class="Draftbtn1">{{ eachjob['biddetails']['offeraccpt']['status'] }}</button>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <a href="/chat?id={{ eachjob['_id'] }}">
+                                                        <button class="Draftbtn1">Chat</button>
+                                                    </a>
+                                                </div>
+
+                                                <div class="col-sm-1">
+                                                    <a href="/order-detail?jobid={{ eachjob["projects"]["project_id"] }}&byrid={{ eachjob["_id"] }}">
+                                                        <i class="fa fa-angle-right jobicon1"></i>
+                                                    </a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if a.value == 0 %}
+                        <p class="divcenter">No new orders.</p>
+                    {% endif %}
+                    <!-- job div end-->
+                </div>
+            </div>
+
+            {# Sent offers to buyers #}
+            <div class="tab-pane fade show" id="sentoffer" role="tabpanel" aria-labelledby="sentoffer-tab">
+                <div class="border ">
+                    <!-- job div Start-->
+                    <div class="container">
+                        <div class="row col form-group">
+                            <p class="divcenter">The following jobs on which you have sent the requests.</p>
+                        </div>
+                    </div>
+                    <br>
+                    {% set a = namespace(value=0) %}
+                    {% for eachjob in bid_data %}
+                        {% if 'offeraccpt' not in eachjob['biddetails'] %}
+                            {% if eachjob['biddetails']['requestby'] == 'actor' %}
+                                {% if 'offeraccpt' not in eachjob['biddetails'] %}
+                                    {% set a.value=a.value + 1 %}
+                                    <div class="border rounder py-3">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <p class="jobtitle1">{{ eachjob['projects']["project_name"] }}</p>
+                                                    <p class="jobno1">Job: #9427247
+                                                        <span class="postdate">{{ eachjob['projects']["timestamp"].strftime('%d %b,%Y (%H:%M)') }}</span>
+                                                    </p>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    {% if eachjob['projects']["status"] == "posted" %}
+                                                        <p class="mb-0 pt-3">
+                                                            Deadline {{ eachjob['projects']["project_deadline"][0]|title }}</p>
+                                                        <p class="mb-0">Cost
+                                                            $ {{ eachjob['projects']["project_cost"] }}</p>
+                                                        <p class="mb-0">
+                                                            Script {{ eachjob['projects']["project_length"] }} {{ eachjob['projects']["project_length_type"] }}</p>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    {% if 'offeraccpt' in eachjob['biddetails'] %}
+                                                        {% if 'status' in eachjob['biddetails']['offeraccpt'] %}
+                                                            <button class="Draftbtn1">{{ eachjob['biddetails']['offeraccpt']['status'] }}</button>
+                                                        {% endif %}
+                                                    {% else %}
+                                                        {% if 'requestby' in eachjob['biddetails'] %}
+                                                            {% if eachjob['biddetails']['requestby'] == 'actor' %}
+                                                                <button class="Draftbtn1">Pending</button>
+                                                            {% elif eachjob['biddetails']['requestby'] == 'buyer' %}
+                                                                <button class="Draftbtn1">Offer received</button>
+                                                            {% endif %}
+                                                        {% else %}
+                                                            <button class="Draftbtn1">Request</button>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <a href="/chat?id={{ eachjob['_id'] }}">
+                                                        <button class="Draftbtn1">Chat</button>
+                                                    </a>
+                                                </div>
+
+                                                <div class="col-sm-1">
+                                                    <a href="/order-detail?jobid={{ eachjob["projects"]["project_id"] }}&byrid={{ eachjob["_id"] }}">
+                                                        <i class="fa fa-angle-right jobicon1"></i>
+                                                    </a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if a.value == 0 %}
+                        <p class="divcenter">No offers sent to any project.</p>
+                    {% endif %}
+                    <!-- job div end-->
+
+
+                </div>
+            </div>
+
+            {# Offers received form buyers #}
+            <div class="tab-pane fade show" id="offerreceived" role="tabpanel" aria-labelledby="offerreceived-tab">
+                <div class="border ">
+                    <!-- job div Start-->
+
+                    <br>
+                    {% set a = namespace(value=0) %}
+                    {% for eachjob in bid_data %}
+                        {% if 'offeraccpt' in eachjob['biddetails'] %}
+                            {% if eachjob['biddetails']['requestby'] == 'actor' %}
+
+                                {% if eachjob['biddetails']['offeraccpt']['status'] == "pending" %}
+
+                                    {% set a.value=a.value + 1 %}
+                                    <p></p>
+                                    <div class="border rounder py-3">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <p class="jobtitle1">{{ eachjob['projects']["project_name"] }}</p>
+                                                    <p class="jobno1">Job: #9427247
+                                                        <span class="postdate">{{ eachjob['projects']["timestamp"].strftime('%d %b,%Y (%H:%M)') }}</span>
+                                                    </p>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    {% if eachjob['projects']["status"] == "posted" %}
+                                                        <p class="mb-0 pt-3">
+                                                            Deadline {{ eachjob['projects']["project_deadline"][0]|title }}</p>
+                                                        <p class="mb-0">Cost
+                                                            {% if "amount" in eachjob['biddetails']['offeraccpt'] %}
+                                                            $ {{eachjob['biddetails']['offeraccpt']['amount'] / 100 }}
+                                                            {% else %}
+                                                            $ {{ eachjob['projects']["project_cost"] }}</p>
+                                                            {% endif %}
+                                                        <p class="mb-0">
+                                                            Script {{ eachjob['projects']["project_length"] }} {{ eachjob['projects']["project_length_type"] }}</p>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    {% if 'offeraccpt' in eachjob['biddetails'] %}
+                                                        {% if 'status' in eachjob['biddetails']['offeraccpt'] %}
+                                                        {% if "amount" in eachjob['biddetails']['offeraccpt'] %}
+                                                            <button id="{{ eachjob['biddetails']['actor_id'] }},{{ eachjob['biddetails']['buyer_id'] }},{{ eachjob['biddetails']['project_id'] }},{{ eachjob['projects']["project_name"] }},{{ eachjob["userName"] }},{{eachjob['biddetails']['offeraccpt']['amount'] / 100 }},{{ eachjob['projects']["project_length"] }},{{ eachjob['projects']["project_length_type"] }},{{ eachjob['projects']["project_deadline"][0]}}"
+                                                                    class="btn btn-primary"
+                                                                    onclick="acceptOffer(this.id)">
+                                                                Accept Offer
+                                                            </button>
+                                                        {% else %}
+                                                            <button id="{{ eachjob['biddetails']['actor_id'] }},{{ eachjob['biddetails']['buyer_id'] }},{{ eachjob['biddetails']['project_id'] }},{{ eachjob['projects']["project_name"] }},{{ eachjob["userName"] }},{{ eachjob['projects']["project_cost"] }},{{ eachjob['projects']["project_length"] }},{{ eachjob['projects']["project_length_type"] }},{{ eachjob['projects']["project_deadline"][0]}}"
+                                                                    class="btn btn-primary"
+                                                                    onclick="acceptOffer(this.id)">
+                                                                Accept Offer
+                                                            </button>
+                                                            {% endif %} 
+                                                        {% endif %}
+                                                    {% endif %}
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <a href="/chat?id={{ eachjob['_id'] }}">
+                                                        <button class="Draftbtn1">Chat</button>
+                                                    </a>
+                                                </div>
+
+                                                <div class="col-sm-1">
+                                                    <a href="/order-detail?jobid={{ eachjob["projects"]["project_id"] }}&byrid={{ eachjob["_id"] }}">
+                                                        <i class="fa fa-angle-right jobicon1"></i>
+                                                    </a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if a.value == 0 %}
+                        <p class="divcenter">No offers received for any of the project.</p>
+                    {% endif %}
+                    <!-- job div end-->
+
+
+                </div>
+            </div>
+
+            {# Working on accepetd projects #}
+            <div class="tab-pane fade show" id="working" role="tabpanel" aria-labelledby="working-tab">
+                <div class="border ">
+                    <!-- job div Start-->
+                    <div class="container">
+                        <div class="row col form-group">
+                            <p class="divcenter">The following jobs on which you are working. </p>
+                        </div>
+                    </div>
+                    <br>
+                    {% set a = namespace(value=0) %}
+                    {% for eachjob in bid_data %}
+                        {% if 'offeraccpt' in eachjob['biddetails'] %}
+                            {% if 'status' in eachjob['biddetails']['offeraccpt'] %}
+                                {% if eachjob['biddetails']['offeraccpt']['status'] == 'accepted' %}
+                                    {% set a.value=a.value + 1 %}
+                                    <div class="border rounder py-3">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <p class="jobtitle1">{{ eachjob['projects']["project_name"] }}</p>
+                                                    <p class="jobno1">Job: #9427247
+                                                        <span class="postdate">{{ eachjob['projects']["timestamp"].strftime('%d %b,%Y (%H:%M)') }}</span>
+                                                    </p>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    {% if eachjob['projects']["status"] == "posted" %}
+                                                        <p class="mb-0 pt-3">
+                                                            Deadline {{ eachjob['projects']["project_deadline"][0]|title }}</p>
+                                                        <p class="mb-0">Cost
+                                                            $ {{ eachjob['projects']["project_cost"] }}</p>
+                                                        <p class="mb-0">
+                                                            Script {{ eachjob['projects']["project_length"] }} {{ eachjob['projects']["project_length_type"] }}</p>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    {% if 'offeraccpt' in eachjob['biddetails'] %}
+                                                        <a href="/receive-revision?project_id={{ eachjob["projects"]["project_id"] }}&buyer_id={{ eachjob["_id"] }}">
+                                                            <button class="btn btn-primary mt-4">Order Detail</button>
+                                                        </a>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <a href="/chat?id={{ eachjob['_id'] }}">
+                                                        <button class="Draftbtn1">Chat</button>
+                                                    </a>
+                                                </div>
+
+                                                <div class="col-sm-1">
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if a.value == 0 %}
+                        <p class="divcenter">No job in working status</p>
+                    {% endif %}
+                    <!-- job div end-->
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form action="/send-bid" method="post" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModal">Send Request</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="editModalBody">
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Name
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="actorName" name="actorName" required
+                                       readonly value="{{ username }}"
+                                       maxlength="30">
+                                <input type="text" class="form-control" id="actorId" name="actorId" required readonly
+                                       value="{{ actordata['_id'] }}"
+                                       style="display: none;" maxlength="25">
+                                <input type="text" class="form-control" id="buyrId" name="buyrId" required readonly
+                                       value=""
+                                       style="display: none;" maxlength="25">
+                                <input type="text" class="form-control" id="projId" name="projId" required readonly
+                                       value=""
+                                       style="display: none;" maxlength="25">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Description
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" id="actorDescription" name="actorDescription" class="form-control"
+                                       maxlength="100" required
+                                       placeholder="Write something about your response.">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Completion Time
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" id="actorCmplTime" name="actorCmplTime" class="form-control"
+                                       maxlength="25" required
+                                       placeholder="Delivery Time of job.">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Related Samples
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="file" id="actorSample" name="actorSample" class="form-control"
+                                       maxlength="3" required
+                                       placeholder="Write something about your response." multiple accept="audio/*">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    {#    Offer accept Modal #}
+    <div class="modal fade" id="myModalAccept" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form action="/accept-offer" method="get">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModal">Accept Offer Agreement</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                                                <div class="row form-group">
+                                <input type="text" id="actor_id" name="actor_id" class="form-control"
+                                       maxlength="100" required style="display: none;">
+                                <input type="text" id="buyer_id" name="buyer_id" class="form-control"
+                                       maxlength="100" required style="display: none;">
+                                <input type="text" id="project_id" name="project_id" class="form-control"
+                                       maxlength="100" required style="display: none;">
+                                <!-- <input type="text" id="project_name" name="project_name" class="form-control"
+                                       maxlength="100" required style="display: none;"> -->
+                            </div>
+                    <div class="modal-body" id="editModalBody">
+                        <div class="container">
+                            <div class="row form-group">
+                                <h4><strong>VO Recording Agreement</strong></h4>
+                                <p class="w-100">Between <strong><span id="myBuyerName"></span></strong> (hereby referred to as “Client”
+ and
+<strong>{{username}} </strong> (hereby referred to as “Talent”), for the project titled, tentatively titled, or codenamed <strong><span id="myProjectName"></span></strong> (hereby referred to as “Production”).
+
+Talent’s voiceover recording rate for this Production is set at <strong><span id="myCost"></span></strong> USD
+ 
+Talent's voiceover recording script length for this job is set to
+<strong><span id="mylength"></strong></span><span id="mylengthtype"></span> 
+
+Deadline for completion of this job is <strong><span id="deadLine"></strong>
+</p>
+                                
+                                <h5><strong>Client’s Obligations</strong></h5>
+<ul style="list-style-type: disc;margin-left:62px;">
+    <ul id="isPasted" style="list-style-type: disc;margin-left:62px;">
+        <li><span style='font-family:"Arial",sans-serif;color:black;'>Client will pay the agreed-upon rate, in full, to the voicescity.com official account in <strong>advance</strong>.</span></li>
+        <li><span style='font-family:"Arial",sans-serif;color:black;'>In the case of the Production being delayed or canceled, or the role being recast or cut, Client agrees to still pay Talent for any work already completed on Talent&rsquo;s part.</span></li>
+        <li><span style='font-family:"Arial",sans-serif;color:black;'>Client will convey any necessary specifications to Talent before work commences.Client understands that revisions, pickups, and other additional work beyond the scope of the initial agreement may be subject to an extra fee. Client will make every effort to provide such revision requests to Talent in a timely manner.</span></li>
+        <li><span style='font-family:"Arial",sans-serif;color:black;'>Client will not require Talent to edit, mix, or master the files (beyond basic cleanup), or split lines into individual files, unless arranged with Talent beforehand or volunteered by Talent. Client understands that any splitting of files or other extensive editing required on Talent&rsquo;s part will be subject to an extra fee.</span></li>
+        <li><span style='font-family:"Arial",sans-serif;color:black;'>Client will not obligate Talent to promote the Production on social media or other public platform as a condition of casting, although Talent may still choose to promote their involvement voluntarily once any non-disclosure agreement has been lifted.</span></li>
+        <li><span style='font-family:"Arial",sans-serif;color:black;'>If personal details of Talent are made available to Client for the purposes of completing the job (including, but not limited to: phone number, address, tax ID, union status, or association with a pseudonym), Client agrees that such information is confidential and will not sell or disclose it to anyunrelated third parties except as required by law.</span></li>
+    </ul>
+</ul>
+<h5><strong>Talent’s Obligations</strong></h5>
+<ul style="list-style-type: disc;margin-left:62px;">
+    <li><span style='font-family:"Arial",sans-serif;color:black;'>Talent will perform work at the agreed-upon rate for the duration of Production.</span></li>
+    <li><span style='font-family:"Arial",sans-serif;color:black;'>Talent will, in good faith, perform the work according to Client&rsquo;s direction and specifications. If a mistake is made on Talent&rsquo;s part (such as a technical error, missed line or mispronunciation), Talent agrees to fix the mistake at no extra charge to Client.</span></li>
+    <li><span style='font-family:"Arial",sans-serif;color:black;'>Talent will deliver the recorded voice files by the agreed-upon deadline, except in case of an emergency or if otherwise granted an extension by Client.</span></li>
+    <li><span style='font-family:"Arial",sans-serif;color:black;'>If for any reason Talent is unable to perform the work as scheduled, Talent agrees to inform Client as soon as possible so alternate arrangements can be made. Talent understands that they will not receive payment for any portion of the work not completed.</span></li>
+    <li><span style='font-family:"Arial",sans-serif;color:black;'>Talent will honor any confidentiality agreements requested by Client. Talent agrees not to publicly discuss their involvement with Production until its release date, unless Client makes a prior announcement of casting or gives permission for a prior announcement.</span></li>
+    <li><span style='font-family:"Arial",sans-serif;color:black;'>Talent will make themselves reasonably available for revisions and pickups for up to 30 days after work has been completed.</span></li>
+</ul>
+<h5><strong>Use and Ownership</strong></h5>
+<ul style="list-style-type: disc;margin-left:62px;">
+    <ul id="isPasted" style="list-style-type: disc;margin-left:62px;">
+        <li id="isPasted"><span style='font-family:"Arial",sans-serif;color:black;'>Talent is an Independent Contractor, not an employee, of Client. Talent is solely responsible for any income taxes incurred on earnings from work for Production.</span></li>
+        <li><span style='font-family:"Arial",sans-serif;color:black;'>Talent is providing a &ldquo;work made for hire&rdquo; and retains no ownership, copyright, or &ldquo;moral rights&rdquo; claim to the voice assets performed for the purpose of the Production.</span></li>
+        <li><span style='font-family:"Arial",sans-serif;color:black;'>Talent understands that the work is considered a &ldquo;buyout&rdquo; for the agreed rate and Client is not obligated to provide any residuals, royalties, bonuses, or additional use fees.</span></li>
+        <li><span style='font-family:"Arial",sans-serif;color:black;'>Client may suse, modify, publish and distribute the work for the Production and all related materials (such as trailers, promotions, advertisements, and streams), in perpetuity.</span></li>
+        <li><span style='font-family:"Arial",sans-serif;color:black;'>Client understands that the work was commissioned for this specific Production and its related materials and, when reasonable/practical, will consult with Talent before selling or reusing for unrelated projects or uses outside of the scope of this initial agreement.</span></li>
+        <li><span style='font-family:"Arial",sans-serif;color:black;'>Client may use Talent&rsquo;s name, website, social media handles, and/or an image supplied by Talent to promote the project, if desired, unless Talent requests to go uncredited or use a pseudonym. Client agrees not to use Talent&rsquo;s name or likeness in a way that misrepresents, disparages, or misconstrues their association with&nbsp;the&nbsp;Production.</span></li>
+        <li><span style='font-family:"Arial",sans-serif;color:black;'>Talent may use publicly available images, logos, sound clips, video clips, or other assets in a non-monetized and non-derogatory manner for the purposes of reel footage and other personal promotion if so desired, unless expressly forbidden by Client. Talent holds no claim to ownership or copyright of such assets.</span></li>
+        <li><span style='font-family:"Arial",sans-serif;color:black;'>Nothing in this agreement obligates Client to use the work performed by Talent.</span></li>
+        <li><span style='font-family:"Arial",sans-serif;color:black;'>Voicescity.com will charge 20% from the total amount of project as a &ldquo;platform fee&quot;.</span></li>
+    </ul>
+</ul>
+                                <p>This agreement is entered into on this <span id="myDate"></span> day of <span id="myMonth"></span> in the year <span id="myYear"></span> between <strong><span id="myBuyerName2"></span></strong> (client) and <strong>{{username}}</strong> (talent).</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Accept</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        {% if sendoffer == true %}
+        $(document).ready(function(){
+        $('.nav-tabs a[href="#sentoffer"]').tab('show');
+            });
+            {% endif %}
+        function showModal(byrId, proId) {
+            console.log(byrId, proId);
+            document.getElementById("buyrId").value = byrId.toString();
+            document.getElementById("projId").value = proId.toString();
+            $('#myModal').modal('show');
+        }
+
+        function acceptOffer(act_idd, byr_id, pro_id) {
+            console.log(pro_name)
+            var act_id = act_idd.split(',')[0]
+            var byr_id = act_idd.split(',')[1]
+            var pro_id = act_idd.split(',')[2]
+            var pro_name = act_idd.split(',')[3]
+            var buy_name = act_idd.split(',')[4]
+            var cost = act_idd.split(',')[5]
+            var length = act_idd.split(',')[6]
+            var length_type = act_idd.split(',')[7]
+            var dead_line = act_idd.split(',')[8]
+            document.getElementById('actor_id').value = act_id.toString();
+            document.getElementById('buyer_id').value = byr_id.toString();
+            document.getElementById('project_id').value = pro_id.toString();
+            $('#myProjectName').html(pro_name)
+            $('#myBuyerName').html(buy_name)
+            $('#myBuyerName2').html(buy_name)
+            $('#myCost').html(cost)
+            $('#mylength').html(length)
+            var dt = new Date();
+            var date = dt.getDate()
+            var month = dt.toLocaleString('default', { month: 'long' });
+            var year = dt.getFullYear()
+            if (length_type === 'Words')
+            {
+                $('#mylengthtype').html(" words.")
+            }
+            else
+            {
+                $('#mylengthtype').html(" minutes.")
+            }
+            $('#deadLine').html(dead_line)
+            $('#myDate').html(date)
+            $('#myMonth').html(month)
+            $('#myYear').html(year)
+            $('#myModalAccept').modal('show');
+        }
+    </script>
+{% endblock %}

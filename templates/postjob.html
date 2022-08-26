@@ -1,0 +1,792 @@
+{% extends "layout.html" %}
+{% block title %}Post Job{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href='{{ url_for("static", filename="css/order.css") }}'/>
+{% endblock %}
+
+{% block body %}
+
+
+    <div class="container postjobcontainer">
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                {% if error != "" %}
+                    <div class="form-group ">
+                        <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+                            <span class="badge badge-pill badge-danger">Alert</span> {{ error }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if message|length>1 %}
+                    <div class="form-group ">
+                        <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                            <span class="badge badge-pill badge-success">Success</span> {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+            <li class="nav-item">
+                <a class="nav-link active" id="Project-tab" data-toggle="tab" href="#Project" role="tab"
+                   aria-controls="Project" aria-selected="true">Project
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="Performance-tab" data-toggle="tab" href="#Performance" role="tab"
+                   aria-controls="Performance" aria-selected="false">Details
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="Usage-tab" data-toggle="tab" href="#Usage" role="tab" aria-controls="Usage"
+                   aria-selected="false">Script</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="Script-tab" data-toggle="tab" href="#Script" role="tab" aria-controls="Script"
+                   aria-selected="false">Proposals</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" id="Budget-tab" data-toggle="tab" href="#Budget" role="tab" aria-controls="Budget"
+                   aria-selected="false">Budget</a>
+            </li>
+
+        </ul>
+        <form action="/post-job" id="myForm" method="post" enctype="multipart/form-data"
+                {#  onsubmit="formSubmit.disabled = true; return true;"#}>
+            <div class="tab-content" id="myTabContent">
+
+
+                <div class="tab-pane fade show active" id="Project" role="tabpanel" aria-labelledby="Project-tab">
+                    <p class="postjobtext1">Project Overview</p>
+                    <div class="row form-group">
+                        <div class="col-sm-3">
+                            <label class="postjoblabel">Project Name <span>*</span></label>
+                        </div>
+                        <div class="col-sm-6">
+                            <input class="form-control" type="text" name="projectName" id="projectName"
+                                   placeholder="Name of your project"
+                                   required>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-3">
+                            <label class="postjoblabel">Project Description <span>*</span></label>
+                        </div>
+                        <div class="col-sm-6">
+                            <input class="form-control" type="text" name="projectDescription" id="projectDescription"
+                                   placeholder="Description about your project" required>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-sm-3">
+                            <label class="postjoblabel">Recording Usage <span>*</span></label>
+                        </div>
+                        <div class="col-sm-6">
+                            <input class="form-control" type="text" name="projectUsage" id="projectUsage"
+                                   placeholder="How, where will the recoding used?" required>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-10"></div>
+                        <div class="btnnextdiv1 col-sm-2">
+                            <button class="nexttab btn btn-success mt-5" type="button" style="margin-top: 50px;">Next
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="tab-pane fade" id="Performance" role="tabpanel" aria-labelledby="Performance-tab">
+                    <p class="postjobtext1">Requirements Overview</p>
+                    <div class="row form-group">
+                        <div class="col-sm-2">
+                            <label class="postjoblabel">Language <span>*</span></label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="projectLanguage" name="projectLanguage" required
+                                    class="selectpicker postjobinput1 form-control"
+                                    data-live-search="true">
+                                {% for language in languages %}
+                                    <option value="{{ language }}"
+                                            {% if loop.index == 1 %}disabled{% endif %}>{{ language }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="postjoblabel">Accent <span>*</span></label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="projectAccent" name="projectAccent" required
+                                    class="selectpicker postjobinput1 form-control"
+                                    data-live-search="true">
+                                {% for accent in accents %}
+                                    <option value="{{ accent }}"
+                                            {% if loop.index == 1 %}disabled{% endif %}>{{ accent }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-2">
+                            <label class="postjoblabel">Age<span>*</span></label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="projectGenderAge" name="projectGenderAge" required
+                                    class="selectpicker postjobinput1 form-control"
+                                    data-live-search="true" onchange="myFunctionChange1()">
+                                <option value="" readonly disabled>Select Type</option>
+                                {% for category in categories %}
+                                    {% if category["Type"] == "age" %}
+                                        <option value="{{ category["_id"] }}">{{ category["Category Name"] }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="postjoblabel">Gender<span>*</span></label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="projectGenderAge1" name="projectGenderAge" required
+                                    class="selectpicker postjobinput1 form-control"
+                                    data-live-search="true" onchange="myFunctionChange1()">
+                                <option value="" readonly disabled>Select Type</option>
+                                {% for category in categories %}
+                                    {% if category["Type"] == "gender" %}
+                                        <option value="{{ category["_id"] }}">{{ category["Category Name"] }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-2">
+                            <label class="postjoblabel">Category<span>*</span></label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select id="projectGenderAge2" name="projectGenderAge" required
+                                    class="selectpicker postjobinput1 form-control"
+                                    data-live-search="true" onchange="myFunctionChange1()">
+                                <option value="" readonly disabled>Select Type</option>
+                                {% for category in categories %}
+                                    {% if category["Type"] == "category" %}
+                                        <option value="{{ category["_id"] }}">{{ category["Category Name"] }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-10"></div>
+                        <div class="btnnextdiv1 col-sm-2">
+                            <button class="prevtab btn btn-info mt-5" type="button" style="margin-top: 50px;">Prev
+                            </button>
+                            <button class="nexttab btn btn-success mt-5" type="button" style="margin-top: 50px;">Next
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="tab-pane fade" id="Usage" role="tabpanel" aria-labelledby="Usage-tab">
+                    <p class="postjobtext1">Script Details</p>
+                    <div class="row form-group">
+                        <div class="col-sm-3">
+                            <label class="postjoblabel">Length of Recording <span>*</span></label>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="number" name="projectLength" id="projectLength" oninput="myFunctionChange()"
+                                   required placeholder="Length*">
+                        </div>
+                        <div class="col-sm-3">
+                            <select id="projectLengthType" name="projectLengthType" required
+                                    class="selectpicker postjobinput1 form-control"
+                                    data-live-search="true" onchange="myFunctionChange()">
+                                <option value="" readonly disabled>Select Lenght <span>*</span></option>
+                                {#  <option value="Seconds" readonly>Seconds</option>
+                            <option value="Minutes" readonly>Minutes</option>
+                            <option value="Hours" readonly>Hours</option>#}
+                                <option value="Words" readonly>Words</option>
+                                <option value="Pages" readonly>Page(s)(250 words/page)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-3">
+                            <label class="postjoblabel">Recording & Delivery Option <span>*</span></label>
+                        </div>
+                        <div class="col-sm-6">
+                            <select id="projectDeliveryOption" name="projectDeliveryOption" required
+                                    class="selectpicker postjobinput1 form-control" multiple
+                                    data-live-search="true">
+                                <option value="" readonly disabled>Select Delivery Option(s)</option>
+                                {% for deliveryOption in delivery_options %}
+                                    <option value="{{ deliveryOption }}" readonly>{{ deliveryOption }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-sm-3">
+                            <label class="postjoblabel">Upload File<span></span></label>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="file" id="scriptFile" name="scriptFile">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-3">
+                            <label class="postjoblabel">Write script<span></span></label>
+                        </div>
+                        <div class="col-sm-6">
+                            <div style="float:bottom" id="item.text.len">(0/10000)</div>
+                            <textarea class="form-control" id="item.text" name="inputscript" wrap="virtual"
+                                      placeholder="script" maxlength="10000"
+                                      onfocus="resize_textarea(this);update_textlen(this);"
+                                      onblur="update_textlen(this);resize_textarea(this);"
+                                      onkeyup="update_textlen(this);resize_textarea(this);" tabindex="1"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-sm-10"></div>
+                        <div class="btnnextdiv1 col-sm-2">
+                            <button class="prevtab btn btn-info mt-5" type="button" style="margin-top: 50px;">Prev
+                            </button>
+                            <button class="nexttab btn btn-success mt-5" type="button" style="margin-top: 50px;">Next
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="tab-pane fade" id="Script" role="tabpanel" aria-labelledby="Script-tab">
+                    <p class="postjobtext1">Proposal options</p>
+                    <div class="row form-group">
+                        <div class="col-sm-3">
+                            <label class="postjoblabel">Number of Proposals <span>*</span></label>
+                        </div>
+                        <div class="col-sm-6">
+                            <select id="projectProposal" name="projectProposal" required
+                                    class="selectpicker postjobinput1 form-control"
+                                    data-live-search="true">
+                                <option value="" readonly disabled>Select Proposals Number</option>
+                                {% for proposal in proposals %}
+                                    <option value="{{ proposal }}" readonly>{{ proposal }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    {#
+                    <div class="row form-group">
+                        <div class="col-sm-3">
+                            <label class="postjoblabel">Custom Auditions <span>*</span></label>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-check">
+                                <label class="form-check-label" for="radio1">
+                                    <input type="radio" class="form-check-input" id="radio1"
+                                           name="projectCustomAudition"
+                                           value="yes"
+                                           checked>Yes, record a custom audition
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label" for="radio2">
+                                    <input type="radio" class="form-check-input" id="radio2"
+                                           name="projectCustomAudition"
+                                           value="no">No, send me related samples
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                #}
+                    <div class="row form-group">
+                        <div class="col-sm-3">
+                            <label class="postjoblabel">Deadline for Proposals <span>*</span></label>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="date" class="postjobinput1 form-control" min="{{ min_date }}" required
+                                   id="projectDeadline" name="projectDeadline">
+                            {#                            <select id="projectDeadline" name="projectDeadline" required#}
+                            {#                                    class="selectpicker postjobinput1 form-control"#}
+                            {#                                    data-live-search="true">#}
+                            {#                                <option value="" readonly disabled selected>Select Deadline</option>#}
+                            {#                                {% for duration in dead_line %}#}
+                            {#                                    <option value="{{ duration }}" readonly>{{ duration }}</option>#}
+                            {#                                {% endfor %}#}
+                            {#                            </select>#}
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-10"></div>
+                        <div class="btnnextdiv1 col-sm-2">
+                            <button class="prevtab btn btn-info mt-5" type="button" style="margin-top: 50px;">Prev
+                            </button>
+                            <button class="nexttab btn btn-success mt-5" type="button" style="margin-top: 50px;">Next
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="tab-pane fade" id="Budget" role="tabpanel" aria-labelledby="Budget-tab">
+                    <p class="postjobtext1">Money matters</p>
+                    <div class="row form-group">
+                        <div class="col-sm-3">
+                            <label class="postjoblabel">Budget <span>*</span></label>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-check-inline form-check" id="test">
+                                <label for="inline-radio1" class="form-check-label radiobtn1 ">
+                                    <input type="radio" name="projectBudget" value="fixed"
+                                           class="form-check-input">Fixed
+                                </label>
+                                <label for="inline-radio2" class="form-check-label radiobtn1">
+                                    <input type="radio" name="projectBudget" value="variable"
+                                           class="form-check-input ml-3">Variable
+                                </label>
+                            </div>
+                            <div id="addrow" class="mb-3">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-10"></div>
+                        <div class="btnnextdiv1 col-sm-2">
+                            <button class="prevtab btn btn-info mt-5" type="button">Prev</button>
+                            <button class="Post btn btn-success mt-5" type="submit" id="formSubmit1">Save</button>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-10 mt-0"></div>
+                        <div class="btnnextdiv1 col-sm-2 mt-0">
+                            <button type="button" class="Post btn btn-secondary mt-2"
+                                    style="width: 125px;"
+                                    onclick=" 
+                                     showPaymentModal()" 
+                                    {#  data-toggle="modal" data-target="#exampleModal"#} >Post
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>      <!-- /.container -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Payment Transfer or draft</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row form-group">
+                        <div class="col-sm-3">
+                            <label>Account</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" maxlength="24" minlength="12" id="bankId" name="bankId" required>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-3">
+                            <label>Bank</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" maxlength="24" minlength="12" id="bankName" name="bankName"
+                                   required>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-3">
+                            <label>Amount</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" id="amount" name="amount" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="callfunc()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal" id="exampleModal1" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Alert</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Please filled all the required fields..</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+
+{% block script %}
+
+    <script type="text/javascript">
+        /* -------------------------------------------------------------
+              bootstrapTabControl
+          ------------------------------------------------------------- */
+        function bootstrapTabControl() {
+            var i, items = $('.nav-link'), pane = $('.tab-pane');
+            // next
+            $('.nexttab').on('click', function () {
+                for (i = 0; i < items.length; i++) {
+                    if ($(items[i]).hasClass('active') == true) {
+                        break;
+                    }
+                }
+                if (i < items.length - 1) {
+                    // for tab
+                    $(items[i]).removeClass('active');
+                    $(items[i + 1]).addClass('active');
+                    // for pane
+                    $(pane[i]).removeClass('show active');
+                    $(pane[i + 1]).addClass('show active');
+                }
+
+            });
+            // Prev
+            $('.prevtab').on('click', function () {
+                for (i = 0; i < items.length; i++) {
+                    if ($(items[i]).hasClass('active') == true) {
+                        break;
+                    }
+                }
+                if (i != 0) {
+                    // for tab
+                    $(items[i]).removeClass('active');
+                    $(items[i - 1]).addClass('active');
+                    // for pane
+                    $(pane[i]).removeClass('show active');
+                    $(pane[i - 1]).addClass('show active');
+                }
+            });
+        }
+
+        bootstrapTabControl();
+    </script>
+
+
+    <script>
+
+        var costList = [];
+
+        function myFunctionChange1() {
+            var selectedValues = $('#projectGenderAge').val();
+            selectedValues = selectedValues.toString();
+            jQuery.ajax({
+                type: 'GET',
+                url: '/get-price',
+                data: {
+                    selectedValues: selectedValues
+                },
+                success: function (response) {
+                    var testList = [];
+                    costList.length = 0;
+                    if (response["success"] == true) {
+                        costList.push(response["cost_list"]);
+                    }
+                    console.log(costList);
+                }
+            });
+        }
+
+        function myFunctionChange() {
+            var lenthWords = document.getElementById("projectLength").value;
+            var value = $('#projectLengthType :selected').val();
+            var total;
+            var ttal1;
+            {#costList.forEach({#}
+            {#    #}
+            {#
+            })#}
+            if (value == 'Pages') {
+                total = parseInt(lenthWords) * parseInt(250);
+            } else {
+                total = parseInt(lenthWords) * parseInt(100);
+            }
+            var costVal = document.getElementById("projectCost");
+            if (costVal) {
+                document.getElementById("projectCost").value = parseInt(total);
+            }
+        }
+
+        function selectotherFunction() {
+            var b = document.getElementById("ad").value;
+
+            if (b == "other") {
+                var x = document.getElementById("selectother");
+                x.style.display = "block";
+            } else {
+                var x = document.getElementById("selectother");
+                x.style.display = "none";
+            }
+        }
+
+        function LengthFunction() {
+            var x = document.getElementById("LengthFunction");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function definedFunction() {
+            var x = document.getElementById("definedFunction");
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+        }
+
+        jQuery('#test input:radio').click(function () {
+            if (jQuery(this).val() === 'fixed') {
+                document.getElementById("addrow").innerHTML = "";
+                var lenthWords = document.getElementById("projectLength").value;
+                var lenthWordsType = document.getElementById("projectLengthType").value;
+                var value = $('#projectLengthType :selected').val();
+                var total;
+                if (value == 'Pages') {
+                    total = parseInt(lenthWords) * parseInt(250);
+                } else {
+                    total = parseInt(lenthWords) * parseInt(100);
+                }
+                jQuery('#addrow').append(`
+                    <div class="row form-group">
+                    <div class="col-sm-3">
+                        <label class="postjoblabel">According to Voice City Policy ($)</label>
+                    </div>
+                    <div class="col-sm-6">
+                         <input type="number" min="0" id="projectCost" name="projectCost" placeholder="Cost in ($)" class="form-control" value="` + parseInt(total) + `" required>
+                    </div>
+                </div>
+                `);
+            } else if (jQuery(this).val() === 'variable') {
+                document.getElementById("addrow").innerHTML = "";
+                jQuery('#addrow').append(`
+                    <div class="row form-group">
+                    <div class="col-sm-3">
+                        <label class="postjoblabel">According to Script ($)</label>
+                    </div>
+                    <div class="col-sm-6">
+                         <input type="number" min="0" id="projectCost1" name="projectCost1" placeholder="Cost in $"checked class="form-control" required>
+                    </div>
+                </div>
+                `);
+            }
+        });
+
+        function showPaymentModal() {
+            var chk = 0;
+            chk = 1;
+            var a1 = document.getElementById("projectName").value
+            var a2 = document.getElementById("projectDescription").value
+            var a3 = document.getElementById("projectUsage").value
+            var a4 = $('#projectLanguage').val()
+            var a41 = $('#projectAccent').val()
+            var a5 = $('#projectGenderAge').val()
+            var a52 = $('#projectGenderAge1').val()
+            var a53 = $('#projectGenderAge2').val()
+            var a6 = $('#projectLength').val()
+            var a7 = $('#projectLengthType').val();
+            var a8 = $('#projectDeliveryOption').val()
+            var a9 = $('#projectProposal').val()
+            var a11 = document.getElementById("projectDeadline").value
+            var a12 = document.getElementById("projectCost")
+            var a13 = document.getElementById("projectCost1");
+            var a14;
+            if (a12) {
+                a14 = a12.value;
+            } else if (a13) {
+                a14 = a13.value;
+            } else {
+                $("#exampleModal1").modal("show");
+            }
+
+            {#if (a1 != "" && a2 != "" && a3 != "" && a4 != "" && a5 != "" && a7 != "" && a8 != "" && a9 != "" && a11 != "" && (a12 != "" || a13 != "") ){#}
+            if (a1 != "" && a2 != "" && a3 != "" && a4 != "" && a5 != "" && a6 != "" && a7 != "" && a8 != "" && a9 != "" && a11 != "" && a12 != "" && a14 != "") {
+                // $("#exampleModal").modal("show");
+                callfunc()
+            } else {
+                $("#exampleModal1").modal("show");
+            }
+        }
+
+
+        function callfunc() {
+            submmitForm();
+        }
+
+        function submmitForm() {
+            var a1 = document.getElementById("projectName").value;
+            var a2 = document.getElementById("projectDescription").value;
+            var a3 = document.getElementById("projectUsage").value;
+            var a4 = $('#projectLanguage').val();
+            var a41 = $('#projectAccent').val();
+            var a5 = $('#projectGenderAge').val();
+            var a52 = $('#projectGenderAge1').val();
+            var a53 = $('#projectGenderAge2').val();
+            var a6 = $('#projectLength').val();
+            var a7 = $('#projectLengthType').val();
+            var a8 = $('#projectDeliveryOption').val();
+            var a9 = $('#projectProposal').val();
+            var a11 = $('#projectDeadline').val();
+            var a12 = document.getElementById("projectCost");
+            var a13 = document.getElementById("projectCost1");
+            var a14;
+            var a15;
+            if (a12) {
+                a14 = a12.value;
+                a15 = 'fixed';
+            } else if (a13) {
+                a14 = a13.value;
+                a15 = 'variable';
+            }
+            {#Script or script file#}
+            inputscript = document.getElementById("item.text").value;
+            scriptFile = document.getElementById("scriptFile").files[0];
+            {#end#}
+            // var b1 = document.getElementById("bankId").value;
+            // var b2 = document.getElementById("bankName").value;
+            // var b3 = document.getElementById("amount").value;
+            var b1 = "no data";
+            var b2 = "no data";
+            var b3 = "no data";
+            if (b1 != "" && b2 != "" && b3 != "") {
+                var formData = new FormData();
+                formData.append("scriptFile", scriptFile);
+                formData.append("inputscript", inputscript);
+                formData.append("projectName", a1);
+                formData.append("projectDescription", a2);
+                formData.append("projectUsage", a3);
+                formData.append("projectLanguage", a4);
+                formData.append("projectAccent", a41);
+                formData.append("projectGenderAge", a5);
+                formData.append("projectGenderAge1", a52);
+                formData.append("projectGenderAge2", a53);
+                formData.append("projectLength", a6);
+                formData.append("projectLengthType", a7);
+                formData.append("projectDeliveryOption", a8);
+                formData.append("projectProposal", a9);
+                formData.append("projectDeadline", a11);
+                formData.append("projectBudget", a15);
+                formData.append("projectCost", a14);
+                formData.append("bankId", b1);
+                formData.append("bankAccount", b2);
+                formData.append("bankAmount", b3);
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '/post-job-payment',
+                    processData: false, // important
+                    contentType: false, // important
+                    dataType: 'json',
+                    data: formData,
+                    {# {
+                    projectName: a1,
+                    projectDescription: a2,
+                    projectUsage: a3,
+                    projectLanguage: a4,
+                    projectGenderAge: a5,
+                    projectLength: a6,
+                    projectLengthType: a7,
+                    projectDeliveryOption: a8,
+                    projectProposal: a9,
+                    projectDeadline: a11,
+                    projectBudget: a15,
+                    projectCost: a14,
+                    bankId: b1,
+                    bankAccount: b2,
+                    bankAmount: b3,
+
+                },#}
+                    success: function (response) {
+                        if (response["success"] == true) {
+                            console.log("hi")
+                            setInterval(refreshPage(), 300);
+                        } else {
+                            alert(response["error"])
+                        }
+                    }
+                });
+            } else {
+                $("#exampleModal1").modal("show");
+            }
+
+        }
+
+        function refreshPage() {
+            location.reload(true);
+        }
+
+        function update_textlen(field) {
+            // count the characters used of maxLenght in text field and report it to a div
+            var maxlen = field.maxLength;
+            var fval = field.value;
+            var flen = fval.length;
+            var tlen = fval.replace(/\n/g, "\r\n").length;
+            var dlen = tlen - flen;
+            var warn = 0;
+            // now clip more characters of the end if neeeded
+            if (tlen > maxlen) {
+                field.value = fval.substring(0, (maxlen - dlen));
+                var tlen = field.value.replace(/\n/g, "\r\n").length;
+                var warn = ("input exceeded the " + maxlen + " allowed characters!");
+            }
+            var counter = "(" + tlen + "/" + maxlen + ")";
+            var target = field.id + ".len";
+            document.getElementById(target).innerHTML = counter;
+            if (warn) {
+                alert(warn);
+            }
+        }
+
+        update_textlen(document.getElementById('item.text'));
+
+        function resize_textarea(area) {
+            //auto expand textarea to fit new number of lines
+            area.style.height = "20px";
+            area.style.height = (area.scrollHeight) + "px";
+        }
+    </script>
+{% endblock %}

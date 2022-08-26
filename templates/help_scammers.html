@@ -1,0 +1,77 @@
+{% extends "layout.html" %} {% block title %}Actors{% endblock %} {% block head
+%} {{ super() }}
+<link
+    rel="stylesheet"
+    href='{{ url_for("static", filename="css/floating.css") }}'
+/>
+{% endblock %} {% block body %}
+<link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+/>
+
+<div class="container mt-1 mb-5">
+    <p class="h1">BE AWARE FROM SCAMMERS.</p>
+    <p class="h5 font-weight-light">
+        Voicecity values the safety and privacy of our users. We remind our
+        users, however, that we’re an open marketplace and it’s their
+        responsibility to ensure the connections they make through our site are
+        real and mutually beneficial. You must check out all your clients,
+        beyond what you see on their project pages, profiles, or read in the
+        messages you receive from them.
+    </p>
+    <p class="h3">An example of a typical scam:</p>
+    <p class="h5 font-weight-light">
+        They will start with a message asking for a proposal, an audition, or a
+        demo.
+    </p>
+    <p class="h5 font-weight-light">
+        They’ll then get in touch and tell you that you cannot see the script,
+        but it will be released shortly before the recording session, and they
+        have a local studio where they'd like you to record.
+    </p>
+    <p class="h5 font-weight-light">
+        They’ll issue you a check that includes your pay and a portion that you
+        will need to forward to another individual.
+    </p>
+    <p class="h5 font-weight-light">
+        They’ll then send you a studio location where you will supposedly
+        record.
+    </p>
+    <p class="h5 font-weight-light">
+        The check will turn out to be fake. You’ll cash it, forward the money to
+        the other individual, but within days your bank will contact you to
+        inform you that the check bounced. On contacting the studio, there'll be
+        no record of a booking for you.
+    </p>
+    <p class="h3">Please always remember:</p>
+    <ul>
+        <li class="h5 font-weight-light">
+            To trust your instincts and never wire funds.
+        </li>
+        <li class="h5 font-weight-light">
+            That you're your own business and have to be cautious
+        </li>
+        <li class="h5 font-weight-light">
+            Not to deliver ready-to-use samples without pay; watermark them or
+            change keywords to protect yourself.
+        </li>
+        <li class="h5 font-weight-light">
+            Not to extend payment to anyone you have not met in person.
+        </li>
+        <li class="h5 font-weight-light">
+            To negotiate payments through safer means such as PayPal
+        </li>
+        <li class="h5 font-weight-light">
+            If someone makes a booking for you at a studio, please contact the
+            studio to confirm.
+        </li>
+    </ul>
+    <p class="h5 font-weight-light">
+        Please be careful when dealing with people you don’t know online,
+        whether on Voicecity or other websites.
+    </p>
+
+    <p><a href="/help" style="color: blue">Back to main menu</a></p>
+</div>
+{% endblock %}

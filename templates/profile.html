@@ -1,0 +1,217 @@
+{% extends "layout.html" %} {% block title %}Actor Home{% endblock %} {% block
+head %} {{ super() }} {% endblock %} {% block body %}
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-sm-9">
+            <p class="profiletext1 pt-5 mb-1">
+                Welcome Back, {{ username|title }}
+            </p>
+        </div>
+        <div class="col-sm-3">
+            <a href="/actor-editprofile">
+                <button class="btn btn-success">Add Demo</button>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <section class="col-sm-9">
+            <div class="border rounder py-2 pt-4 pb-4">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-2">
+                            <img
+                                src="static/img/job-posting.png"
+                                class="img-fluid"
+                            />
+                        </div>
+                        <div class="col-sm-8">
+                            <h5 class="font-weight-bold">
+                                Review Hiring Jobs
+                                <span class="profilespan1"
+                                    >{% if skill_status == True %} {{ totaljobs
+                                    }} Jobs Match{% else %}Incomplete Profile{%
+                                    endif %}</span
+                                >
+                            </h5>
+                            <p>
+                                Take a look at what jobs you've been matched
+                                with.
+                            </p>
+                        </div>
+                        <div class="col-sm-1">
+                            <a href="/jobs">
+                                <i class="fa fa-chevron-right pt-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border rounder py-2 pt-4 pb-4 mt-5">
+                <div class="container">
+                    <h5 class="font-weight-bold pt-3 pb-5 ml-5">
+                        Improve Your Profile
+                    </h5>
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-2">
+                            <img
+                                src="static/img/voice-match.png"
+                                class="img-fluid"
+                            />
+                        </div>
+                        <div class="col-sm-8">
+                            <h5 class="font-weight-bold">
+                                Edit Your Profile
+                                <span class="profilespan1"
+                                    >{{ profile_percentag }}% Complete</span
+                                >
+                            </h5>
+                            <p>
+                                Fill in what's missing from your profile so you
+                                get the best job matches.
+                            </p>
+                        </div>
+                        <a href="/actor-editprofile">
+                            <div class="col-sm-1">
+                                <i class="fa fa-chevron-right pt-4"></i>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="row mt-5">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-2">
+                            <img
+                                src="static/img/audition-file.png"
+                                class="img-fluid"
+                            />
+                        </div>
+                        <div class="col-sm-8">
+                            <h5 class="font-weight-bold">
+                                Add a Demo
+                                <span class="profilespan1"
+                                    >{{ playlist_length }} Demo</span
+                                >
+                            </h5>
+                            <p>
+                                Edit your profile to improve your opportunity to
+                                match with jobs.
+                            </p>
+                        </div>
+                        <a href="/actor-editprofile">
+                            <div class="col-sm-1">
+                                <i class="fa fa-chevron-right pt-4"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            {#
+            <div class="border rounder py-2 pt-4 pb-4 mt-5">
+                <div class="container">
+                    <h5 class="font-weight-bold pt-3 pb-2 ml-3">
+                        Build Your Career
+                    </h5>
+                    <div class="row ml-3">
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-1">
+                                    <i class="fa fa-book"></i>
+                                </div>
+                                <div class="col-sm-11">
+                                    <p class="mb-0 font-weight-bold">
+                                        Beginners Guide
+                                    </p>
+                                    <p class="mb-1">
+                                        Our step-by-step guide to voice acting
+                                        helps launch your career.
+                                    </p>
+                                    <a href="#">Read It Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-1">
+                                    <i class="fa fa-book"></i>
+                                </div>
+                                <div class="col-sm-11">
+                                    <p class="mb-0 font-weight-bold">
+                                        Beginners Guide
+                                    </p>
+                                    <p class="mb-1">
+                                        Our step-by-step guide to voice acting
+                                        helps launch your career.
+                                    </p>
+                                    <a href="#">Read It Now</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-5">
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-1">
+                                        <i class="fa fa-book"></i>
+                                    </div>
+                                    <div class="col-sm-11">
+                                        <p class="mb-0 font-weight-bold">
+                                            Beginners Guide
+                                        </p>
+                                        <p class="mb-1">
+                                            Our step-by-step guide to voice
+                                            acting helps launch your career.
+                                        </p>
+                                        <a href="#">Read It Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-1">
+                                        <i class="fa fa-book"></i>
+                                    </div>
+                                    <div class="col-sm-11">
+                                        <p class="mb-0 font-weight-bold">
+                                            Beginners Guide
+                                        </p>
+                                        <p class="mb-1">
+                                            Our step-by-step guide to voice
+                                            acting helps launch your career.
+                                        </p>
+                                        <a href="#">Read It Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            #}
+        </section>
+        {% if status == "standard" %}
+        <section class="col-sm-3">
+            <div class="border rounder py-2 pt-4 pb-4">
+                <div class="container">
+                    <p class="mb-2 font-weight-bold">
+                        Ready to take your voice over career to the next level?
+                    </p>
+                    <p class="mb-5">
+                        Unlock the ability to audition for any job that matches
+                        your profile, and more, with a Premium Membership.
+                    </p>
+                    <div class="text-center">
+                        <a href="/re-new-paymentplan">
+                            <button class="btn btn-success">Upgrade Now</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

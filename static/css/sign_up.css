@@ -1,0 +1,246 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+
+  /* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) { 
+      .container {
+    width: 912px;
+}
+
+
+
+
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .container {
+        width: 912px;
+    }
+    #userform {
+        background-color: #fff;
+        margin: 20px 0 20px 0;
+        box-shadow: 0px 0px 12px #fff;
+        /* border-radius: 20px; */
+        border-bottom-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        height: 68% !important;
+        margin-top: 128px;
+    }
+
+    #userform .form-group input.form-control {
+        height: auto;
+        background-color: #fff;
+        color: rgb(4, 4, 4);
+        margin-top: 44px !important;
+    }
+    #userform .form-group input, #userform .form-group textarea {
+        padding: 16px !important;
+        font-size: 22px;
+    }
+    #userform .form-group input, #userform .form-group textarea {
+        padding: 16px !important;
+        font-size: 36px !important;
+    }
+
+   
+
+
+    .fa {
+        padding: 10px;
+        font-size: 36px !important;
+        width: 40px;
+        text-align: center;
+        text-decoration: none !important;
+        list-style-type: none !important;
+        margin: 2px 12px;
+        border-radius: 50px;
+    }
+    .password-show-btn-1 {
+        float: right;
+        margin-top: -60px !important;
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+    }
+   
+    .Login-Form-Btn-1 {
+        background: #b89057;
+        color: #ffffff;
+        padding: 16px;
+        width: 53%;
+        margin: auto;
+        border: none;
+        margin-top: 10px;
+        border-radius: 28px;
+        font-size: 35px !important;
+    }
+    .login-div-3 .form-check-label {
+        padding: 20px !important;
+        font-size: 23px !important;
+    }
+    #userform p {
+        font-size: 45px !important;
+        margin-bottom: 5px;
+    }
+    #userform .nav-tabs.nav-justified > .active > a, #userform .nav-tabs.nav-justified > .active > a:hover, #userform .nav-tabs.nav-justified > .active > a:focus {
+        border: 0;
+        background: #b89057;
+        color: white;
+        /* border-radius: 0; */
+        font-size: 50px !important;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+        .container {
+        width: 912px;
+    }
+    #userform {
+        background-color: #fff;
+        margin: 20px 0 20px 0;
+        box-shadow: 0px 0px 12px #fff;
+        /* border-radius: 20px; */
+        border-bottom-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        height: 68% !important;
+        margin-top: 128px;
+    }
+
+    #userform .form-group input.form-control {
+        height: auto;
+        background-color: #fff;
+        color: rgb(4, 4, 4);
+        margin-top: 44px !important;
+    }
+    #userform .form-group input, #userform .form-group textarea {
+        padding: 4px !important;
+        font-size: 22px;
+    }
+    .fa {
+        padding: 10px;
+        font-size: 36px !important;
+        width: 40px;
+        text-align: center;
+        text-decoration: none !important;
+        list-style-type: none !important;
+        margin: 2px 12px;
+        border-radius: 50px;
+    }
+    .password-show-btn-1 {
+        float: right;
+        margin-top: -60px !important;
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+    }
+    .login-div-3 .form-check-label {
+        padding: 10px;
+        font-size: 20px !important;
+    }
+    .Login-Form-Btn-1 {
+        background: #b89057;
+        color: #ffffff;
+        padding: 16px;
+        width: 53%;
+        margin: auto;
+        border: none;
+        margin-top: 10px;
+        border-radius: 28px;
+        font-size: 25px !important;
+    }
+    #userform p {
+        font-size: 32px !important;
+        margin-bottom: 5px;
+    }
+    #userform .nav-tabs.nav-justified > .active > a, #userform .nav-tabs.nav-justified > .active > a:hover, #userform .nav-tabs.nav-justified > .active > a:focus {
+        border: 0;
+        background: #b89057;
+        color: white;
+        /* border-radius: 0; */
+        font-size: 50px !important;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .container {
+        width: 1153px;
+    }
+
+    #userform {
+        background-color: #fff;
+        margin: 50px 0 20px 0;
+        box-shadow: 0px 0px 12px #fff;
+        border-bottom-right-radius: 20px;
+        border-bottom-left-radius: 0px;
+        height: 81% !important;
+    }
+    #userform .form-group input.form-control {
+        height: auto;
+        background-color: #fff;
+        color: rgb(4, 4, 4);
+        margin-top: 10px !important;
+    }
+
+    #userform .form-group input, #userform .form-group textarea {
+        padding: 10px !important;
+        font-size: 15px !important;
+    }
+
+    .fa {
+        padding: 10px;
+        font-size: 20px !important ;
+        width: 40px;
+        text-align: center;
+        text-decoration: none !important;
+        list-style-type: none !important;
+        margin: 15px 12px;
+        border-radius: 50px;
+      }
+
+      .password-show-btn-1 {
+        float: right;
+        margin-top: -43px !important;
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+    }
+    .login-div-3 .form-check-label {
+        padding: 6px !important;
+        font-size: 13px !important;
+    }
+    .Login-Form-Btn-1 {
+        background: #b89057;
+        color: #ffffff;
+        padding: 16px;
+        width: 53%;
+        margin: auto;
+        border: none;
+        margin-top: 10px;
+        border-radius: 28px;
+        font-size: 15px !important;
+    }
+    #userform p {
+        font-size: 15px !important;
+        margin-bottom: 5px;
+    }
+    #userform .nav-tabs.nav-justified > .active > a, #userform .nav-tabs.nav-justified > .active > a:hover, #userform .nav-tabs.nav-justified > .active > a:focus {
+        border: 0;
+        background: #b89057;
+        color: white;
+        /* border-radius: 0; */
+        font-size: 20px !important;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {}

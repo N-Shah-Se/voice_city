@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../static/img/fav.png" type="image/gif" sizes="16x16">
+    <title>Login - Voices City</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../static/plugins/fontawesome-free/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="../static/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../static/dist/css/adminlte.min.css">
+            <link rel="stylesheet" type="text/css" href="../static/css/login.css">
+
+</head>
+
+<body>
+  
+<div class="container">
+<div class="login-div-1">
+<div class="login-div-2">
+
+  <img src="../static/img/login-logo.png" class="img-fluid login-logo-1"></div>
+<div class="login-div-3">
+
+  <p class="text-center font-weight-bold h5 pb-3">Welcome Back</p>
+
+          {%if loginerror != "NULL"%}
+            <div class="form-group ">
+                <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+                    <span class="badge badge-pill badge-danger">Alert</span> {{loginerror}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            {%endif%}
+
+                            
+            <form class="login-form-1" action="/admin/login" method="post">
+
+  <div class="form-group">
+
+    <input type="email" class="form-control text-lowercase" id="email" name="email"
+                                           value="" autocomplete="off" placeholder="Enter email">
+  </div>  
+<div class="form-group required">
+    <input type="password" class="form-control" id="password" autocomplete="off" placeholder="password" 
+    name="password" value="">
+<span><i class="fa fa-eye password-show-btn-1 fa-eye-slash" id="togglePassword" onclick=""></i></span>
+
+  </div>
+    <div class="form-row">
+    <div class="col">
+<div class="form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Remember me</label>
+  </div></div>
+
+  <button type="submit" class="Login-Form-Btn-1 mt-3">Log In</button>
+</div>
+
+</form>
+
+
+<hr style="border-top: 1px solid #be9e65">
+
+
+
+</div></div></div>
+
+<!-- jQuery -->
+<script src="../static/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../static/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../static/dist/js/adminlte.min.js"></script>
+</body>
+</html>

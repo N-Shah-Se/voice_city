@@ -1,0 +1,76 @@
+{% extends "layout.html" %} {% block title %}Actors{% endblock %} {% block head
+%} {{ super() }}
+<link
+    rel="stylesheet"
+    href='{{ url_for("static", filename="css/floating.css") }}'
+/>
+{% endblock %} {% block body %}
+<link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+/>
+
+<div class="container mt-1 mb-5">
+    <p class="h1">Communication on Voices City - The Dos and Don'ts</p>
+    <p class="h3">The Dos:</p>
+    <ul>
+        <li class="h5 font-weight-light">
+            Voices City is your best option when it comes to payments and
+            conversations, therefore never let such information leave the
+            website.
+        </li>
+        <li class="h5 font-weight-light">
+            To be honest, if you were trying to sell anything on Voices City and
+            then decided to move that sale off of Voices City, we can't
+            guarantee your project or company security.
+        </li>
+        <li class="h5 font-weight-light">
+            Be professional at all times, especially while interacting on Voices
+            City. We don't endorse bullying, harassment, discrimination, or hate
+            speech on Voices City.
+        </li>
+    </ul>
+    <p class="h3">The Dont’s:</p>
+    <ul>
+        <li class="h5 font-weight-light">
+            Sharing passwords, credit card details, Social Security numbers, or
+            other sensitive information is strictly prohibited.
+        </li>
+        <li class="h5 font-weight-light">
+            If you're not sure who you're chatting with, avoid clicking links or
+            opening attachments in any emails you get.
+        </li>
+        <li class="h5 font-weight-light">
+            As an added layer of protection, we suggest that you always use an
+            antivirus program on your own device.
+        </li>
+        <li class="h5 font-weight-light">
+            It is not advisable to participate in any kind of online discussion
+            that makes you feel uneasy. If you do get such a communication, DO
+            NOT reply to it; instead, contact Customer Support
+            (Support@voicescity.com) to report the sender's identity
+            immediately.
+        </li>
+        <li class="h5 font-weight-light">
+            As is often the case, remote access programs such as TeamViewer and
+            AnyDesk are a privacy concern, since they may put you at risk of
+            your system being compromised by the other party. If you must use
+            such a tool, be certain that no operations are permitted. Do not
+            share them if you want to keep your personal data safe.
+        </li>
+    </ul>
+    <p class="h4">Note:</p>
+    <p class="h5 font-weight-light">
+        Contacting Customer Support at
+        <a href="mailto:support@voicescity.com" style="color: blue"
+            >support@voicescity.com</a
+        >
+        right away will prevent any questionable activities during your
+        discussions. You may also use the Report button to forward strange
+        communications to our Trust and Safety team for investigation.
+        Downloading unknown files or accessing untrusted websites are examples
+        of actions that may cause harm
+    </p>
+    <p><a href="/help" style="color: blue">Back to main menu</a></p>
+</div>
+{% endblock %}

@@ -1,0 +1,201 @@
+{% extends "layout.html" %} {% block title %}Actor Payments{% endblock %} {%
+block head %} {{ super() }}
+<link
+    rel="stylesheet"
+    href='{{ url_for("static", filename="css/floating.css") }}'
+/>
+{% endblock %} {% block body %}
+
+<link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+/>
+
+<div class="container mt-5 mb-5">
+    <h3 class="pt-5">Payments</h3>
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a
+                class="nav-link active"
+                id="Hiring-tab"
+                data-toggle="tab"
+                href="#Hiring"
+                role="tab"
+                aria-controls="Hiring"
+                aria-selected="true"
+                >All Payments</a
+            >
+        </li>
+        <li class="nav-item">
+            <a
+                class="nav-link"
+                id="Answered-tab"
+                data-toggle="tab"
+                href="#Answered"
+                role="tab"
+                aria-controls="Answered"
+                aria-selected="false"
+                >Held in SafeBox™</a
+            >
+        </li>
+        <li class="nav-item">
+            <a
+                class="nav-link"
+                id="Awarded-tab"
+                data-toggle="tab"
+                href="#Awarded"
+                role="tab"
+                aria-controls="Awarded"
+                aria-selected="false"
+            >
+                Completed</a
+            >
+        </li>
+    </ul>
+
+    <div class="tab-content mt-2" id="myTabContent">
+        <div
+            class="tab-pane fade show active"
+            id="Hiring"
+            role="tabpanel"
+            aria-labelledby="Hiring-tab"
+        >
+            <div
+                class="paymentdiv1"
+                style="height: 10px; margin-bottom: 10px; margin-top: 10px"
+            ></div>
+
+            {% set a=namespace(value=0) %} {% for eachtransaction in
+            transactions_data %} {##} {# {% if plantype in eachtransaction %}#}
+            <div class="border rounder py-3">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            {% if 'plantype' in eachtransaction %} {% set
+                            a.value=a.value + 1 %} S#. {{ loop.index }}
+                            <p class="jobno1">Plan Renew</p>
+                            {% endif %}
+                        </div>
+                        <div class="col-sm-3">
+                            {% if 'plantype' in eachtransaction %}
+                            <p class="jobtitle1">
+                                {{ eachtransaction['plantype']|title }} ${{
+                                eachtransaction['amount'] }}
+                            </p>
+                            {% endif %}
+                        </div>
+                        <div class="col-sm-3">
+                            <span class="postdate"
+                                >{{ eachtransaction["timestamp"].strftime('%d
+                                %b,%Y (%H:%M)') }}</span
+                            >
+                        </div>
+                        <div class="col-sm-1">
+                            {% if 'amountstatus' in eachtransaction %}
+                            <button class="Draftbtn1" style="margin-top: 5px">
+                                {{ eachtransaction['amountstatus'] }}
+                            </button>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-sm-1"></div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %} {% if a.value == 0 %}
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">
+                    &times;
+                </button>
+                <strong> No Payments Recorded </strong><br />
+                Details of your payment history will be shown here after being
+                processed.
+            </div>
+            {% endif %}
+        </div>
+
+        <div
+            class="tab-pane fade show"
+            id="Answered"
+            role="tabpanel"
+            aria-labelledby="Answered-tab"
+        >
+            <div
+                class="paymentdiv1"
+                style="height: 10px; margin-bottom: 10px; margin-top: 10px"
+            ></div>
+            {% set b=namespace(value=0) %} {% for eachbidding in
+            actor_bidding_data %}
+            <div class="border rounder py-3">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            {% if 'offeraccpt' in eachbidding %} {% set
+                            b.value=a.value + 1 %} S#{{ loop.index }}
+                            <p class="jobno1">{{ eachbidding['_id'] }}</p>
+                            {% endif %}
+                        </div>
+                        <div class="col-sm-3">
+                            {% if 'offeraccpt' in eachbidding %}
+                            <p class="jobtitle1">
+                                {{ eachbidding['status']|title }} ${{
+                                eachbidding['offeraccpt']['amount']/100 }}
+                            </p>
+                            {% endif %}
+                        </div>
+                        <div class="col-sm-3">
+                            <span class="postdate"
+                                >{{
+                                eachbidding["offeraccpt"]["accepttime"].strftime('%d
+                                %b,%Y (%H:%M)') }}</span
+                            >
+                        </div>
+                        <div class="col-sm-1">
+                            {% if 'status' in eachbidding['offeraccpt'] %}
+                            <button class="Draftbtn1" style="margin-top: 5px">
+                                {{ eachbidding['offeraccpt']['status'] }}
+                            </button>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-sm-1"></div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %} {% if b.value == 0 %}
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">
+                    &times;
+                </button>
+                <strong> No Payments in SafeBox </strong><br />
+                Details of your held payment history in SafeBox.
+            </div>
+            {% endif %}
+        </div>
+
+        <div
+            class="tab-pane fade show"
+            id="Awarded"
+            role="tabpanel"
+            aria-labelledby="Awarded-tab"
+        >
+            <div
+                class="paymentdiv1"
+                style="height: 10px; margin-bottom: 10px; margin-top: 10px"
+            ></div>
+
+            {% set c=namespace(value=0) %} {% if c.value == 0 %}
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">
+                    &times;
+                </button>
+                <strong> No Payments have completed </strong><br />
+                Details of your completed jobs payments goes here.
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

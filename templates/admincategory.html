@@ -1,0 +1,782 @@
+{% extends "admin_layout.html" %} {% block title %}Home{% endblock %} {% block
+head %} {{ super() }}
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css"
+/>
+{% endblock %} {% block body %}
+<section class="content">
+    <div class="container-fluid">
+        <div class="col-12 col-sm-12">
+            <div class="card card-primary card-outline card-outline-tabs">
+                <div class="card-header p-0 border-bottom-0">
+                    <ul
+                        class="nav nav-tabs"
+                        id="custom-tabs-four-tab"
+                        role="tablist"
+                    >
+                        <li class="nav-item">
+                            <a
+                                class="nav-link active"
+                                id="custom-tabs-four-home-tab"
+                                data-toggle="pill"
+                                href="#custom-tabs-four-home"
+                                role="tab"
+                                aria-controls="custom-tabs-four-home"
+                                aria-selected="true"
+                                >Categories Prices</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                id="custom-tabs-four-home-age"
+                                data-toggle="pill"
+                                href="#custom-tabs-four-age"
+                                role="tab"
+                                aria-controls="custom-tabs-four-age"
+                                aria-selected="true"
+                                >Age</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                id="custom-tabs-four-home-gender"
+                                data-toggle="pill"
+                                href="#custom-tabs-four-gender"
+                                role="tab"
+                                aria-controls="custom-tabs-four-gender"
+                                aria-selected="true"
+                                >Genders</a
+                            >
+                        </li>
+
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                id="custom-tabs-four-profile-tab"
+                                data-toggle="pill"
+                                href="#custom-tabs-four-profile"
+                                role="tab"
+                                aria-controls="custom-tabs-four-profile"
+                                aria-selected="false"
+                                >Add New Category, Age & Gender</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content" id="custom-tabs-four-tabContent">
+                        <div
+                            class="tab-pane fade show active"
+                            id="custom-tabs-four-home"
+                            role="tabpanel"
+                            aria-labelledby="custom-tabs-four-home-tab"
+                        >
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        Category And Prices
+                                    </h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    {% if error|length>1 %}
+                                    <div class="form-group">
+                                        <div
+                                            class="alert alert-danger alert-dismissible fade show"
+                                            role="alert"
+                                        >
+                                            <span
+                                                class="badge badge-pill badge-danger"
+                                                >Alert</span
+                                            >
+                                            {{ error }}
+                                            <button
+                                                type="button"
+                                                class="close"
+                                                data-dismiss="alert"
+                                                aria-label="Close"
+                                            >
+                                                <span aria-hidden="true"
+                                                    >&times;</span
+                                                >
+                                            </button>
+                                        </div>
+                                    </div>
+                                    {% endif %} {% if catupdate != "NULL" %}
+                                    <div class="form-group">
+                                        <div
+                                            class="alert alert-success alert-dismissible fade show"
+                                            role="alert"
+                                        >
+                                            <span
+                                                class="badge badge-pill badge-success"
+                                                >Success</span
+                                            >
+                                            {{ catupdate }}
+                                            <button
+                                                type="button"
+                                                class="close"
+                                                data-dismiss="alert"
+                                                aria-label="Close"
+                                            >
+                                                <span aria-hidden="true"
+                                                    >&times;</span
+                                                >
+                                            </button>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    <table
+                                        id="cateTable"
+                                        class="table table-bordered table-hover"
+                                    >
+                                        <thead>
+                                            <tr>
+                                                {% for label in titles %}
+                                                <th>{{ label }}</th>
+                                                {% endfor %}
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for data in catdata %} {%if
+                                            data["Type"] == "category"%}
+                                            <tr>
+                                                {% for info in data %} {% if
+                                                loop.index < 5 %}
+
+                                                <td
+                                                    style="
+                                                        text-transform: capitalize;
+                                                    "
+                                                >
+                                                    {{ data[titles[loop.index -
+                                                    1]] }}
+                                                </td>
+                                                {% endif %} {% endfor %}
+                                                <td style="text-align: center">
+                                                    <button
+                                                        id="edit_{{ data['_id'] }}"
+                                                        class="item"
+                                                        style="
+                                                            background: transparent;
+                                                        "
+                                                        data-placement="top"
+                                                        title="Edit"
+                                                        onclick="edit(this.id)"
+                                                    >
+                                                        <i
+                                                            class="fa fa-edit"
+                                                        ></i>
+                                                    </button>
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <button
+                                                        name="deleted"
+                                                        class="item"
+                                                        data-toggle="tooltip"
+                                                        data-placement="top"
+                                                        id="del_{{ data['_id'] }}"
+                                                        onclick="del(this.id)"
+                                                        title="Delete"
+                                                        style="
+                                                            background: transparent;
+                                                        "
+                                                    >
+                                                        <i
+                                                            class="fa fa-trash-alt"
+                                                        ></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            {%endif%} {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="tab-pane fade"
+                            id="custom-tabs-four-age"
+                            role="tabpanel"
+                            aria-labelledby="custom-tabs-four-age"
+                        >
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Age</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    {% if error|length>1 %}
+                                    <div class="form-group">
+                                        <div
+                                            class="alert alert-danger alert-dismissible fade show"
+                                            role="alert"
+                                        >
+                                            <span
+                                                class="badge badge-pill badge-danger"
+                                                >Alert</span
+                                            >
+                                            {{ error }}
+                                            <button
+                                                type="button"
+                                                class="close"
+                                                data-dismiss="alert"
+                                                aria-label="Close"
+                                            >
+                                                <span aria-hidden="true"
+                                                    >&times;</span
+                                                >
+                                            </button>
+                                        </div>
+                                    </div>
+                                    {% endif %} {% if catupdate != "NULL" %}
+                                    <div class="form-group">
+                                        <div
+                                            class="alert alert-success alert-dismissible fade show"
+                                            role="alert"
+                                        >
+                                            <span
+                                                class="badge badge-pill badge-success"
+                                                >Success</span
+                                            >
+                                            {{ catupdate }}
+                                            <button
+                                                type="button"
+                                                class="close"
+                                                data-dismiss="alert"
+                                                aria-label="Close"
+                                            >
+                                                <span aria-hidden="true"
+                                                    >&times;</span
+                                                >
+                                            </button>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    <table
+                                        id="cateTable"
+                                        class="table table-bordered table-hover"
+                                    >
+                                        <thead>
+                                            <tr>
+                                                {% for label in titles %}
+                                                <th>{{ label }}</th>
+                                                {% endfor %}
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for data in catdata %} {%if
+                                            data["Type"] == "age"%}
+                                            <tr>
+                                                {% for info in data %} {% if
+                                                loop.index < 5 %}
+                                                <td
+                                                    style="
+                                                        text-transform: capitalize;
+                                                    "
+                                                >
+                                                    {{ data[titles[loop.index -
+                                                    1]] }}
+                                                </td>
+                                                {% endif %} {% endfor %}
+                                                <td style="text-align: center">
+                                                    <button
+                                                        id="edit_{{ data['_id'] }}"
+                                                        class="item"
+                                                        style="
+                                                            background: transparent;
+                                                        "
+                                                        data-placement="top"
+                                                        title="Edit"
+                                                        onclick="edit(this.id)"
+                                                    >
+                                                        <i
+                                                            class="fa fa-edit"
+                                                        ></i>
+                                                    </button>
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <button
+                                                        name="deleted"
+                                                        class="item"
+                                                        data-toggle="tooltip"
+                                                        data-placement="top"
+                                                        id="del_{{ data['_id'] }}"
+                                                        onclick="del(this.id)"
+                                                        title="Delete"
+                                                        style="
+                                                            background: transparent;
+                                                        "
+                                                    >
+                                                        <i
+                                                            class="fa fa-trash-alt"
+                                                        ></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            {%endif%} {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="tab-pane fade"
+                            id="custom-tabs-four-gender"
+                            role="tabpanel"
+                            aria-labelledby="custom-tabs-four-gender"
+                        >
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Gender</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    {% if error|length>1 %}
+                                    <div class="form-group">
+                                        <div
+                                            class="alert alert-danger alert-dismissible fade show"
+                                            role="alert"
+                                        >
+                                            <span
+                                                class="badge badge-pill badge-danger"
+                                                >Alert</span
+                                            >
+                                            {{ error }}
+                                            <button
+                                                type="button"
+                                                class="close"
+                                                data-dismiss="alert"
+                                                aria-label="Close"
+                                            >
+                                                <span aria-hidden="true"
+                                                    >&times;</span
+                                                >
+                                            </button>
+                                        </div>
+                                    </div>
+                                    {% endif %} {% if catupdate != "NULL" %}
+                                    <div class="form-group">
+                                        <div
+                                            class="alert alert-success alert-dismissible fade show"
+                                            role="alert"
+                                        >
+                                            <span
+                                                class="badge badge-pill badge-success"
+                                                >Success</span
+                                            >
+                                            {{ catupdate }}
+                                            <button
+                                                type="button"
+                                                class="close"
+                                                data-dismiss="alert"
+                                                aria-label="Close"
+                                            >
+                                                <span aria-hidden="true"
+                                                    >&times;</span
+                                                >
+                                            </button>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    <table
+                                        id="cateTable"
+                                        class="table table-bordered table-hover"
+                                    >
+                                        <thead>
+                                            <tr>
+                                                {% for label in titles %}
+                                                <th>{{ label }}</th>
+                                                {% endfor %}
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for data in catdata %} {%if
+                                            data["Type"] == "gender"%}
+                                            <tr>
+                                                {% for info in data %} {% if
+                                                loop.index < 5 %}
+                                                <td
+                                                    style="
+                                                        text-transform: capitalize;
+                                                    "
+                                                >
+                                                    {{ data[titles[loop.index -
+                                                    1]] }}
+                                                </td>
+                                                {% endif %} {% endfor %}
+                                                <td style="text-align: center">
+                                                    <button
+                                                        id="edit_{{ data['_id'] }}"
+                                                        class="item"
+                                                        style="
+                                                            background: transparent;
+                                                        "
+                                                        data-placement="top"
+                                                        title="Edit"
+                                                        onclick="edit(this.id)"
+                                                    >
+                                                        <i
+                                                            class="fa fa-edit"
+                                                        ></i>
+                                                    </button>
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <button
+                                                        name="deleted"
+                                                        class="item"
+                                                        data-toggle="tooltip"
+                                                        data-placement="top"
+                                                        id="del_{{ data['_id'] }}"
+                                                        onclick="del(this.id)"
+                                                        title="Delete"
+                                                        style="
+                                                            background: transparent;
+                                                        "
+                                                    >
+                                                        <i
+                                                            class="fa fa-trash-alt"
+                                                        ></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            {%endif%} {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="tab-pane fade"
+                            id="custom-tabs-four-profile"
+                            role="tabpanel"
+                            aria-labelledby="custom-tabs-four-profile-tab"
+                        >
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Add New Category</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <form
+                                    action="/admin/category-price"
+                                    method="post"
+                                >
+                                    <div class="card-body">
+                                        <div class="row form-group">
+                                            <div class="col col-sm-2">
+                                                <label>Category Name</label>
+                                            </div>
+                                            <div class="col col-sm-6">
+                                                <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    name="catname"
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div class="row form-group">
+                                            <div class="col col-sm-2">
+                                                <label>Type</label>
+                                            </div>
+                                            <div class="col col-sm-6">
+                                                <select
+                                                    class="form-control selectpicker"
+                                                    name="catType"
+                                                    id="catType"
+                                                    required
+                                                >
+                                                    <option value="">
+                                                        Select Type
+                                                    </option>
+                                                    <option value="category">
+                                                        Category
+                                                    </option>
+                                                    <option value="gender">
+                                                        Gender
+                                                    </option>
+                                                    <option value="age">
+                                                        Age
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row form-group">
+                                            <div class="col col-sm-2">
+                                                <label>Standard Price</label>
+                                            </div>
+                                            <div class="col col-sm-6">
+                                                <input
+                                                    type="number"
+                                                    step="0.1"
+                                                    class="form-control"
+                                                    name="stprice"
+                                                    required
+                                                    placeholder="Price in $"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-sm-2">
+                                                <label>Price Per Word</label>
+                                            </div>
+                                            <div class="col col-sm-6">
+                                                <input
+                                                    type="number"
+                                                    step="0.1"
+                                                    class="form-control"
+                                                    name="wprice"
+                                                    required
+                                                    placeholder="Price in $"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-sm-4">
+                                                <button
+                                                    class="btn btn-primary"
+                                                    type="submit"
+                                                >
+                                                    Submit
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- /.modal edit category-->
+
+<div class="modal fade" id="editcatmodal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit</h4>
+                <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/updatecategory" method="post">
+                <div class="modal-body">
+                    <div class="row form-group">
+                        <div class="col col-sm-3">
+                            <label>Category Name</label>
+                        </div>
+                        <div class="col col-sm-6">
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="catnames"
+                                id="Catnames"
+                                value=""
+                                required
+                            />
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-sm-3">
+                            <label>Type</label>
+                        </div>
+                        <div class="col col-sm-6">
+                            <select
+                                class="form-control"
+                                name="catTypes"
+                                id="catTypes"
+                                required
+                            >
+                                <option value="category" id="category">
+                                    Category
+                                </option>
+                                <option value="gender" id="gender">
+                                    Gender
+                                </option>
+                                <option value="age" id="age">Age</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-sm-3">
+                            <label>Standard Price</label>
+                        </div>
+                        <div class="col col-sm-6">
+                            <input
+                                type="number"
+                                step="0.1"
+                                value=""
+                                id="STprice"
+                                class="form-control"
+                                name="stprices"
+                                required
+                            />
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-sm-3">
+                            <label>Price Per Word</label>
+                        </div>
+                        <div class="col col-sm-6">
+                            <input
+                                type="number"
+                                step="0.1"
+                                class="form-control"
+                                name="wprices"
+                                value=""
+                                id="Wprice"
+                                required
+                            />
+                        </div>
+                    </div>
+                    <input
+                        style="display: none"
+                        type="text"
+                        name="catidEdit"
+                        value=""
+                        id="editcatid"
+                    />
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button
+                        type="button"
+                        class="btn btn-default"
+                        data-dismiss="modal"
+                    >
+                        Close
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        Save changes
+                    </button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<!-- /.modal delete category-->
+
+<div class="modal fade" id="delcatmodal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Delete</h4>
+                <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/deletecategory" method="post">
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this category.</p>
+                    <input
+                        style="display: none"
+                        type="text"
+                        id="Catiddel"
+                        name="catiddel"
+                        value=""
+                    />
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button
+                        type="button"
+                        class="btn btn-default"
+                        data-dismiss="modal"
+                    >
+                        Close
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        Delete
+                    </button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+{% endblock %} {% block script %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+<script>
+
+    $('select').selectpicker();
+
+    function edit(id) {
+        var catid = id.split("_")[1];
+        $.ajax({
+            url: "/editcat",
+            type: "get",
+            data: {id: catid},
+            success: function (response) {
+                console.log(response)
+                if (response != "None") {
+                    document.getElementById('Catnames').value = response["Category Name"];
+                    document.getElementById('STprice').value = response["Standard Price"];
+                    document.getElementById('Wprice').value = response["Price per Word"];
+                    {#var key = response["Type"];#}
+                    {#document.getElementById(key).selected = "true";#}
+                    document.getElementById("catTypes").value = response["Type"];
+                    document.getElementById('editcatid').value = response["id"];
+                    $("#editcatmodal").modal();
+
+                } else {
+                    alert("No record found against this category id");
+                }
+
+
+            }
+        });
+
+    }
+
+
+    function del(id) {
+        var catid = id.split("_")[1];
+        document.getElementById('Catiddel').value = catid;
+        $("#delcatmodal").modal()
+    }
+
+
+    $(function () {
+
+        $('#cateTable').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+</script>
+
+{% endblock %}

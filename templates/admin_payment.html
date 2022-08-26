@@ -1,0 +1,147 @@
+{% extends "admin_layout.html" %}
+{% block title %}Payments{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block body %}
+    <section class="content">
+        <div class="container-fluid">
+            <div class="col-12 col-sm-12">
+                <div class="card card-primary card-outline card-outline-tabs">
+                    <div class="card-header p-0 border-bottom-0">
+                        <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill"
+                                   href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home"
+                                   aria-selected="true">All Payments</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        {% if error|length>1 %}
+                            <div class="form-group ">
+                                <div class="alert  alert-danger alert-dismissible fade show"
+                                     role="alert">
+                                    <span class="badge badge-pill badge-danger">Alert</span> {{ error }}
+                                    <button type="button" class="close" data-dismiss="alert"
+                                            aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if message != "" %}
+                            <div class="form-group ">
+                                <div class="alert alert-success alert-dismissible fade show"
+                                     role="alert">
+                                    <span class="badge badge-pill badge-success">Success</span> {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert"
+                                            aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                        {% endif %}
+                        <div class="tab-content" id="custom-tabs-four-tabContent">
+                            <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel"
+                                 aria-labelledby="custom-tabs-four-home-tab">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Payment History</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <table id="payment" class="table table-bordered table-hover">
+                                            <thead>
+                                            <tr>
+                                                {% for label in titles %}
+                                                    <th>{{ label }}</th>
+                                                {% endfor %}
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% if arg_type == "buyers" %}
+                                                {% for buyer in buyer_data %}
+                                                    {% if buyer['projects']["paymentStatus"] == "paid" %}
+                                                        {% for bid in bidding_data %}
+                                                            {% if bid["buyer_id"] == buyer["_id"] and buyer['projects']["project_id"] == bid["project_id"] %}
+
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                        <tr>
+                                                            <td>{{ loop.index }}</td>
+                                                            <td>{{ buyer['projects']["project_name"] }}</td>
+                                                            <td>{{ buyer['projects']["project_description"] }}</td>
+                                                            <td>{{ buyer['projects']["project_deadline"][0] }}</td>
+                                                            <td>$ {{ buyer['projects']["project_cost"] }}</td>
+                                                            <td>{{ buyer['projects']["status"] }}</td>
+                                                            <td style="text-align:center;">
+                                                                <button id="edit_{{ buyer['projects']['project_id'] }}_{{ buyer["_id"] }}"
+                                                                        class="item"
+                                                                        style="background: transparent;"
+                                                                        data-placement="top" title="View Details"
+                                                                        onclick="edit(this.id)">
+                                                                    <i class="fa fa-info-circle"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% elif arg_type == "actors" %}
+                                                {% for data in actor_data %}
+                                                    {% if data['_id']['message'] == "newplan" %}
+                                                    <tr>
+                                                        <td>{{ loop.index }}</td>
+                                                        <td>{{ data['_id']['actor_id'] }}</td>
+                                                        <td>{{ data['_id']['message'] }}</td>
+                                                        <td>{{ data['totalSaleAmount'] }}</td>
+                                                        <td>{{ data['_id']['status'] }}</td>
+                                                    </tr>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endif %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+{% endblock %}
+
+{% block script %}
+    <script>
+
+        function edit(id) {
+            var idActor = id.toString().split('_')[2];
+            var date = new Date();
+            date.setTime(date.getTime() + (1 * 1 * 60 * 60 * 1000));
+            document.cookie = "idActor = " + idActor + "; expires=" + date.toGMTString();
+            window.location.href = "/admin/buyer-detail";
+        }
+
+        $(function () {
+
+            $('#payment').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
+{% endblock %}

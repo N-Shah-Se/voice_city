@@ -1,0 +1,1210 @@
+{% extends "admin_layout.html" %} {% block title %}Buyers{% endblock %} {% block
+head %} {{ super() }}
+<style>
+    .btn-success1 {
+        background: #343a40 !important;
+        color: white !important;
+    }
+
+    .verticleLine1 {
+        margin-left: 15px;
+        border-left: thin solid #000000;
+    }
+
+    .divClass {
+        color: white !important;
+        background: #343a40;
+        font-size: 15px;
+        transition: 0.7s;
+        border: 1px solid black;
+        margin-bottom: 10px;
+        border-radius: 10px;
+    }
+</style>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css"
+/>
+{% endblock %} {% block body %}
+<section class="content">
+    <div class="container-fluid">
+        <div class="col-12 col-sm-12">
+            {% if error|length>1 %}
+            <div class="form-group">
+                <div
+                    class="alert alert-danger alert-dismissible fade show"
+                    role="alert"
+                >
+                    <span class="badge badge-pill badge-danger">Alert</span> {{
+                    error }}
+                    <button
+                        type="button"
+                        class="close"
+                        data-dismiss="alert"
+                        aria-label="Close"
+                    >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            {% endif %} {% if message != "" %}
+            <div class="form-group">
+                <div
+                    class="alert alert-success alert-dismissible fade show"
+                    role="alert"
+                >
+                    <span class="badge badge-pill badge-success">Success</span>
+                    {{ message }}
+                    <button
+                        type="button"
+                        class="close"
+                        data-dismiss="alert"
+                        aria-label="Close"
+                    >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            {% endif %}
+            <div class="card card-primary card-outline card-outline-tabs">
+                <div class="card-header p-0 border-bottom-0">
+                    <ul
+                        class="nav nav-tabs"
+                        id="custom-tabs-four-tab"
+                        role="tablist"
+                    >
+                        <li class="nav-item">
+                            <a
+                                class="nav-link active"
+                                id="custom-tabs-four-home-tab"
+                                data-toggle="pill"
+                                href="#custom-tabs-four-home"
+                                role="tab"
+                                aria-controls="custom-tabs-four-home"
+                                aria-selected="true"
+                                >Detail</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                id="custom-tabs-four-profile-tab"
+                                data-toggle="pill"
+                                href="#custom-tabs-four-profile"
+                                role="tab"
+                                aria-controls="custom-tabs-four-profile"
+                                aria-selected="false"
+                                >Offer Received</a
+                            >
+                        </li>
+
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                id="custom-tabs-four-sentoffer-tab"
+                                data-toggle="pill"
+                                href="#custom-tabs-four-sentoffer"
+                                role="tab"
+                                aria-controls="custom-tabs-four-sentoffer"
+                                aria-selected="false"
+                                >Offer Sent</a
+                            >
+                        </li>
+
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                id="custom-tabs-four-working-tab"
+                                data-toggle="pill"
+                                href="#custom-tabs-four-working"
+                                role="tab"
+                                aria-controls="custom-tabs-four-working"
+                                aria-selected="false"
+                                >Working</a
+                            >
+                        </li>
+
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                id="custom-tabs-four-messages-tab"
+                                data-toggle="pill"
+                                href="#custom-tabs-four-messages"
+                                role="tab"
+                                aria-controls="custom-tabs-four-messages"
+                                aria-selected="false"
+                                >Payment</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                id="custom-tabs-four-settings-tab"
+                                data-toggle="pill"
+                                href="#custom-tabs-four-settings"
+                                role="tab"
+                                aria-controls="custom-tabs-four-settings"
+                                aria-selected="false"
+                                >Files</a
+                            >
+                        </li>
+
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                id="custom-tabs-four-reviews-tab"
+                                data-toggle="pill"
+                                href="#custom-tabs-four-reviews"
+                                role="tab"
+                                aria-controls="custom-tabs-four-reviews"
+                                aria-selected="false"
+                                >Reviews</a
+                            >
+                        </li>
+
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                id="custom-tabs-four-order-tab"
+                                data-toggle="pill"
+                                href="#custom-tabs-four-order"
+                                role="tab"
+                                aria-controls="custom-tabs-four-order"
+                                aria-selected="false"
+                                >Order</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card-body">
+                    <div class="tab-content" id="custom-tabs-four-tabContent">
+                        <div
+                            class="tab-pane fade show active"
+                            id="custom-tabs-four-home"
+                            role="tabpanel"
+                            aria-labelledby="custom-tabs-four-home-tab"
+                        >
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Project Detail</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <div class="row mt-4 mb-4">
+                                        <div class="col-sm-4 mb-3">
+                                            <div class="text-center">
+                                                <p
+                                                    class="fa fa-language jobicon2"
+                                                >
+                                                    <span class="pl-4"
+                                                        >Language</span
+                                                    >
+                                                </p>
+                                                <div class="row">
+                                                    {% for language in
+                                                    project_details["projects"][0]["project_language"]
+                                                    %}
+                                                    <div
+                                                        class="col-sm-5 offset-md-1 divClass"
+                                                    >
+                                                        {{ language }}
+                                                    </div>
+
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="verticleLine"></div>
+                                        <div class="col-sm-4 mb-3">
+                                            <div class="text-center">
+                                                <p
+                                                    class="fa fa-language jobicon2"
+                                                >
+                                                    <span class="pl-4"
+                                                        >Accents</span
+                                                    >
+                                                </p>
+                                                <div class="row">
+                                                    {% for accent in
+                                                    project_details["projects"][0]["project_accent"]
+                                                    %}
+                                                    <div
+                                                        class="col-sm-5 offset-md-1 divClass"
+                                                    >
+                                                        {{ accent }}
+                                                    </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="verticleLine"></div>
+                                        <div class="col-sm-4 mb-3">
+                                            <div class="text-center">
+                                                <p
+                                                    class="fa fa-language jobicon2"
+                                                >
+                                                    <span class="pl-4"
+                                                        >Age</span
+                                                    >
+                                                </p>
+                                                <div class="row">
+                                                    {% for category in cat_data
+                                                    %} {% if category['Type'] ==
+                                                    'age' %} {% if
+                                                    category["_id"]|string in
+                                                    project_details["projects"][0]["project_gender_age"]
+                                                    %}
+                                                    <div
+                                                        class="col-sm-5 offset-md-1 divClass"
+                                                    >
+                                                        {{ category["Category
+                                                        Name"]|capitalize }}
+                                                    </div>
+                                                    {% endif %} {% endif %} {%
+                                                    endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4 mb-3">
+                                            <div class="text-center">
+                                                <p
+                                                    class="fa fa-language jobicon2"
+                                                >
+                                                    <span class="pl-4"
+                                                        >Gender</span
+                                                    >
+                                                </p>
+                                                <div class="row">
+                                                    {% for category in cat_data
+                                                    %} {% if category['Type'] ==
+                                                    'gender' %} {% if
+                                                    category["_id"]|string in
+                                                    project_details["projects"][0]["project_gender_age"]
+                                                    %}
+                                                    <div
+                                                        class="col-sm-5 offset-md-1 divClass"
+                                                    >
+                                                        {{ category["Category
+                                                        Name"]|capitalize }}
+                                                    </div>
+                                                    {% endif %} {% endif %} {%
+                                                    endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 mb-3">
+                                            <div class="text-center">
+                                                <p
+                                                    class="fa fa-language jobicon2"
+                                                >
+                                                    <span class="pl-4"
+                                                        >Category</span
+                                                    >
+                                                </p>
+                                                <div class="row">
+                                                    {% for category in cat_data
+                                                    %} {% if category['Type'] ==
+                                                    'category' %} {% if
+                                                    category["_id"]|string in
+                                                    project_details["projects"][0]["project_gender_age"]
+                                                    %}
+                                                    <div
+                                                        class="col-sm-5 offset-md-1 divClass"
+                                                    >
+                                                        {{ category["Category
+                                                        Name"]|capitalize }}
+                                                    </div>
+                                                    {% endif %} {% endif %} {%
+                                                    endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 mb-3">
+                                            <div class="text-center">
+                                                <p
+                                                    class="fa fa-language jobicon2"
+                                                >
+                                                    <span class="pl-4"
+                                                        >Script</span
+                                                    >
+                                                </p>
+                                                <p class="">
+                                                    {{
+                                                    project_details["projects"][0]["project_length"]
+                                                    }} {{
+                                                    project_details["projects"][0]["project_length_type"]
+                                                    }}
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4 mb-3">
+                                            <div class="text-center">
+                                                <p
+                                                    class="fa fa-language jobicon2"
+                                                >
+                                                    <span class="pl-4"
+                                                        >Deadline</span
+                                                    >
+                                                </p>
+                                                <p class="">
+                                                    {{
+                                                    project_details["projects"][0]["project_deadline"][0]
+                                                    }}
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4 mb-3">
+                                            <div class="text-center">
+                                                <p
+                                                    class="fa fa-language jobicon2"
+                                                >
+                                                    <span class="pl-4"
+                                                        >Cost</span
+                                                    >
+                                                </p>
+                                                <p class="">
+                                                    $ {{
+                                                    project_details["projects"][0]["project_cost"]
+                                                    }}
+                                                    <span>
+                                                        ({{
+                                                        project_details["projects"][0]["project_budget"]
+                                                        }})</span
+                                                    >
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4 mb-3">
+                                            <div class="text-center">
+                                                <p
+                                                    class="fa fa-language jobicon2"
+                                                >
+                                                    <span class="pl-4"
+                                                        >Posted Date</span
+                                                    >
+                                                </p>
+                                                <p class="">
+                                                    {{
+                                                    project_details["projects"][0]["timestamp"].strftime('%d
+                                                    %b,%Y (%H:%M)') }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% if
+                                    project_details["projects"][0]["status"] ==
+                                    "draft" %}
+
+                                    <div class="row mt-4 mb-4">
+                                        <div class="col-sm-4 mb-3">
+                                            <div class="text-center pl-4">
+                                                <button
+                                                    id="{{idBuyer}},{{project_details["projects"][0]["project_id"]}},posted"
+                                                    onclick="sentAcceptOffer(this.id)"
+                                                    type="button"
+                                                    name="posted"
+                                                    class="btn btn-primary mt-2 ml-1"
+                                                >
+                                                    Accept
+                                                </button>
+                                                <button
+                                                    id="{{idBuyer}},{{project_details["projects"][0]["project_id"]}},cancelled"
+                                                    onclick="sentAcceptOffer(this.id)"
+                                                    type="button"
+                                                    name="cancelled"
+                                                    class="btn btn-danger mt-2 ml-1"
+                                                >
+                                                    Reject
+                                                </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    {% endif %}
+                                    <div class="col-sm-4 mb-3">
+                                            <div class="text-center">
+                                                <button
+                                                    id="{{idBuyer}},{{project_details["projects"][0]["project_id"]}},deleted"
+                                                    onclick="sentAcceptOffer(this.id)"
+                                                    type="button"
+                                                    name="deleted"
+                                                    class="btn btn-danger mt-2 ml-1"
+                                                >
+                                                    Delete
+                                                </button>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {#Response#}
+                        <div
+                            class="tab-pane fade"
+                            id="custom-tabs-four-profile"
+                            role="tabpanel"
+                            aria-labelledby="custom-tabs-four-profile-tab"
+                        >
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Responses</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    {% if
+                                    project_details["projects"][0]["responses"]|length
+                                    == 0 %}
+                                    <p class="divcenter font-weight-bold">
+                                        No Responses Received
+                                    </p>
+                                    {% else %} {% if
+                                    project_details["projects"][0]["responses"]|length
+                                    >= 1 %} {% for response in
+                                    project_details["projects"][0]["responses"]
+                                    %}
+                                    <div class="border rounder pl-4 py-3 px-4">
+                                        <div class="row form-group">
+                                            <div class="col-sm-6">
+                                                <div class="row">
+                                                    <h3>
+                                                        {{
+                                                        response["actor_name"]
+                                                        }}
+                                                    </h3>
+                                                </div>
+                                                <div class="row">
+                                                    <p>
+                                                        {{
+                                                        response["actor_description"]
+                                                        }}
+                                                    </p>
+                                                </div>
+                                                <div class="row">
+                                                    <p class="jobno1">
+                                                        Completion Time:
+                                                        <span class="postdate"
+                                                            >{% if
+                                                            response["job_complete"]
+                                                            %} {{
+                                                            (response["job_complete"]|string)
+                                                            }}{% endif %}</span
+                                                        >
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <div class="row">
+                                                    <select
+                                                        id="selection"
+                                                        name="projectGenderAge"
+                                                        class="selectpicker postjobinput1 form-control"
+                                                        data-live-search="true"
+                                                    >
+                                                        {% for sampal in
+                                                        response["playlist"] %}
+                                                        <audio controls>
+                                                            <option
+                                                                value="static/samples/{{ sampal }}"
+                                                            >
+                                                                {{ loop.index
+                                                                }}. {{ sampal }}
+                                                                {#
+                                                                <source
+                                                                    src="static/samples/{{ sampal }}"
+                                                                    #}
+                                                                    {#
+                                                                    type="audio/mpeg"
+                                                                />
+                                                            </option>
+                                                            #}
+                                                        </audio>
+                                                        {#
+                                                        <option
+                                                            value="{{ sampal }}"
+                                                        >
+                                                            {{ sampal }}
+                                                        </option>
+                                                        #} {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <br />
+                                                <div class="row">
+                                                    <audio
+                                                        id="player"
+                                                        controls="controls"
+                                                    >
+                                                        <source
+                                                            id="mp3_src"
+                                                            src='static/samples/{{ response["playlist"][0] }}'
+                                                            type="audio/mp3"
+                                                        />
+                                                        Your browser does not
+                                                        support the audio
+                                                        element.
+                                                    </audio>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-1"></div>
+                                            <div class="col-sm-2">
+                                                <div
+                                                    class="row form-group"
+                                                    style="padding-top: 40px"
+                                                >
+                                                    <a
+                                                        href="/admin/actor-detail?idd={{ response['_id'] }}"
+                                                    >
+                                                        <button
+                                                            type="button"
+                                                            class="btn btn-success1"
+                                                        >
+                                                            Profile
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %} {% endif %} {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        {#sentoffer#}
+                        <div
+                            class="tab-pane fade"
+                            id="custom-tabs-four-sentoffer"
+                            role="tabpanel"
+                            aria-labelledby="custom-tabs-four-profile-tab"
+                        >
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Offer Sent</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    {% if
+                                    project_details["projects"][0]["acceptOffers"]|length
+                                    == 0 %}
+                                    <p class="divcenter font-weight-bold">
+                                        No offer sent
+                                    </p>
+                                    {% else %} {% if
+                                    project_details["projects"][0]["acceptOffers"]|length
+                                    >= 1 %} {% for response in
+                                    project_details["projects"][0]["acceptOffers"]
+                                    %} {% for bidding in bid_data %} {% if
+                                    bidding["actor_id"]|string ==
+                                    response["actor_id"]|string and
+                                    bidding["project_id"]|string ==
+                                    project_details["projects"][0]["project_id"]|string
+                                    %} {% if bidding["offeraccpt"]["status"] ==
+                                    "pending" %}
+                                    <div class="border rounder pl-4 py-3 px-4">
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <div class="row">
+                                                    <h3>
+                                                        {{ response["_id"] }}
+                                                    </h3>
+                                                </div>
+                                                <div class="row">
+                                                    <label>Date</label>
+                                                    <input class="form-control"
+                                                    readonly value="{{
+                                                    response["timestamp"].strftime("%d
+                                                    %b, %Y (%H:%M)") }}"> {#
+                                                    <p>
+                                                        {{
+                                                        response["timestamp"].strftime("%d
+                                                        %b, %Y (%H:%M)") }}
+                                                    </p>
+                                                    #}
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <div class="row"></div>
+                                            </div>
+
+                                            <div class="col-sm-2">
+                                                <div class="row">
+                                                    <h3>
+                                                        {{ response["_id"] }}
+                                                    </h3>
+                                                </div>
+                                                <div class="row">
+                                                    <label>Status</label>
+                                                    <input
+                                                        class="form-control"
+                                                        readonly
+                                                        value="{{ response['acceptStatus'] }}"
+                                                    />
+                                                    {#
+                                                    <p>
+                                                        {{
+                                                        response['acceptStatus']
+                                                        }}
+                                                    </p>
+                                                    #}
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-1"></div>
+                                            <div class="col-sm-2">
+                                                <div class="row">
+                                                    <h3>
+                                                        {{ response["_id"] }}
+                                                    </h3>
+                                                </div>
+                                                <div class="row">
+                                                    <p>View Actor</p>
+                                                </div>
+                                                <div class="row">
+                                                    <a
+                                                        href="/actor-profile?id={{ response['actor_id'] }}"
+                                                    >
+                                                        <button
+                                                            type="button"
+                                                            class="btn btn-secondary"
+                                                        >
+                                                            Profile
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <div class="row">
+                                                    <h3>
+                                                        {{ response["_id"] }}
+                                                    </h3>
+                                                </div>
+                                                <div class="row">
+                                                    <label
+                                                        >Chat with Actor</label
+                                                    >
+                                                </div>
+                                                <div class="row">
+                                                    <a
+                                                        href="/chat?actorid={{ response['actor_id'] }}"
+                                                    >
+                                                        <button
+                                                            type="button"
+                                                            class="btn btn-secondary"
+                                                        >
+                                                            Chat
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %} {% endif %} {% endfor %} {%
+                                    endfor %} {% endif %} {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        {#working#}
+                        <div
+                            class="tab-pane fade"
+                            id="custom-tabs-four-working"
+                            role="tabpanel"
+                            aria-labelledby="custom-tabs-four-profile-tab"
+                        >
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Progress</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    {% if
+                                    project_details["projects"][0]["acceptOffers"]|length
+                                    == 0 %}
+                                    <p class="divcenter font-weight-bold">
+                                        No job in progress
+                                    </p>
+                                    {% else %} {% if
+                                    project_details["projects"][0]["acceptOffers"]|length
+                                    >= 1 %} {% for response in
+                                    project_details["projects"][0]["acceptOffers"]
+                                    %} {% for bidding in bid_data %} {% if
+                                    bidding["actor_id"]|string ==
+                                    response["actor_id"]|string and
+                                    bidding["project_id"]|string ==
+                                    project_details["projects"][0]["project_id"]|string
+                                    %}
+                                    <div class="border rounder pl-4 py-3 px-4">
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <div class="row">
+                                                    <label>Accept Time</label>
+                                                    <input class="form-control"
+                                                    readonly value="{{
+                                                    bidding["offeraccpt"]["accepttime"].strftime("%d
+                                                    %b, %Y (%H:%M)") }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <div class="row"></div>
+                                            </div>
+
+                                            <div class="col-sm-2">
+                                                <div class="row">
+                                                    <label>Status</label>
+                                                    <input class="form-control"
+                                                    readonly value="{{
+                                                    bidding['offeraccpt']["status"]
+                                                    }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-1"></div>
+                                            <div class="col-sm-2">
+                                                <div class="row">
+                                                    <label>View Actor</label>
+                                                </div>
+                                                <div class="row">
+                                                    <a
+                                                        target="_blank"
+                                                        href="/admin/actor-detail?idd={{ response['actor_id'] }}"
+                                                    >
+                                                        <button
+                                                            type="button"
+                                                            class="btn btn-success1"
+                                                        >
+                                                            Profile
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <div class="row">
+                                                    <label>Show Chat</label>
+                                                </div>
+                                                <div class="row">
+                                                    <a
+                                                        target="_blank"
+                                                        href="/chat?actorid={{ response['actor_id'] }}"
+                                                    >
+                                                        <button
+                                                            type="button"
+                                                            class="btn btn-success1"
+                                                        >
+                                                            Chat
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %} {% endfor %} {% endfor %} {%
+                                    endif %} {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        {#Payments#}
+                        <div
+                            class="tab-pane fade"
+                            id="custom-tabs-four-messages"
+                            role="tabpanel"
+                            aria-labelledby="custom-tabs-four-messages-tab"
+                        >
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Payments</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    {% if
+                                    project_details["projects"][0]["paymentStatus"]
+                                    == 'unpaid' %}
+                                    <p class="divcenter font-weight-bold">
+                                        No Payments Yet
+                                    </p>
+                                    {% else %} {% if
+                                    project_details["projects"][0]["paymentDetail"]
+                                    %}
+                                    <div class="row form-group pl-3 py-3 px-3">
+                                        <div class="col-sm-5">
+                                            <label>Date</label>
+                                            <input class="form-control" readonly
+                                            value="{{
+                                            project_details["projects"][0]["paymentDetail"]["timestamp"].strftime("%d
+                                            %b, %Y (%H:%M)") }}"> {# <input
+                                            class="form-control" readonly#} {#
+                                            value="{{
+                                            project_details["projects"][0]["project_payments"]["date"].strftime('%d
+                                            %b,%Y (%H:%M)') }}">#}
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label>Amount</label>
+                                            <input class="form-control" readonly
+                                            value="$ {{
+                                            project_details["projects"][0]["paymentDetail"]["amount"]
+                                            }}"> {#
+                                            <p>
+                                                {{
+                                                project_details["projects"][0]["project_payments"]["amount"]
+                                                }}
+                                            </p>
+                                            #}
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label>Payment Status</label>
+                                            <input
+                                                class="form-control"
+                                                readonly
+                                                value="Paid"
+                                            />
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label>Job Status</label>
+                                            <input class="form-control" readonly
+                                            value="{{
+                                            project_details["projects"][0]["status"]
+                                            }}"> {#
+                                            <p>
+                                                {{
+                                                project_details["projects"][0]["project_payments"]["deliverstatus"]
+                                                }}
+                                            </p>
+                                            #}
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    <p class="divcenter font-weight-bold">
+                                        No Payments Transfer
+                                    </p>
+                                    {% endif %} {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        {#Files#}
+                        <div
+                            class="tab-pane fade"
+                            id="custom-tabs-four-settings"
+                            role="tabpanel"
+                            aria-labelledby="custom-tabs-four-settings-tab"
+                        >
+                            {% set a = namespace(value=0) %} {% if
+                            project_details["projects"][0]["script"] %} {% set
+                            a.value = a.value + 1 %}
+                            <label>Script for voice over</label>
+                            <p>
+                                {{ project_details["projects"][0]["script"] }}
+                            </p>
+                            {% endif %} {% if
+                            project_details["projects"][0]["script"] %} {% set
+                            a.value = a.value + 1 %}
+                            <label>Attached script file for voiceover</label>
+                            <p>
+                                {{ project_details["projects"][0]["script file"]
+                                }}
+                            </p>
+                            {% endif %} {% if a.value == 0 %}
+                            <p>No file or script attached for this project.</p>
+                            {% endif %}
+                        </div>
+
+                        {#Review#}
+                        <div
+                            class="tab-pane fade"
+                            id="custom-tabs-four-reviews"
+                            role="tabpanel"
+                            aria-labelledby="custom-tabs-four-settings-tab"
+                        >
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Reviews</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    {% set a = namespace(value=0) %} {% if
+                                    project_details["projects"][0]["script"] %}
+                                    {% set a.value = a.value + 1 %}
+                                    <label>Script for voice over</label>
+                                    <p>
+                                        {{
+                                        project_details["projects"][0]["script"]
+                                        }}
+                                    </p>
+                                    {% endif %} {% if
+                                    project_details["projects"][0]["script"] %}
+                                    {% set a.value = a.value + 1 %}
+                                    <label
+                                        >Attached script file for
+                                        voiceover</label
+                                    >
+                                    <p>
+                                        {{
+                                        project_details["projects"][0]["script
+                                        file"] }}
+                                    </p>
+                                    {% endif %} {% if a.value == 0 %}
+                                    <p>No reviews.</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        {#order#}
+                        <div
+                            class="tab-pane fade"
+                            id="custom-tabs-four-order"
+                            role="tabpanel"
+                            aria-labelledby="custom-tabs-four-settings-tab"
+                        >
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Order</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    {% set a = namespace(value=0) %} {% for
+                                    response in
+                                    project_details["projects"][0]["acceptOffers"]
+                                    %} {% for bidding in bid_data %} {% if
+                                    bidding["actor_id"]|string ==
+                                    response["actor_id"]|string and
+                                    bidding["project_id"]|string ==
+                                    project_details["projects"][0]["project_id"]|string
+                                    %} {% if bidding["offeraccpt"]["status"] ==
+                                    "accepted" %} {% set a.value = a.value + 1
+                                    %}
+                                    <div class="border rounder pl-4 py-3 px-4">
+                                        <div class="row form-group">
+                                            <div class="col-sm-6 text-left">
+                                                <h3
+                                                    class="align-content-center"
+                                                >
+                                                    Order Created
+                                                </h3>
+                                                <label class="align-content-"
+                                                    >Date & Time: {{
+                                                    bidding["offeraccpt"]["timestamp"].strftime('%d
+                                                    %b, %Y (%H:%M)') }}</label
+                                                >
+                                                <br />
+                                                <label>Project: </label
+                                                ><label>
+                                                    {{
+                                                    project_details["projects"][0]["project_name"]
+                                                    }}</label
+                                                >
+                                                <br />
+                                                <label>Actor: </label
+                                                ><label>
+                                                    {{
+                                                    project_details["projects"][0]["project_name"]
+                                                    }}</label
+                                                >
+                                            </div>
+                                            <div>
+                                                <div class="col-sm-6 text-left">
+                                                    <div class="row form-group">
+                                                        <h2></h2>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <p>
+                                                            Budget: $ {{
+                                                            project_details["projects"][0]["project_cost"]
+                                                            }}
+                                                        </p>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <p>
+                                                            Deadline: $ {{
+                                                            project_details["projects"][0]["project_deadline"][0]
+                                                            }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="border rounder pl-4 py-3 px-4">
+                                        <div class="row form-group">
+                                            <div class="col-sm-5"></div>
+                                            <div class="col-sm-7 text-right">
+                                                <h3
+                                                    class="align-content-center"
+                                                >
+                                                    Order Accept
+                                                </h3>
+                                                <label
+                                                    class="align-content-center"
+                                                    >Date & Time: {{
+                                                    bidding["offeraccpt"]["accepttime"].strftime('%d
+                                                    %b, %Y (%H:%M)') }}</label
+                                                >
+                                            </div>
+                                            <div></div>
+                                        </div>
+                                    </div>
+                                    {% if bidding["revisions"] %} {% for
+                                    eachrevision in bidding["revisions"] %} {%
+                                    if eachrevision["response"] == "buyer" %}
+                                    <div class="border rounder pl-4 py-3 px-4">
+                                        <div class="row form-group">
+                                            <div class="col-sm-12 text-left">
+                                                <h3
+                                                    class="align-content-center"
+                                                >
+                                                    Revision
+                                                </h3>
+                                                <p>
+                                                    Date & Time: {{
+                                                    eachrevision["timestamp"].strftime('%d
+                                                    %b, %Y (%H:%M)') }}
+                                                </p>
+                                                <p>
+                                                    Message: {{
+                                                    eachrevision["message"] }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% elif eachrevision["response"] == "actor"
+                                    %}
+                                    <div class="border rounder pl-4 py-3 px-4">
+                                        <div class="row form-group">
+                                            <div class="col-sm-12 text-right">
+                                                <h3
+                                                    class="align-content-center"
+                                                >
+                                                    Response
+                                                </h3>
+                                                <p>
+                                                    Date & Time: {{
+                                                    eachrevision["timestamp"].strftime('%d
+                                                    %b, %Y (%H:%M)') }}
+                                                </p>
+                                                <p>
+                                                    Message: {{
+                                                    eachrevision["message"] }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %} {% endfor %} {% endif %} {% if
+                                    bidding["offeraccpt"]["status"] ==
+                                    "completd" %}
+                                    <div class="border rounder pl-4 py-3 px-4">
+                                        <h2 class="text-center">
+                                            Review (Rating)
+                                        </h2>
+                                        <div class="row form-group text-center">
+                                            <div class="col-sm-3">
+                                                <p>Comment:</p>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <p>
+                                                    {{
+                                                    bidding["reviews"]["commnet"]
+                                                    }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group text-center">
+                                            <div class="col-sm-3">
+                                                <p>Rating:</p>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <p>
+                                                    {{
+                                                    bidding["reviews"]["rating"]
+                                                    }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %} {% endif %} {% endif %} {%
+                                    endfor %} {% endfor %} {% if a.value == 0 %}
+                                    <p class="divcenter font-weight-bold">
+                                        No Messages Received
+                                    </p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- /.card -->
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} {% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#selection").on("change", function () {
+            change($(this).val());
+        });
+    });
+
+    function change(sourceUrl) {
+        var audio = document.getElementById("player");
+        var source = document.getElementById("mp3_src");
+
+        audio.pause();
+
+        if (sourceUrl) {
+            source.src = sourceUrl;
+            audio.load();
+            audio.play();
+        }
+    }
+
+    function changetab() {
+        // first remove the active class from all the nav-links
+        $("#Responses").removeClass("active");
+        // then apply active class on the target nav-link's id
+        $("#Messages").addClass("active");
+
+        $("Responses").removeClass("show active");
+        $("Messages").addClass("show active");
+    }
+            function sentAcceptOffer(id) {
+            var a = document.getElementsByName("deleted")[0].disabled = true;
+            if (document.getElementsByName("posted").length > 0)
+            {
+            var b = document.getElementsByName("posted")[0].disabled = true;
+            var c = document.getElementsByName("cancelled")[0].disabled = true; 
+            }
+            var prjId = id.toString().split(",")[1]
+            var byrId = id.toString().split(",")[0]
+            var action = id.toString().split(",")[2]
+            jQuery.ajax({
+                type: 'POST',
+                url: '/change-job-status',
+                data: {
+                    project_Id: prjId,
+                    buyer_Id: byrId,
+                    action: action,
+                },
+                success: function (response) {
+                    if (response["success"] == true) {
+                        window.location.href = "/admin/buyers-projets"
+                    } else {
+                        console.log(response)
+                        document.getElementsByName("deleted")[0].disabled = false;
+                                    if (document.getElementsByName("posted").length > 0)
+{
+                        document.getElementsByName("posted")[0].disabled = false;
+                        document.getElementsByName("cancelled")[0].disabled = false; 
+}
+                        alert(response["error"])
+                    }
+                }
+            });
+
+        }
+</script>
+{% endblock %}

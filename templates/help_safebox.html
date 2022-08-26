@@ -1,0 +1,122 @@
+{% extends "layout.html" %} {% block title %}Actors{% endblock %} {% block head
+%} {{ super() }}
+<link
+    rel="stylesheet"
+    href='{{ url_for("static", filename="css/floating.css") }}'
+/>
+{% endblock %} {% block body %}
+<link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+/>
+
+<div class="container mt-1 mb-5">
+    <p class="h1">
+        How does the Secure Payment (SafeBox) method work for clients?
+    </p>
+    <p class="h5 font-weight-light">
+        Voicescity has rolled out a Secure Payment (SafeBox) system Called
+        SafeBox where Voicescity acts as a guarantor for the transaction.
+    </p>
+    <p class="h5 font-weight-light">
+        The service is absolutely free and is applied to every job.
+    </p>
+    <p class="h5 font-weight-light">
+        This means that we won’t subtract any funds from the amount the voice
+        actor has agreed to and we will send them the full amount.
+    </p>
+    <p class="h5 font-weight-light">It will be a simple 4 step system:</p>
+    <ol>
+        <li class="h5 font-weight-light">
+            The client posts a job and then voiceover actors can start bidding
+            on the job. Voicescity will then start to manage the transaction
+            until the final recording is accepted.
+        </li>
+        <li class="h5 font-weight-light">
+            As soon as the client wants to award the project to the actor, the
+            client transfers the payment to Voicescity.
+        </li>
+        <li class="h5 font-weight-light">
+            Afterwards, A mutual agreement is accepted by both the parties.
+        </li>
+        <li class="h5 font-weight-light">
+            Voicescity holds the payment in SafeBox until the final recording is
+            accepted. Voicescity then releases it to the voice actor
+        </li>
+    </ol>
+    <p class="h3">The benefits of using Secure Payment (SafeBox)</p>
+    <ul>
+        <li class="h5 font-weight-light">
+            A secure and trusted third-party to manage your payments.
+        </li>
+        <li class="h5 font-weight-light">
+            Guaranteed service and minimum hassle.
+        </li>
+        <li class="h5 font-weight-light">
+            Solves your problem of sending and receiving money worldwide
+        </li>
+    </ul>
+    <p class="h3">Frequently Asked Questions (FAQ)</p>
+    <ol>
+        <li class="h5 font-weight-light">
+            <strong> How do you enable Secure Payment (SafeBox)?</strong>
+        </li>
+
+        <ul>
+            <li class="h5 font-weight-light">
+                Secure Payment (SafeBox) will be enabled when you book a voice
+                actor. You can book a voice actor by following these steps:
+            </li>
+            <ol>
+                <li class="h5 font-weight-light">
+                    Open the selected voice actor's proposal and click HIRE
+                    VOICE ACTOR in the bottom right. It will generate the draft
+                    for the booking and update any direction, script changes, or
+                    details if necessary
+                </li>
+                <li class="h5 font-weight-light">
+                    Click Submit in the bottom right.
+                </li>
+            </ol>
+        </ul>
+        <li class="h5 font-weight-light">
+            <strong>How do you transfer the money to Voicescity?</strong>
+        </li>
+        <ul>
+            <li class="h5 font-weight-light">
+                You can pay via PayPal, Stripe, Paypro, credit card and debit
+                card to complete the payment please go to your booking and click
+                on the button where it says COMPLETE TRANSACTION
+            </li>
+            <li class="h5 font-weight-light">
+                If you're having any issues completing the payment please reach
+                out to us at
+                <a href="mailto:help@voicescity.com" style="color: blue"
+                    >help@voicescity.com</a
+                >
+                and we'll gladly follow up.
+            </li>
+        </ul>
+        <li class="h5 font-weight-light">
+            <strong
+                >What are the costs of using Secure Payment (SafeBox)?</strong
+            >
+        </li>
+        <ul>
+            <li class="h5 font-weight-light">
+                The service has no fee and this service is applied to each job.
+            </li>
+        </ul>
+        <li class="h5 font-weight-light">
+            <strong>When do you receive the final recording?</strong>
+        </li>
+        <ul>
+            <li class="h5 font-weight-light">
+                Voicescity will share the recording with you and you will be
+                able to review it before final acceptance.
+            </li>
+        </ul>
+    </ol>
+    <p><a href="/help" style="color: blue">Back to main menu</a></p>
+</div>
+{% endblock %}

@@ -1,0 +1,475 @@
+{% extends "layout.html" %}
+{% block title %}Home {% endblock %}
+{% block head %}
+    {{ super() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href='{{ url_for("static", filename="css/order.css") }}'/>
+<link rel="stylesheet" href='{{ url_for("static", filename="css/iconstyle.css") }}'>
+<link rel="stylesheet" href='{{ url_for("static", filename="css/floating.css") }}'>
+
+    <style>
+        .tab-content > .tab-pane {
+            border: none;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+       <div class="adminActions">
+        <input type="checkbox" name="adminToggle" class="adminToggle" />
+        <a class="adminButton floating" href="#!"><i class="fa fa-plus"></i></a>
+
+
+        <div class="adminButtons floating">
+            <a href="https://www.facebook.com/Voices-City-332687944647576/">
+                <i class="fa fa-facebook my-float"></i>
+            </a>
+            <a href="/contact-us#">
+                <i class="fa fa-google my-float"> </i></a>
+                <a href="https://twitter.com/VoicesCity2?s=08">
+                    <i class="fa fa-twitter my-float"></i>
+                </a>          
+                  <a href="https://www.instagram.com/invites/contact/?i=1m3jhaema7vre&utm_content=kwyjr4v">
+                    <i class="fa fa-instagram my-float"></i>
+                </a>
+                <a href="https://www.pinterest.com/voicescity/">
+                    <i class="fa fa-pinterest my-float"></i>
+                </a>
+                <a href="https://youtube.com/channel/UC4hbJ2BBcxvw_ffVdRpXWNA">
+                    <i class="fa fa-youtube my-float"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/voices-city-33990a205">
+                    <i class="fa fa-linkedin my-float"></i>
+                </a>
+                <a href="https://vm.tiktok.com/ZSJhu7dos/">
+                <i class="fa fa-tiktok my-float"></i>
+                </a>
+                <a href="https://sck.io/u/Tm3Udeow">
+                <i class="fa fa-snackvideo my-float"></i>
+                </a>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="container ">
+
+            <div class="row">
+
+                <div class="col-sm-5 mt-5">
+                    <p class="line-1-home  anim-typewriter">Asia's First Freelance Voice Over Marketplace
+                    </p>
+                    <p class="hometext2">
+                        Sign up in moments. Place your work for free. Access the World's finest expert voice artists.<br>
+                       
+                        Voices city is utilized by the World's greatest reliable brands
+
+                    </p>
+
+                    <a href="/signup">
+                        <button class="btn btn-dark btn1 ">Get Started Free</button>
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+    <div class="container mt-5 mb-5">
+        <p class="hometext4 text-center">How it is functioning </p>
+        <p class="hometext6 text-center pb-1">
+            Finding the perfect voice has never really been quicker or simpler
+        </p>
+
+
+        <ul class="nav justify-content-center" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link home-new-btn-1 active" id="pills-home-tab" data-toggle="pill" href="#pills-home"
+                   role="tab" aria-controls="pills-home" aria-selected="true">Post a Work </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link home-new-btn-1" id="pills-profile-tab" data-toggle="pill" href="#pills-profile"
+                   role="tab" aria-controls="pills-profile" aria-selected="false">Voice Actor</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link home-new-btn-1" id="pills-contact-tab" data-toggle="pill" href="#pills-contact"
+                   role="tab" aria-controls="pills-contact" aria-selected="false">Complete Project</a>
+            </li>
+        </ul>
+
+
+        <div class="tab-content pt-5" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-5 d-none">
+                        <img class="img-fluid w-75" src="static/img/home-submit-your-job.png" alt="First slide">
+                    </div>
+                    <div class="col-sm-5">
+                        <p class="hometext4 pt-5">Post a work</p>
+                        <p class="hometext5">
+                            Post your work for nothing in minutes, and our VoiceTie design will just welcome the best
+                            qualified voice artists for your work.
+                        </p>
+                    </div>
+                    <div class="col-sm-1"></div>
+
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-5 d-none">
+                        <img class="img-fluid w-75" src="static/img/home-select-the-voice-actor.png" alt="First slide">
+                    </div>
+                    <div class="col-sm-5">
+                        <p class="hometext4 pt-5">Select the Voice Actor
+                        </p>
+                        <p class="hometext5">
+
+                            Hire in one-click. While the final voice over files are being prepared, your payment will be
+                            held securely in our SafeBox system. Communications between you and the voice actor are kept
+                            confidential.</p>
+                    </div>
+                    <div class="col-sm-1"></div>
+
+                </div>
+
+            </div>
+            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-5 d-none">
+                        <img class="img-fluid w-75" src="static/img/home-complete-your-project.png" alt="First slide">
+                    </div>
+                    <div class="col-sm-5">
+                        <p class="hometext4 pt-5">Complete Your Project</p>
+                        <p class="hometext5">
+
+                            Once you're satisfied with the voice over and have received the final files, it's time to
+                            release your payment to the voice actor. Voila! All that's left is to launch your final
+                            project to the world. </p></div>
+                    <div class="col-sm-1"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="home-bg-black">
+        <div class="container mt-5 mb-5">
+            <div class="row">
+                <div class="col-md-6" style="
+    padding-top: 80px;
+">
+                    <p class="hometext4">Professional Voice Actors</p>
+                    <p class="hometext6 pb-3">
+                        Explore by category, role, vocal quality, and more to find your perfect voice</p>
+                    <a href="/actors">
+                        <button class="btn btn-success">Browse All Voice Actors
+                        </button>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <img src="static/img/professional-voice-actors-tablet.png" class="img-fluid">
+                </div>
+            </div>
+        </div>
+
+    </div>
+<div class="container mt-5 mb-5">
+        <p class="hometext4 text-center mb-5">Main Sectors </p>
+        <div class="row">
+            <div class="col-sm-3">
+                <a href="/main-sector?sector=Voice%20Over">
+                <div class="card">
+                    <div class="img">
+                        <img src="static/img/login/dubbing.png" class="img-fluid" alt="">
+                    </div>
+                    <div class="pera">
+                        <p>Voice Over</p>
+                    </div>
+                </div>
+            </a>
+            </div>
+            <div class="col-sm-3">
+                <a href="/main-sector?sector=Documentaries">
+
+                <div class="card-2">
+                    <div class="img">
+                        <img src="static/img/login/documentary.png" class="img-fluid" alt="">
+                    </div>
+                    <div class="pera">
+                        <p>Documentaries</p>
+                    </div>
+                </div>
+                </a>
+            </div>
+            <div class="col-sm-3">
+                <a href="/main-sector?sector=Commercials">
+
+                <div class="card">
+                    <div class="img">
+                        <img src="static/img/login/commercial.png" class="img-fluid" alt="">
+                    </div>
+                    <div class="pera">
+                        <p>Commercials </p>
+                    </div>
+                </div>
+                </a>
+            </div>
+            <div class="col-sm-3">
+                <a href="/main-sector?sector=Narration">
+
+                <div class="card-2">
+                    <div class="img">
+                        <img src="static/img/login/avatar.png" class="img-fluid" alt="">
+                    </div>
+                    <div class="pera">
+                        <p>Narration</p>
+                    </div>
+                </div>
+                </a>
+            </div>
+            <div class="col-sm-3">
+                <a href="/main-sector?sector=Audiobooks">
+
+                <div class="card-2">
+                    <div class="img">
+                        <img src="static/img/login/audiobook.png" class="img-fluid" alt="">
+                    </div>
+                    <div class="pera">
+                        <p>Audiobooks</p>
+                    </div>
+                </div>
+            </a>
+            </div>
+            <div class="col-sm-3">
+                <a href="/main-sector?sector=Gaming">
+
+                <div class="card">
+                    <div class="img">
+                        <img src="static/img/login/game-controller.png" class="img-fluid" alt="">
+                    </div>
+                    <div class="pera">
+                        <p>Gaming</p>
+                    </div>
+                </div>
+                </a>
+            </div>
+            <div class="col-sm-3">
+                <a href="/main-sector?sector=Podcasts">
+
+                <div class="card-2">
+                    <div class="img">
+                        <img src="static/img/login/podcast.png" class="img-fluid" alt="">
+                    </div>
+                    <div class="pera">
+                        <p>Podcasts</p>
+                    </div>
+                </div>
+                </a>
+            </div>
+            <div class="col-sm-3">
+                <a href="/main-sector?sector=IVRS">
+
+                <div class="card">
+                    <div class="img">
+                        <img src="static/img/login/ivr.png" class="img-fluid" alt="">
+                    </div>
+                    <div class="pera">
+                        <p>Ivrs</p>
+                    </div>
+                </div>
+                </a>
+            </div>
+            <div class="col-sm-3">
+                <a href="/main-sector?sector=Training%20and%20Explainer%20Videos">
+
+                <div class="card">
+                    <div class="img">
+                        <img src="static/img/login/education.png" class="img-fluid" alt="">
+                    </div>
+                    <div class="pera">
+                        <p>Training & Explainer Videos</p>
+                    </div>
+                </div>
+                </a>
+            </div>
+            <div class="col-sm-3">
+                <a href="/main-sector?sector=Animation%20Films%20and%20Series">
+
+                <div class="card-2">
+                    <div class="img">
+                        <img src="static/img/login/3d-movie.png" class="img-fluid" alt="">
+                    </div>
+                    <div class="pera">
+                        <p>Animation Films & Series</p>
+                    </div>
+                </div>
+            </a>
+
+            </div>
+            <div class="col-sm-3">
+                <a href="/main-sector?sector=Tv%20and%20Radio">
+
+                <div class="card">
+                    <div class="img">
+                        <img src="static/img/login/tv.png" class="img-fluid" alt="">
+                    </div>
+                    <div class="pera">
+                        <p>Television & Radio</p>
+                    </div>
+                </div>
+            </a>
+
+            </div>
+            <div class="col-sm-3">
+                <a href="/main-sector?sector=Dubbing%20Movies%20and%20Dramas">
+
+                <div class="card-2">
+                    <div class="img">
+                        <img src="static/img/login/clapperboard.png" class="img-fluid" alt="">
+                    </div>
+                    <div class="pera">
+                        <p>Dubbing Movies & Dramas</p>
+                    </div>
+                </div>
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    </div>
+    <hr class="mb-5" style="border-top: 2px solid rgb(0 0 0);">
+
+    <div class="container pb-4 pt-4">
+        <p class="hometext4 text-center">Professional Services </p>
+        <p class="hometext6 text-center pb-1">
+            If your project is complex, or you simply don't have the time, Voices City offers Professional
+            Services for end-to-end project completion support, including:</p>
+
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="border border-black px-2 py-2 mb-3 home-works-div-box-1 hover-1-div-1 text-center pt-3">
+                    <i class="fa fa-microphone how-its-work-icon-1"></i>
+                    <p class="h5 mb-1 pt-1">
+                        Help sourcing the most
+                        qualified voice talent</p>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="border border-black px-2 py-2 mb-3 home-works-div-box-1 hover-1-div-1 text-center pt-3">
+                    <i class="fa fa-user-md how-its-work-icon-1"></i>
+                    <p class="h5 mb-1 pt-1">
+                        Coordination of all project details
+                        with the various stakeholders</p>
+
+
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="border border-black px-2 py-2 mb-3 home-works-div-box-1 hover-1-div-1 text-center pt-3">
+                    <i class="fa fa-file how-its-work-icon-1"></i>
+                    <p class="h5 mb-1 pt-1">
+                        Support with NDAs, contracts, and
+                        other legal or vendor requirements
+                    </p>
+
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="border border-black px-2 py-2 mb-3 home-works-div-box-1 hover-1-div-1 text-center pt-3">
+                    <i class="fa fa-language how-its-work-icon-1"></i>
+                    <p class="h5 mb-1 pt-1">
+                        Management of translation
+                        and localization</p>
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+    {% block script %}
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                typing(0, $('.typewriter-text').data('text'));
+
+                function typing(index, text) {
+
+                    var textIndex = 1;
+
+                    var tmp = setInterval(function () {
+                        if (textIndex < text[index].length + 1) {
+                            $('.typewriter-text').text(text[index].substr(0, textIndex));
+                            textIndex++;
+                        } else {
+                            setTimeout(function () {
+                                deleting(index, text)
+                            }, 2000);
+                            clearInterval(tmp);
+                        }
+
+                    }, 150);
+
+                }
+
+                function deleting(index, text) {
+
+                    var textIndex = text[index].length;
+
+                    var tmp = setInterval(function () {
+
+                        if (textIndex + 1 > 0) {
+                            $('.typewriter-text').text(text[index].substr(0, textIndex));
+                            textIndex - 0;
+                        } else {
+                            index++;
+                            if (index == text.length) {
+                                index = 0;
+                            }
+                            typing(index, text);
+                            clearInterval(tmp);
+                        }
+
+                    }, 150)
+
+                }
+
+            });
+
+        </script>
+
+
+    {% endblock %}
+
+
+
+{% endblock %}

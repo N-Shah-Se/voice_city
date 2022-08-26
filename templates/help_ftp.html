@@ -1,0 +1,59 @@
+{% extends "layout.html" %} {% block title %}Actors{% endblock %} {% block head
+%} {{ super() }}
+<link
+    rel="stylesheet"
+    href='{{ url_for("static", filename="css/floating.css") }}'
+/>
+{% endblock %} {% block body %}
+<link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+/>
+
+<div class="container mt-1 mb-5">
+    <p class="h1">What is FTP, ISDN, Phone Patch, Source Connect or ipDTL?</p>
+    <p class="h5 font-weight-light">
+        Under Recording & Delivery Capabilities on your profile, you will find
+        numerous options for recording and delivering your performances to a
+        client.
+    </p>
+    <p class="h5 font-weight-light">
+        <strong>FTP</strong> is an acronym for File Transfer Protocol. As the
+        name suggests, FTP is used to transfer files between computers on a
+        network. You can use FTP to exchange/send files.
+    </p>
+    <p class="h5 font-weight-light">
+        Two very popular services you can use for sharing files are:
+    </p>
+    <ul>
+        <li class="h5 font-weight-light">
+            <strong>Dropbox:</strong> A file hosting service where you can store
+            and share files.
+        </li>
+        <li class="h5 font-weight-light">
+            <strong>Google Drive:</strong> A file storage and synchronization
+            service created by Google. It allows users to store files in the
+            cloud, share files, and edit documents, spreadsheets, and
+            presentations with collaborators. When you have a Gmail account, the
+            Google Drive option is free to use.
+        </li>
+    </ul>
+    <p class="h5 font-weight-light">
+        ISDN, Phone Patch, Source Connect, and ipDTL are all technologies that
+        allow for the client to listen in and direct performances live.
+    </p>
+    <p class="h5 font-weight-light">
+        <strong>ISDN</strong> and <strong>Phone Patch</strong> are the original
+        hardware-based technologies that run over traditional telephone lines,
+        with ISDN being the industry standard. The hardware is relatively
+        expensive but is still very common in the industry.
+    </p>
+    <p class="h5 font-weight-light">
+        <strong>Source Connect</strong> and <strong>ipDTL</strong> are
+        computer-based technologies that connect over the internet. Both can be
+        subscription-based, and ipDTL is even browser-based for added simplicity
+    </p>
+
+    <p><a href="/help" style="color: blue">Back to main menu</a></p>
+</div>
+{% endblock %}

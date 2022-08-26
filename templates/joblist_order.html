@@ -1,0 +1,610 @@
+{% extends "layout.html" %}
+{% block title %}Project Response{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href='{{ url_for("static", filename="css/order.css") }}'/>
+<link rel="stylesheet" href='{{ url_for("static", filename="css/floating.css") }}'>
+{% endblock %}
+{% block body %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+
+
+
+
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-sm-9">
+                <h3 class="pt-5">{{ project_details["projects"][0]["project_name"]|title }}</h3>
+                <span>(Job #428222)</span>
+                <p>{{ project_details["projects"][0]["project_description"] }}</p>
+            </div>
+        </div>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="Messages-tab" data-toggle="tab" href="#Messages" role="tab"
+                   aria-controls="Messages" aria-selected="false">Order</a>
+            </li>
+        </ul>
+
+
+        <div class="tab-content mt-2" id="myTabContent">
+
+
+            <div class="tab-pane fade show active" id="Messages" role="tabpanel" aria-labelledby="Messages-tab">
+                <div class="border ">
+                    <div class="container">
+                        {% set a = namespace(value=0) %}
+                        {% for response in project_details["projects"][0]["acceptOffers"] %}
+                            {% for bidding in bid_data %}
+                                {% if bidding["actor_id"]|string == response["actor_id"]|string and
+                            bidding["project_id"]|string == project_details["projects"][0]["project_id"]|string %}
+                                    {% if bidding["offeraccpt"]["status"] == "accepted" %}
+                                        {% set a.value = a.value + 1 %}
+                                        <div class="row form-group">
+                                            <div class="col-sm-12">
+                                                <h2 class="text-center">Order Details</h2>
+                                            </div>
+
+                                        </div>
+                                        <div class="border rounder pl-4 py-3 px-4">
+                                            <div class="row form-group">
+                                                <div class="col-sm-6 text-left">
+                                                    <h3 class="align-content-center">Order Created</h3>
+                                                    <label class="align-content-">Date &
+                                                        Time: {{ bidding["offeraccpt"]["timestamp"].strftime('%d %b, %Y (%H:%M)') }}</label>
+                                                    <br>
+                                                    <label>Project: </label><label> {{ project_details["projects"][0]["project_name"] }}
+                                                </label>
+                                                    <br>
+                                                    <label>Actor: </label><label> {{ project_details["projects"][0]["project_name"] }}
+                                                </label>
+                                                </div>
+                                                <div>
+                                                    <div class="col-sm-6 text-left">
+                                                        <div class="row form-group"><h2></h2></div>
+                                                        <div class="row form-group">
+                                                            <p>Budget:
+                                                                $ {{ project_details["projects"][0]["project_cost"] }}</p>
+                                                        </div>
+                                                        <div class="row form-group">
+                                                            <p>Deadline:
+                                                                $ {{ project_details["projects"][0]["project_deadline"][0] }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="border rounder pl-4 py-3 px-4">
+                                            <div class="row form-group">
+                                                <div class="col-sm-5">
+                                                </div>
+                                                <div class="col-sm-7 text-right">
+                                                    <h3 class="align-content-center">Order Accept</h3>
+                                                    <label class="align-content-center">Date &
+                                                        Time: {{ bidding["offeraccpt"]["accepttime"].strftime('%d %b, %Y (%H:%M)') }}
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% if 'projectSubmit' in bidding %}
+                                            <div class="border rounder pl-4 py-3 px-4">
+                                                <div class="row form-group">
+                                                    <div class="col-sm-5"></div>
+                                                    <div class="col-sm-7 text-right">
+                                                        <h3 class="align-content-center">Order Submitted</h3>
+                                                        <label class="align-content-">Date &
+                                                            Time: {{ bidding["projectSubmit"]["timestamp"].strftime('%d %b, %Y (%H:%M)') }}</label>
+                                                        <br>
+                                                        <label>Message: </label><label> {{ bidding["projectSubmit"]["message"] }}
+                                                    </label>
+                                                        <br>
+                                                        <label>Project Files: </label><a
+                                                            href="../static/projectFiles/{{ bidding["projectSubmit"]["attachedfiles"] }}"
+                                                            target="_blank"
+                                                            download><label> {{ bidding["projectSubmit"]["attachedfiles"].split("-")[1] }}
+                                                    </label></a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if 'revisions' not in bidding and 'projectSubmit' not in bidding %}
+                                            <div class="border rounder pl-4 py-3 px-4">
+                                                <div class="row form-group text-center">
+                                                    <div class="col-sm-4"></div>
+                                                    <div class="col-sm-4">
+                                                        <button class="btn btn-success"
+                                                                id="{{ bidding["actor_id"] }},{{ bidding["buyer_id"] }},{{ bidding["project_id"] }}"
+                                                                onclick="completedModal(this.id)">
+                                                            Copmpleted
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if 'revisions' in bidding %}
+                                            {% for eachrevision in bidding["revisions"] %}
+                                                {% if eachrevision["response"] == "buyer" %}
+                                                    <div class="border rounder pl-4 py-3 px-4">
+                                                        <div class="row form-group">
+                                                            <div class="col-sm-12 text-left">
+                                                                <h3 class="align-content-center">Revision</h3>
+                                                                <p>Date &
+                                                                    Time: {{ eachrevision["timestamp"].strftime('%d %b, %Y (%H:%M)') }}</p>
+                                                                <p>Message: {{ eachrevision["message"] }}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% elif eachrevision["response"] == "actor" %}
+                                                    <div class="border rounder pl-4 py-3 px-4">
+                                                        <div class="row form-group">
+                                                            <div class="col-sm-12 text-right">
+                                                                <h3 class="align-content-center">Response</h3>
+                                                                <p>Date &
+                                                                    Time: {{ eachrevision["timestamp"].strftime('%d %b, %Y (%H:%M)') }}</p>
+                                                                <p>Message: {{ eachrevision["message"] }}</p>
+                                                                <label>Project Files: </label><a
+                                                                    href="../static/projectFiles/{{ eachrevision["attachedfiles"] }}"
+                                                                    target="_blank"
+                                                                    download><label> {{ eachrevision["attachedfiles"].split("-")[1] }}
+                                                            </label></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                        {% if 'revisions' in bidding %}
+                                            {% for revision in bidding["revisions"] %}
+                                                {% if loop.last %}
+                                                    {% if revision["response"] == "buyer" %}
+                                                        <div class="border rounder pl-4 py-3 px-4">
+                                                            <div class="row form-group text-center">
+                                                                <div class="col-sm-3"></div>
+                                                                <div class="col-sm-6">
+                                                                    <button class="btn btn-success"
+                                                                            id="{{ bidding["actor_id"] }},{{ bidding["buyer_id"] }},{{ bidding["project_id"] }}"
+                                                                            onclick="revisionModal(this.id)">
+                                                                        Revised
+                                                                    </button>
+                                                                </div>
+                                                                <div class="col-sm-4">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    {% else %}
+                                                        <div class="border rounder pl-4 py-3 px-4">
+                                                            <div class="col-sm-5"></div>
+                                                            {#                                                            <div class="col-sm-4">#}
+                                                            {#                                                                <button class="btn btn-success"#}
+                                                            {#                                                                        id="{{ bidding["actor_id"] }},{{ bidding["buyer_id"] }},{{ bidding["project_id"] }}"#}
+                                                            {#                                                                        onclick="cancelJob(this.id)">Cancel#}
+                                                            {#                                                                </button>#}
+                                                            {#                                                            </div>#}
+                                                        </div>
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endfor %}
+
+                                        {% endif %}
+
+                                        {% if bidding["offeraccpt"]["status"] == "completed" %}
+                                            <div class="border rounder pl-4 py-3 px-4">
+                                                <h2 class="text-center">Completed</h2>
+                                                <h2 class="text-center">Review (Ratinsadg)</h2>
+                                                <div class="row form-group text-center">
+                                                    <div class="col-sm-3">
+                                                        <p>Comment: </p>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        ASsadaskjdxklsam
+                                                        <p>{{ bidding["comments"] }}</p>
+                                                    </div>
+                                                    Completed
+                                                </div>
+                                                <div class="row form-group text-center">
+                                                    <div class="col-sm-3">
+                                                        <p>Rating: </p>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <p>{{ bidding["reviews"] }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                        {#                                        asdasdasd#}
+                                        {#                                    {% else %}#}
+                                    {% elif bidding["offeraccpt"]["status"] == "completed" %}
+                                        {% set a.value = a.value + 1 %}
+                                        <div class="row form-group">
+                                            <div class="col-sm-12">
+                                                <h2 class="text-center">Order Details</h2>
+                                            </div>
+
+                                        </div>
+                                        <div class="border rounder pl-4 py-3 px-4">
+                                            <div class="row form-group">
+                                                <div class="col-sm-6 text-left">
+                                                    <h3 class="align-content-center">Order Created</h3>
+                                                    <label class="align-content-">Date &
+                                                        Time: {{ bidding["offeraccpt"]["timestamp"].strftime('%d %b, %Y (%H:%M)') }}</label>
+                                                    <br>
+                                                    <label>Project: </label><label> {{ project_details["projects"][0]["project_name"] }}
+                                                </label>
+                                                    <br>
+                                                    <label>Actor: </label><label> {{ project_details["projects"][0]["project_name"] }}
+                                                </label>
+                                                </div>
+                                                <div>
+                                                    <div class="col-sm-6 text-left">
+                                                        <div class="row form-group"><h2></h2></div>
+                                                        <div class="row form-group">
+                                                            <p>Budget:
+                                                                $ {{ project_details["projects"][0]["project_cost"] }}</p>
+                                                        </div>
+                                                        <div class="row form-group">
+                                                            <p>Deadline:
+                                                                $ {{ project_details["projects"][0]["project_deadline"][0] }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="border rounder pl-4 py-3 px-4">
+                                            <div class="row form-group">
+                                                <div class="col-sm-5">
+                                                </div>
+                                                <div class="col-sm-7 text-right">
+                                                    <h3 class="align-content-center">Order Accept</h3>
+                                                    <label class="align-content-center">Date &
+                                                        Time: {{ bidding["offeraccpt"]["accepttime"].strftime('%d %b, %Y (%H:%M)') }}
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% if 'projectSubmit' in bidding %}
+                                            <div class="border rounder pl-4 py-3 px-4">
+                                                <div class="row form-group">
+                                                    <div class="col-sm-5"></div>
+                                                    <div class="col-sm-7 text-right">
+                                                        <h3 class="align-content-center">Order Submitted</h3>
+                                                        <label class="align-content-">Date &
+                                                            Time: {{ bidding["projectSubmit"]["timestamp"].strftime('%d %b, %Y (%H:%M)') }}</label>
+                                                        <br>
+                                                        <label>Message: </label><label> {{ bidding["projectSubmit"]["message"] }}
+                                                    </label>
+                                                        <br>
+                                                        <label>Project Files: </label><a
+                                                            href="../static/projectFiles/{{ bidding["projectSubmit"]["attachedfiles"] }}"
+                                                            target="_blank"
+                                                            download><label> {{ bidding["projectSubmit"]["attachedfiles"].split("-")[1] }}
+                                                    </label></a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if 'revisions' not in bidding and 'projectSubmit' not in bidding %}
+                                            <div class="border rounder pl-4 py-3 px-4">
+                                                <div class="row form-group text-center">
+                                                    <div class="col-sm-4"></div>
+                                                    <div class="col-sm-4">
+                                                        <button class="btn btn-success"
+                                                                id="{{ bidding["actor_id"] }},{{ bidding["buyer_id"] }},{{ bidding["project_id"] }}"
+                                                                onclick="completedModal(this.id)">
+                                                            Copmpleted
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if 'revisions' in bidding %}
+                                            {% for eachrevision in bidding["revisions"] %}
+                                                {% if eachrevision["response"] == "buyer" %}
+                                                    <div class="border rounder pl-4 py-3 px-4">
+                                                        <div class="row form-group">
+                                                            <div class="col-sm-12 text-left">
+                                                                <h3 class="align-content-center">Revision</h3>
+                                                                <p>Date &
+                                                                    Time: {{ eachrevision["timestamp"].strftime('%d %b, %Y (%H:%M)') }}</p>
+                                                                <p>Message: {{ eachrevision["message"] }}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% elif eachrevision["response"] == "actor" %}
+                                                    <div class="border rounder pl-4 py-3 px-4">
+                                                        <div class="row form-group">
+                                                            <div class="col-sm-12 text-right">
+                                                                <h3 class="align-content-center">Response</h3>
+                                                                <p>Date &
+                                                                    Time: {{ eachrevision["timestamp"].strftime('%d %b, %Y (%H:%M)') }}</p>
+                                                                <p>Message: {{ eachrevision["message"] }}</p>
+                                                                <label>Project Files: </label><a
+                                                                    href="../static/projectFiles/{{ eachrevision["attachedfiles"] }}"
+                                                                    target="_blank"
+                                                                    download><label> {{ eachrevision["attachedfiles"].split("-")[1] }}
+                                                            </label></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                        {% if 'revisions' in bidding %}
+                                            {% for revision in bidding["revisions"] %}
+                                                {% if loop.last %}
+                                                    {% if revision["response"] == "buyer" %}
+                                                        <div class="border rounder pl-4 py-3 px-4">
+                                                            <div class="row form-group text-center">
+                                                                <div class="col-sm-3"></div>
+                                                                <div class="col-sm-6">
+                                                                    <button class="btn btn-success"
+                                                                            id="{{ bidding["actor_id"] }},{{ bidding["buyer_id"] }},{{ bidding["project_id"] }}"
+                                                                            onclick="revisionModal(this.id)">
+                                                                        Revised
+                                                                    </button>
+                                                                </div>
+                                                                <div class="col-sm-4">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    {% else %}
+                                                        <div class="border rounder pl-4 py-3 px-4">
+                                                            <div class="col-sm-5"></div>
+                                                            {#                                                            <div class="col-sm-4">#}
+                                                            {#                                                                <button class="btn btn-success"#}
+                                                            {#                                                                        id="{{ bidding["actor_id"] }},{{ bidding["buyer_id"] }},{{ bidding["project_id"] }}"#}
+                                                            {#                                                                        onclick="cancelJob(this.id)">Cancel#}
+                                                            {#                                                                </button>#}
+                                                            {#                                                            </div>#}
+                                                        </div>
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endfor %}
+
+                                        {% endif %}
+
+                                        {% if bidding["offeraccpt"]["status"] == "completed" %}
+                                            <div class="border rounder pl-4 py-3 px-4">
+                                                <h2 class="text-center">Completed</h2>
+                                                <h2 class="text-center">Review (Rating)</h2>
+                                                <div class="row form-group text-center">
+                                                    <div class="col-sm-3">
+                                                        <p>Comment: </p>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <p>{{ bidding["comments"] }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group text-center">
+                                                    <div class="col-sm-3">
+                                                        <p>Rating: </p>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <p>{{ bidding["reviews"] }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                        {% if a.value == 0 %}
+                            <p class="divcenter font-weight-bold">No Messages Received
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="revisionModal" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Revision</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" action="/receive-revision" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>Message</label>
+                            </div>
+                            <div class="col-sm-9">
+                    <textarea type="text" maxlength="10000" cols="45" rows="5" id="revisionmessage"
+                              name="revisionmessage"
+                              required></textarea>
+
+                            </div>
+                            <input type="text" maxlength="10000" id="response" name="response" value="actor"
+                                   style="display: none;" required>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>Revised Files</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input class="form-control" type="file" name="revisionFiles" id="revisionFiles"
+                                       required>
+                                <span>Attached files as 1 zip file.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" id="actor_id" name="actor_id" required style="display: none;">
+                            <input type="text" id="buyer_id" name="buyer_id" required style="display: none;">
+                            <input type="text" id="project_id" name="project_id" required style="display: none;">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Revised</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="completeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">Order Competed</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/send-project" method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>Message</label>
+                            </div>
+                            <div class="col-sm-9">
+                            <textarea type="text" maxlength="10000" cols="45" rows="5" id="sendmessage"
+                                      name="sendmessage"
+                                      required></textarea>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>Attached Files</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input class="form-control" type="file" maxlength="10000" id="fiels" name="fiels"
+                                       required>
+                                <span>Attached files as zip folder.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="actor_idC" name="actor_idC" required style="display: none;">
+                            <input type="text" id="buyer_idC" name="buyer_idC" required style="display: none;">
+                            <input type="text" id="project_idC" name="project_idC" required style="display: none;">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Send Project</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        $(document).ready(function () {
+
+            $('#selection').on('change', function () {
+                change($(this).val());
+            });
+
+        });
+
+
+        function change(sourceUrl) {
+            var audio = document.getElementById("player");
+            var source = document.getElementById("mp3_src");
+
+            audio.pause();
+
+            if (sourceUrl) {
+                source.src = sourceUrl;
+                audio.load();
+                audio.play();
+            }
+        }
+
+        function changetab() {
+            // first remove the active class from all the nav-links
+            $('#Responses').removeClass('active');
+            // then apply active class on the target nav-link's id
+            $('#Messages').addClass('active')
+
+            $('Responses').removeClass('show active')
+            $('Messages').addClass('show active')
+        }
+
+
+        function sentAcceptOffer(actId, prjId, byrId) {
+            console.log(actId);
+            var actrId = actId.toString().split(",")[0]
+            var prjId = actId.toString().split(",")[1]
+            var byrId = actId.toString().split(",")[2]
+            console.log(actrId);
+            console.log(prjId);
+            console.log(byrId);
+            jQuery.ajax({
+                type: 'POST',
+                url: '/sent-offer',
+                data: {
+                    project_Id: prjId,
+                    buyer_Id: byrId,
+                    actor_Id: actrId
+                },
+                success: function (response) {
+                    if (response["success"] == true) {
+                        location.reload();
+                    } else {
+                        console.log(response)
+                        alert(response["error"])
+                    }
+                }
+            });
+        }
+
+
+        function revisionModal(id) {
+            var actor_id = id.split(',')[0];
+            var buyer_id = id.split(',')[1];
+            var project_id = id.split(',')[2];
+            document.getElementById("actor_id").value = actor_id.toString();
+            document.getElementById("buyer_id").value = buyer_id.toString();
+            document.getElementById("project_id").value = project_id.toString();
+            $("#revisionModal").modal('show');
+        }
+
+
+        function completedModal(id) {
+            var actor_id = id.split(',')[0];
+            var buyer_id = id.split(',')[1];
+            var project_id = id.split(',')[2];
+            document.getElementById("actor_idC").value = actor_id.toString();
+            document.getElementById("buyer_idC").value = buyer_id.toString();
+            document.getElementById("project_idC").value = project_id.toString();
+            $("#completeModal").modal('show');
+        }
+
+    </script>
+{% endblock %}

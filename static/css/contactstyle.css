@@ -1,0 +1,342 @@
+@import url("https://fonts.googleapis.com/css2?family=Aladin&family=Poppins:ital@1&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+section {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: linear-gradient(to right, #dcb073, #957546);
+}
+/* section::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background-image: linear-gradient(#dca961, rgb(214, 158, 74));
+
+} */
+section .container {
+    position: relative;
+    min-width: 1100px;
+    min-height: 550px;
+    display: flex;
+    z-index: 1000;
+}
+section .container .contactinfo {
+    position: absolute;
+    margin-top: 25px;
+    width: 350px;
+    height: calc(105% - 80px);
+    background: #2b2b2b;
+    z-index: 1;
+    padding: 19px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2);
+}
+section .container .contactinfo h2 {
+    color: #fff;
+    font-size: 40px;
+    font-weight: 500px;
+}
+section .container .contactinfo .info {
+    position: relative;
+    /* margin: 50px 0; */
+}
+section .container .contactinfo .info li {
+    position: relative;
+    list-style: none;
+    display: flex;
+    margin: 20px 0;
+    cursor: pointer;
+    align-items: flex-start;
+}
+section .container .contactinfo .info li span:nth-child(1) {
+    width: 30px;
+    min-width: 30px;
+}
+section .container .contactinfo .info li span:nth-child(1) img {
+    max-width: 100%;
+    filter: invert(1);
+}
+section .container .contactinfo .info li span:nth-child(2) {
+    color: #fff;
+    margin-left: 10px;
+    font-weight: 300;
+    line-height: 1.5;
+}
+section .container .contactinfo .info li:hover span:nth-child(1) img,
+section .container .contactinfo .info li:hover span:nth-child(2) {
+    opacity: 1;
+}
+section .container .contactinfo .sci {
+    position: relative;
+    display: flex;
+}
+section .container .contactinfo .sci li {
+    list-style: none;
+    margin-right: 15px;
+}
+section .container .contactinfo .sci li a {
+    text-decoration: none;
+}
+section .container .contactinfo .sci li a img {
+    filter: invert(1);
+    opacity: 0.5;
+}
+section .container .contactinfo .sci li:hover a img {
+    opacity: 1;
+}
+section .container .contactform {
+    position: absolute;
+    padding: 70px 50px;
+    background: #fff;
+    margin-left: 50px;
+    padding-left: 50px;
+    width: calc(100% - 150px);
+    height: 105%;
+    box-shadow: 0 50px 50px rgba(0, 0, 0, 0.5);
+}
+section .container .contactform h2 {
+    color: #2b2b2b;
+    font-size: 45px;
+}
+section .container .contactform .formbox {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-top: 30px;
+}
+section .container .contactform .formbox .inputbox {
+    position: relative;
+    margin: 0 0 35px 0;
+}
+section .container .contactform .formbox .inputbox.w50 {
+    width: 47%;
+}
+section .container .contactform .formbox .inputbox.w100 {
+    width: 100%;
+}
+section .container .contactform .formbox .inputbox input,
+section .container .contactform .formbox .inputbox textarea {
+    width: 100% !important;
+    padding: 5px 0;
+    resize: none;
+
+    font-size: 18px;
+    font-weight: 300;
+    color: #333;
+    border: none;
+    border-bottom: 1px solid #777777;
+    outline: none;
+}
+
+section .container .contactform .formbox .inputbox textarea {
+    min-height: 120px;
+}
+
+section .container .contactform .formbox .inputbox span {
+    position: absolute;
+    left: 0;
+    padding: 5px 0;
+    font-size: 18px;
+    font-weight: 300;
+    color: #333;
+    transition: 0.3s;
+    pointer-events: none;
+}
+section .container .contactform .formbox .inputbox input:focus ~ span,
+section .container .contactform .formbox .inputbox textarea:focus ~ span,
+section .container .contactform .formbox .inputbox input:valid ~ span,
+section .container .contactform .formbox .inputbox textarea:valid ~ span {
+    transform: translateY(-20px);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #957546;
+}
+section .container .contactform .formbox .inputbox input[type="submit"] {
+    position: relative;
+    cursor: pointer;
+    background: #2b2b2b;
+    color: #fff;
+    border: none;
+    max-width: 150px;
+    padding: 12px;
+    border-radius: 10px;
+}
+section .container .contactform .formbox .inputbox input[type="submit"]:hover {
+    background: #957546;
+}
+.pera {
+    color: #fff;
+}
+
+/* media query */
+
+@media only screen and (max-width: 600px) {
+    .pera {
+        color: #fff;
+        font-size: 20px;
+    }
+    section .container .contactinfo .sci li a img {
+        filter: invert(1);
+        opacity: 0.5;
+        height: 43px;
+    }
+
+    section .container .contactinfo .info li span:nth-child(2) {
+        color: #fff;
+        margin-left: 10px;
+        font-weight: 300;
+        line-height: 1.5;
+        font-size: 20px;
+    }
+
+    section .container .contactform .formbox {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding-top: 30px;
+    }
+    section .container .contactform {
+        position: absolute;
+        padding: 70px 50px;
+        background: #fff;
+        margin-left: 150px;
+        padding-left: 250px;
+        /* width: calc(100% - 150px); */
+        height: 100%;
+        box-shadow: 0 50px 50px rgb(0 0 0 / 50%);
+        width: 50%;
+    }
+    section .container .contactform {
+        position: absolute;
+        padding: 70px 50px;
+        background: #fff;
+        margin-left: 150px;
+        padding-left: 250px;
+        /* width: calc(100% - 150px); */
+        height: 100%;
+        box-shadow: 0 50px 50px rgb(0 0 0 / 50%);
+        width: 50%;
+        margin-top: 526px;
+    }
+    section .container {
+        position: relative;
+        /* min-width: 1076px; */
+        min-height: 550px;
+        display: flex;
+        z-index: 1000;
+    }
+
+    section .container .contactinfo {
+        position: absolute;
+        margin-top: 25px;
+        width: 350px;
+        height: calc(105% - 80px);
+        background: #2b2b2b;
+        z-index: 1;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 0 20px 20px rgb(0 0 0 / 20%);
+        margin-left: 351px !important;
+    }
+
+    .formbox .inputbox.w50 {
+        width: 100% !important;
+    }
+    section {
+        display: flex;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        min-height: 61vh;
+        background: #112d42;
+        width: 0% !important;
+    }
+    section .container .contactinfo {
+        position: absolute;
+        margin-top: 0px !important;
+        width: 535px !important;
+        height: calc(105% - 80px);
+        background: #2b2b2b;
+        z-index: 1;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: none !important;
+        margin-left: 539px !important;
+    }
+    section .container .contactform {
+        position: absolute;
+        padding: 70px 50px;
+        background: #fff;
+        margin-left: 540px !important;
+        /* padding-left: 250px; */
+        width: calc(65% - 164px) !important;
+        height: 100%;
+        box-shadow: none !important;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    section .container .contactinfo {
+        position: absolute;
+        margin-top: 25px;
+        width: 350px;
+        height: calc(105% - 80px);
+        background: #2b2b2b;
+        z-index: 1;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 0 20px 20px rgb(0 0 0 / 20%);
+        margin-left: 167px;
+    }
+
+    section {
+        display: flex;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        min-height: 61vh;
+        background: #112d42;
+        width: 110%;
+    }
+
+    section .container .contactform {
+        position: absolute;
+        padding: 70px 50px;
+        background: #fff;
+        margin-left: 480px;
+        /* padding-left: 250px; */
+        width: calc(55% - 150px);
+        height: 100%;
+        box-shadow: 0 50px 50px rgb(0 0 0 / 50%);
+    }
+
+    section {
+        display: flex;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        min-height: 61vh;
+        background: #112d42;
+    }
+}

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="static/css/signup.css" />
+        <link rel="stylesheet" href="static/css/bootstrap.min.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+        <link rel="icon" type="image/png" href="static/img/fav.png" />
+
+        <title>Sign up</title>
+    </head>
+
+    <body>
+        <a class="close-btn" href="\"></a>
+        <section class="header_form">
+            <div class="header_div">
+                <div class="container">
+                    <div class="row mt-5">
+                        <div class="col-lg-6 col-sm-12 contain-6">
+                            <div class="contain">
+                                <div class="logo_form">
+                                    <img
+                                        src="static/img/login/logo.png"
+                                        class="img-fluid"
+                                        alt=""
+                                    />
+                                </div>
+                                <br />
+
+                                <br />
+                                <br />
+                                <div class="header_text">
+                                    <h1>
+                                        Asia's First Freelance Voice Over
+                                        Marketplace
+                                    </h1>
+                                    <br />
+
+                                    <div class="pera">
+                                        <p>
+                                            Sign up in moments. Place your work
+                                            for free. Access the Asia's finest
+                                            expert voice artists.
+                                            <br />
+                                            Voices city is utilized by the
+                                            Asia's greatest reliable brands
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- <ul class="ul_list">
+                                <li><a href="https://www.facebook.com/Voices-City-332687944647576/"
+                                        class="fa fa-facebook"></a></li>
+                                <li> <a href="https://twitter.com/VoicesCity2?s=08" class="fa fa-twitter"></a> </li>
+                                <li> <a href="#" class="fa fa-google"></a></li>
+                            </ul> -->
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="contain_form">
+                                <div class="heading_userform">
+                                    <h1>Sign Up</h1>
+                                </div>
+
+                                <form
+                                    action="/hiresignup"
+                                    method="post"
+                                    oninput='checkpassword.setCustomValidity(checkpassword.value != password.value ? "Passwords do not match." : "")'
+                                >
+                                    {% if loginerror != "NULL" %}
+                                    <div
+                                        class="alert alert-danger alert-dismissible"
+                                    >
+                                        <button
+                                            type="button"
+                                            class="close"
+                                            data-dismiss="alert"
+                                        ></button>
+                                        <strong>ALERT!</strong> {{loginerror}}
+                                    </div>
+                                    {% endif %} {% if message|length>1 %}
+                                    <div
+                                        class="alert alert-success alert-dismissible"
+                                    >
+                                        <button
+                                            type="button"
+                                            class="close"
+                                            data-dismiss="alert"
+                                        ></button>
+                                        <strong>Success!</strong> {{ message }}
+                                    </div>
+                                    {% endif %}
+
+                                    <div class="form-group">
+                                        <input
+                                            type="email"
+                                            class="form-control"
+                                            id="email"
+                                            name="email"
+                                            autocomplete="off"
+                                            aria-describedby="email"
+                                            placeholder="Enter email"
+                                            required
+                                        />
+                                    </div>
+                                    <div class="form-group">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            name="companyname"
+                                            autocomplete="off"
+                                            aria-describedby="companyname"
+                                            placeholder="Company Name"
+                                            required
+                                        />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            name="username"
+                                            autocomplete="off"
+                                            aria-describedby="UserName"
+                                            placeholder="User Name"
+                                            required
+                                        />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input
+                                            type="password"
+                                            class="form-control"
+                                            id="password"
+                                            name="password"
+                                            autocomplete="off"
+                                            placeholder="Password"
+                                            required
+                                        />
+                                        <i
+                                            class="fa fa-eye password-show-btn-1"
+                                            id="togglePassword"
+                                            onclick=""
+                                        ></i>
+                                    </div>
+                                    <div class="form-group">
+                                        <input
+                                            type="password"
+                                            class="form-control"
+                                            id="checkpassword"
+                                            autocomplete="off"
+                                            name="checkpassword"
+                                            placeholder="Repeat Password"
+                                            required
+                                        />
+                                        <i
+                                            class="fa fa-eye password-show-btn-1"
+                                            id="togglePassword1"
+                                            onclick=""
+                                        ></i>
+                                    </div>
+                                    <div class="form-check text-center">
+                                        <input
+                                            type="checkbox"
+                                            class="form-check-input"
+                                            id="exampleCheck1"
+                                            required
+                                        />
+                                        <label
+                                            class="form-check-label"
+                                            for="exampleCheck1"
+                                            >I agree to the Voices City User
+                                            Agreement and Privacy Policy.
+                                        </label>
+                                    </div>
+                                    <button
+                                        type="submit"
+                                        class="Login-Form-Btn-1 btn mt-3"
+                                    >
+                                        Join Voices City
+                                    </button>
+
+                                    <hr style="border-top: 1px solid #be9e65" />
+
+                                    <p class="text-center">
+                                        Already have an account?
+                                        <a href="/login"> Log in</a>
+                                    </p>
+                                    <a
+                                        href="/resend_verification"
+                                        class="forget-password text-center"
+                                    >
+                                        Didn't receive verification email?</a
+                                    >
+                                    <div class="header_icons">
+                                        <h6>Login with Social Media</h6>
+                                        <ul class="ul_list text-center">
+                                            <li>
+                                                <a
+                                                    href="https://www.facebook.com/Voices-City-332687944647576/"
+                                                    class="fa fa-facebook"
+                                                ></a>
+                                            </li>
+                                            <li>
+                                                <a
+                                                    href="https://twitter.com/VoicesCity2?s=08"
+                                                    class="fa fa-twitter"
+                                                ></a>
+                                            </li>
+                                            <li>
+                                                <a
+                                                    href="#"
+                                                    class="fa fa-google"
+                                                ></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script>
+            const togglePassword = document.querySelector("#togglePassword");
+            const password = document.querySelector("#password");
+            togglePassword.addEventListener("click", function (e) {
+                // toggle the type attribute
+                const type =
+                    password.getAttribute("type") === "password"
+                        ? "text"
+                        : "password";
+                password.setAttribute("type", type);
+                // toggle the eye slash icon
+                this.classList.toggle("fa-eye-slash");
+            });
+
+            const togglePassword1 = document.querySelector("#togglePassword1");
+            const password1 = document.querySelector("#checkpassword");
+            togglePassword1.addEventListener("click", function (e) {
+                // toggle the type attribute
+                const type =
+                    password1.getAttribute("type") === "password"
+                        ? "text"
+                        : "password";
+                password1.setAttribute("type", type);
+                // toggle the eye slash icon
+                this.classList.toggle("fa-eye-slash");
+            });
+        </script>
+
+        <script src="static/css/bootstrap.min.js"></script>
+        <script src="static/css/jquery-3.2.1.slim.min.js"></script>
+        <script src="static/css/popper.min.js"></script>
+    </body>
+</html>

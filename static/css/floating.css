@@ -1,0 +1,247 @@
+.adminActions {
+    position: fixed;
+    bottom: 35px;
+    left: 35px;
+    z-index: 1111;
+}
+
+.adminButton {
+    height: 60px;
+    width: 60px;
+    background-color: rgba(67, 83, 143, 0.8);
+    border-radius: 50%;
+    display: block;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    z-index: 11111;
+}
+
+.adminButton i {
+    font-size: 22px;
+}
+
+.adminButtons {
+    position: absolute;
+    width: 83%;
+    bottom: 125%;
+    text-align: center;
+}
+
+.adminButtons a {
+    display: block;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    text-decoration: none;
+    margin: 10px auto 0;
+    line-height: 1.15;
+    color: #fff;
+    opacity: 0;
+    display: none;
+    position: relative;
+    box-shadow: 0 0 5px 1px rgba(51, 51, 51, 0.3);
+}
+
+.adminButtons a:hover {
+    transform: scale(1.05);
+}
+
+/* .adminButtons a:nth-child(1) {background-color: #ff5722; transition: opacity .2s ease-in-out .3s, transform .15s ease-in-out;}
+        .adminButtons a:nth-child(2) {background-color: #03a9f4; transition: opacity .2s ease-in-out .25s, transform .15s ease-in-out;}
+        .adminButtons a:nth-child(3) {background-color: #f44336; transition: opacity .2s ease-in-out .2s, transform .15s ease-in-out;}
+        .adminButtons a:nth-child(4) {background-color: #4CAF50; transition: opacity .2s ease-in-out .15s, transform .15s ease-in-out;} */
+
+/* .adminActions a i {
+          position: absolute;
+          top: 50%; left: 50%;
+          transform: translate(-50%, -50%);
+        } */
+.adminActions a i {
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 48px;
+    width: 108%;
+    border-radius: 76px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: grid;
+    font-size: 23px;
+    z-index: 111821111;
+}
+.adminToggle {
+    -webkit-appearance: none;
+    position: absolute;
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    z-index: 111111;
+    transition: box-shadow 0.2s ease-in-out;
+    box-shadow: 0 3px 5px 1px rgba(51, 51, 51, 0.3);
+}
+
+.adminToggle:hover {
+    box-shadow: 0 3px 6px 2px rgba(51, 51, 51, 0.3);
+}
+
+.adminToggle:checked ~ .adminButtons a {
+    opacity: 1;
+    display: block;
+}
+
+.fa {
+    padding: 10px;
+    font-size: 20px;
+    width: 40px;
+    text-align: center;
+    text-decoration: none !important;
+    list-style-type: none !important;
+    border-radius: 50px;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+    background: #3b5998;
+    color: white;
+}
+
+.fa-twitter {
+    background: #55acee;
+    color: white;
+}
+
+.fa-google {
+    background: #dd4b39;
+    color: white;
+}
+
+.fa-linkedin {
+    background: #007bb5;
+    color: white;
+}
+
+.fa-youtube {
+    background: #bb0000;
+    color: white;
+}
+
+.fa-instagram {
+    background: #125688;
+    color: white;
+}
+
+.fa-pinterest {
+    background: #cb2027;
+    color: white;
+}
+
+.fa-snapchat-ghost {
+    background: #fffc00;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.fa-skype {
+    background: #00aff0;
+    color: white;
+}
+
+.fa-android {
+    background: #a4c639;
+    color: white;
+}
+
+.fa-dribbble {
+    background: #ea4c89;
+    color: white;
+}
+
+.fa-vimeo {
+    background: #45bbff;
+    color: white;
+}
+
+.fa-tumblr {
+    background: #2c4762;
+    color: white;
+}
+
+.fa-vine {
+    background: #00b489;
+    color: white;
+}
+
+.fa-foursquare {
+    background: #45bbff;
+    color: white;
+}
+
+.fa-stumbleupon {
+    background: #eb4924;
+    color: white;
+}
+
+.fa-flickr {
+    background: #f40083;
+    color: white;
+}
+
+.fa-yahoo {
+    background: #430297;
+    color: white;
+}
+
+.fa-soundcloud {
+    background: #ff5500;
+    color: white;
+}
+
+.fa-reddit {
+    background: #ff5700;
+    color: white;
+}
+
+.fa-rss {
+    background: #ff6600;
+    color: white;
+}
+
+.fa-snackvideo {
+    background: white;
+    color: white;
+    background-image: url(snackvideo.png) !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+.floating {
+    animation-name: floating;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes floating {
+    from {
+        transform: translate(0, 0px);
+    }
+    65% {
+        transform: translate(0, 15px);
+    }
+    to {
+        transform: translate(0, -0px);
+    }
+}

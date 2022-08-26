@@ -1,0 +1,1228 @@
+body
+{
+	background: #f7f7f7;
+}
+
+.orderno1
+{
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 0px;
+
+}
+
+.ordertext1
+{
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 0px;
+}
+
+.ordernospan
+{
+	font-size: 11px;
+}
+
+.ordertext2
+{
+    font-size: 22px;
+
+}
+
+.tr1
+{
+	background: #dee2e6;
+
+}
+
+tbody tr td
+{
+	font-size: 11px;
+}
+
+.td1
+{
+	text-align: right;
+}
+
+.td2
+{
+	    font-size: 12px;
+    font-weight: 700;
+}
+
+
+.me1 {
+    color: #0e0e0f;
+    font-weight: 700;
+    margin-top: 5px;
+    font-size: 14px;
+    margin-bottom: 0px;
+}
+
+
+.divprofile
+{
+    width: 7%;
+    margin-left: 10px;
+
+}
+
+.ordermessage
+{
+    font-size: 13px;
+    margin-bottom: 0px;
+}
+
+.orderdate
+{
+    font-size: 10px;
+    margin-top: 3px;
+    margin-top: 10px;
+
+}
+
+
+.orderdiv1
+{
+	border-bottom: 1px solid #dee2e6;
+    border-top: 1px solid #dee2e6;
+    padding: 20px;
+}
+
+.ordertext3
+
+{
+	font-size: 12px;
+    color: #00668c;
+    text-align: center;
+}
+
+
+.ordertext4
+
+{
+	font-size: 12px;
+    color: black;
+    text-align: center;
+}
+
+.ordericon1
+{
+    font-size: 55px;
+    color: #00668c;
+    padding-bottom: 10px;
+    text-align: center;
+    margin: auto;
+    display: block;
+
+}
+
+
+.orderdiv3
+{
+	border-top: 1px solid #dee2e6;
+    padding: 20px;
+    text-align: center;
+    font-size: 28px;
+    color: #00668c;
+}
+.orderdiv3 p
+{
+   font-size: 15px;
+
+}
+
+.orderdiv2
+{
+	border-bottom: 1px solid #dee2e6;
+    padding: 20px;
+}
+
+.iconrevision
+{
+    font-size: 28px;
+    color: #00668c;
+}
+
+.revisiontext
+{
+    font-size: 15px;
+    color: #00668c;
+    text-transform: capitalize;
+}
+
+
+.revisionbox1
+{
+	text-align: center;
+    border-left: 1px solid;
+}
+
+
+.orderreviews
+{
+    width: 85%;
+    margin: auto;
+    border-top: 1px solid #dee2e6;
+}
+
+.border-top11
+{
+
+		border-top: 1px solid #dee2e6;
+
+}
+
+
+.orderreviewdiv1
+{
+    background: #e4e4e4;
+    padding: 10px;
+}
+
+
+.Comment
+{
+margin-bottom: 0px;
+padding-left: 5px;
+font-size: 12px;
+}
+
+
+.username
+
+{
+	margin-bottom: 0px;
+	padding-left: 5px;
+	font-size: 13px;
+}
+
+.Commenttime
+{
+    font-size: 9px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.checked {
+  color: orange;
+}
+
+
+.orderreviewtext1
+{   
+	font-size: 11px;
+    line-height: 100%;
+    padding-bottom: 5px;
+    margin-bottom: 0px;
+}
+
+.orderreviewtext2
+{   font-size: 11px;
+    line-height: 100%;
+    padding-bottom: 5px;
+    margin-bottom: 0px;
+
+}
+
+.orderreviewtextarea
+{
+	width: 100%;
+	margin-top: 10px;
+}
+
+
+
+
+.completeorder
+{
+	background: #d2eaff;
+	text-align: center;
+	padding-bottom: 15px;
+	padding-top: 15px;
+
+}
+
+.completeordericon
+{
+	color: #00668c;
+    padding-bottom: 10px;
+    text-align: center;
+    margin: auto;
+    display: block;
+    font-size: 34px;
+}
+
+.completeordertext1
+{
+	color: #00668c;
+    font-size: 18px;
+
+}
+
+.completeordertext2
+{
+	text-align: center;
+    padding-top: 15px;
+    font-size: 12px;
+}
+
+.ordermaindiv1
+{
+	width: 60%;
+}
+
+.borderpostjob1
+{
+	border-radius: 10px;
+	border: 1px solid black;
+	padding: 10px;
+}
+
+.postjobtext1
+{
+	    font-size: 20px;
+    font-weight: 600;
+}
+
+
+
+.postjoblabel {
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 2px;
+}
+
+.postjobtext2
+{
+	    font-size: 14px;
+
+}
+
+.postjobinput1
+{
+	width: 40%;
+	margin-bottom: 30px;
+}
+
+.postjobdiv1
+{
+	border: 1px solid black;
+	text-align: center;
+	border-radius: 10px;
+	padding:10px;
+	transition: 0.7s;
+	margin-bottom: 20px;
+}
+
+.postinstructor
+{
+margin-bottom: 2px;
+font-weight: 700;
+}
+
+.postjobdivtext1
+{
+
+}
+
+.postjobdiv1:hover
+{
+
+	-webkit-box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.75);
+}
+
+
+.postjobicon1
+{
+    font-size: 30px;
+    color: #1e7e34;
+    padding-top: 10px;
+
+   }
+
+
+
+.selectpicker option
+{
+        border: none;
+        background-color: white;
+        outline: none;
+        -webkit-appearance: none;
+        -moz-appearance : none;
+        color: #14B1B2;
+        font-weight: bold;
+        font-size: 30px;
+        margin: 0;
+        padding-left: 0;
+        margin-top: -20px;
+        background: none;
+    }
+select.selectpicker
+{
+        border: none;
+        background-color: white;
+        outline: none;
+        -webkit-appearance: none;
+        -moz-appearance : none;
+        color: #14B1B2;
+        font-weight: bold;
+        font-size: 30px;
+        margin: 0;
+        padding-left: 0;
+        margin-top: -20px;
+        background: none;
+    }
+
+.radiobtn1
+{
+	background: white;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+
+
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.btnupload {
+    border: 2px solid gray;
+    color: gray;
+    background-color: white;
+    padding: 8px 8px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.postjobcontainer
+
+{
+	margin-bottom: 100px !important;
+    margin-top: 70px !important;
+}
+
+
+
+
+
+.tab-content>.tab-pane {
+     border: 1px solid;
+    border-radius: 10px;
+        padding: 10px;
+
+}
+
+
+
+.btnnextdiv1{
+	    position: inherit;
+    margin-top: -40px;
+    float: right;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

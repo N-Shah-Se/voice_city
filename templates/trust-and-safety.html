@@ -1,0 +1,487 @@
+{% extends "layout.html" %} {% block title %}Trust-And-Safety{% endblock %} {%
+block head %} {{ super() }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link
+    rel="stylesheet"
+    href='{{ url_for("static", filename="css/order.css") }}'
+/>
+<link
+    rel="stylesheet"
+    href='{{ url_for("static", filename="css/floating.css") }}'
+/>
+
+<style>
+    .tab-content > .tab-pane {
+        border: none;
+        padding: 0px;
+    }
+</style>
+
+{% endblock %} {% block body %}
+<link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+/>
+
+<div class="container mart-5">
+    <div class="row">
+        <div class="col-sm-6">
+            <p class="pt-5 font-weight-bolder h2 pb-2 mt-5">Trust Center</p>
+            <p>
+                We're constructing the biggest network of voices on the planet,
+                beginning with our Trust Center. Here, you can perceive how
+                we're encouraging associations for work while keeping the
+                network free from any danger on the web.
+            </p>
+        </div>
+        <div class="col-sm-6">
+            <img
+                src="static/img/trust-center-hero.jpg"
+                class="img-fluid pt-2"
+            />
+        </div>
+    </div>
+
+    <ul class="nav justify-content-center" id="pills-tab" role="tablist">
+        <li class="nav-item">
+            <a
+                class="nav-link home-new-btn-1 active"
+                id="pills-home-tab"
+                data-toggle="pill"
+                href="#pills-home"
+                role="tab"
+                aria-controls="pills-home"
+                aria-selected="true"
+                >Trust</a
+            >
+        </li>
+        <li class="nav-item">
+            <a
+                class="nav-link home-new-btn-1"
+                id="pills-profile-tab"
+                data-toggle="pill"
+                href="#pills-profile"
+                role="tab"
+                aria-controls="pills-profile"
+                aria-selected="false"
+                >Safety</a
+            >
+        </li>
+        <li class="nav-item">
+            <a
+                class="nav-link home-new-btn-1"
+                id="pills-contact-tab"
+                data-toggle="pill"
+                href="#pills-contact"
+                role="tab"
+                aria-controls="pills-contact"
+                aria-selected="false"
+                >Security
+            </a>
+        </li>
+    </ul>
+
+    <div
+        class="tab-content pt-3 border border-black px-3"
+        id="pills-tabContent"
+    >
+        <div
+            class="tab-pane fade show active"
+            id="pills-home"
+            role="tabpanel"
+            aria-labelledby="pills-home-tab"
+        >
+            <p class="h3 font-weight-bold mt-2 text-center pt-1 pb-4">
+                Trust At Voicescity
+            </p>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div
+                        class="border border-black py-3 px-3 text-center hover-1-div-1 trust-div-2"
+                    >
+                        <p class="font-weight-bold h5 pb-2">Quality Talent</p>
+                        <p>
+                            Our voice entertainers have added to the
+                            accomplishment of outstanding tasks for a portion of
+                            the world's biggest and most cherished brands. With
+                            VoiceTie, the top voice ability is welcome to your
+                            work, putting the best-coordinated ability at the
+                            highest point of your tryouts.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div
+                        class="border border-black py-3 px-3 text-center hover-1-div-1 trust-div-2"
+                    >
+                        <p class="font-weight-bold h5 pb-2">Verified Talent</p>
+                        <p>
+                            The Verified by Voicescity program checks the
+                            personality and nature of the ability on our
+                            foundation. Confirmed status is demonstrated with a
+                            blue checkmark on an ability profile, so you can see
+                            who has been confirmed initially.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div
+                        class="border border-black py-3 px-3 text-center hover-1-div-1 trust-div-2"
+                    >
+                        <p class="font-weight-bold h5 pb-2">
+                            Employment Screening
+                        </p>
+                        <p>
+                            We utilize a blend of mechanized instruments and
+                            manual practices to survey each task to guarantee
+                            that it meets our severe Content Guidelines and
+                            spending necessities to guarantee all work finished
+                            on our foundation is of the quality you expect and
+                            are pleased with.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div
+                        class="border border-black py-3 px-3 text-center hover-1-div-1 trust-div-2"
+                    >
+                        <p class="font-weight-bold h5 pb-2">Risk-Free</p>
+                        <p>
+                            Choosing a talent dependent on a custom tryout
+                            utilizing your own content gives you a review of the
+                            nature of the voice over the document you'll get.
+                            You can unquestionably push ahead with your
+                            undertaking, knowing the voice and sound quality
+                            will live up to your desires.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div
+                        class="border border-black py-3 px-3 text-center hover-1-div-1 trust-div-2"
+                    >
+                        <p class="font-weight-bold h5 pb-2">
+                            Transparent Pricing
+                        </p>
+                        <p>
+                            Our charges are transparent. Customers understand
+                            what they are paying early and ability to
+                            consistently observe their income in their
+                            statement. The employment necessities are laid out
+                            unmistakably in the Agreement among customer and
+                            talent.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div
+                        class="border border-black py-3 px-3 text-center hover-1-div-1 trust-div-2"
+                    >
+                        <p class="font-weight-bold h5 pb-2">
+                            Evaluations and Reviews
+                        </p>
+                        <p>
+                            Evaluations and surveys are a basic piece of the
+                            Voicescity. They permit customers and Talent to rate
+                            their experience in the wake of working with one
+                            another on occupation on Voicescity. This input
+                            exhibits a client's profundity of involvement,
+                            giving you the certainty to work with them.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="tab-pane fade"
+            id="pills-profile"
+            role="tabpanel"
+            aria-labelledby="pills-profile-tab"
+        >
+            <p class="h3 font-weight-bold mt-2 text-center pt-1 pb-4">
+                Safety At Voicescity
+            </p>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div
+                        class="border border-black py-3 px-3 text-center hover-1-div-1 trust-div-2"
+                    >
+                        <p class="font-weight-bold h5 pb-2">
+                            Your Own Data Remains individual
+                        </p>
+                        <p>
+                            Our Privacy Policy traces what individual data we
+                            gather, what we use it for, and how we keep your
+                            information secure. We are dedicated to protecting
+                            your data.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div
+                        class="border border-black py-3 px-3 text-center hover-1-div-1 trust-div-2"
+                    >
+                        <p class="font-weight-bold h5 pb-2">
+                            Your Project Information and Records Are Secured
+                        </p>
+                        <p>
+                            We accept that you, and just you, claim all
+                            authority to share your undertaking details,
+                            contents, documents, and other sensitive data with
+                            others. That is the reason we guarantee that your
+                            correspondences, records, project details, and other
+                            task data are totally private.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div
+                        class="border border-black py-3 px-3 text-center hover-1-div-1 trust-div-2"
+                    >
+                        <p class="font-weight-bold h5 pb-2">Secure payments</p>
+                        <p>
+                            Our safe Secured Payment (SafeBox) Assurance service
+                            guarantees hazard-free payment. Customers possibly
+                            discharge payment when the project is conveyed, and
+                            the talents are destined to be paid for work
+                            finished. We utilize solid credit card
+                            fraud-prevention mechanisms to keep your payment
+                            data secure.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div
+                        class="border border-black py-3 px-3 text-center hover-1-div-1 trust-div-2"
+                    >
+                        <p class="font-weight-bold h5 pb-2">
+                            Malware and Spam Protection
+                        </p>
+                        <p>
+                            We are focused on shielding you from malware and
+                            spam. We utilize exclusive calculations to shield
+                            you from malevolent conduct. Messages and
+                            connections are checked for viruses and other
+                            malware preceding download.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-sm-3"></div>
+
+                <div class="col-sm-6">
+                    <div
+                        class="border border-black py-3 px-3 text-center hover-1-div-1 trust-div-2"
+                    >
+                        <p class="font-weight-bold h5 pb-2">
+                            Privacy and IP Rights
+                        </p>
+                        <p>
+                            We offer Discretionary Help Agreement Terms that are
+                            adaptable so both the customer and talent can feel
+                            certain going into an arrangement concerning
+                            classification and protected innovation rights that
+                            fit their requirements.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-sm-3"></div>
+            </div>
+        </div>
+
+        <div
+            class="tab-pane fade"
+            id="pills-contact"
+            role="tabpanel"
+            aria-labelledby="pills-contact-tab"
+        >
+            <p class="h3 font-weight-bold mt-2 text-center pt-1 pb-4">
+                Security At Voicescity
+            </p>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div
+                        class="border border-black py-3 px-3 text-center hover-1-div-1 trust-div-2"
+                    >
+                        <p class="font-weight-bold h5 pb-2">Cloud Hosting</p>
+                        <p>
+                            Voicescity utilizes Amazon Web Administrations for
+                            our hosting requirements. We realize AWS gives the
+                            hardware, service, and ability we need to best serve
+                            our customers.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div
+                        class="border border-black py-3 px-3 text-center hover-1-div-1 trust-div-2"
+                    >
+                        <p class="font-weight-bold h5 pb-2">Data Encryption</p>
+                        <p>
+                            To help shield from attacks, snooping, and session
+                            hijacking, we encode all information on the way
+                            utilizing Hypertext Transfer Protocol Secure (HTTPS)
+                            and authorize HTTP Exacting Vehicle Security (HSTS).
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div
+                        class="border border-black py-3 px-3 text-center hover-1-div-1 trust-div-2"
+                    >
+                        <p class="font-weight-bold h5 pb-2">
+                            Firewall Security
+                        </p>
+                        <p>
+                            The whole Voicescity application, including your
+                            sound records, work subtleties, and account data, is
+                            ensured and put away behind firewalls observed 24
+                            hours per day by security trained professionals.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div
+                        class="border border-black py-3 px-3 text-center hover-1-div-1 trust-div-2"
+                    >
+                        <p class="font-weight-bold h5 pb-2">Network</p>
+                        <p>
+                            The Voicescity network is 100% Cisco-powered, and
+                            has its own fundamental Intrusion Detection System
+                            (IDS).
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div
+                        class="border border-black py-3 px-3 text-center hover-1-div-1 trust-div-2"
+                    >
+                        <p class="font-weight-bold h5 pb-2">
+                            Data Centers Countrywide
+                        </p>
+                        <p>
+                            Through AWS, we have our site in server centers
+                            worldwide that incorporate biometric observation,
+                            vigorous fire concealment, numerous power sources,
+                            and painstakingly checked climate control. These are
+                            only a couple of the highlights that secure the
+                            servers that store your information.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div
+                        class="border border-black py-3 px-3 text-center hover-1-div-1 trust-div-2"
+                    >
+                        <p class="font-weight-bold h5 pb-2">Security Reviews</p>
+                        <p>
+                            Internal security reviews are on-going and we expand
+                            our investigation with outsider administrations who
+                            utilize free security experts to review our
+                            organization and security protocols.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div
+                        class="border border-black py-3 px-3 text-center hover-1-div-1 trust-div-2"
+                    >
+                        <p class="font-weight-bold h5 pb-2">
+                            Combined Team Accounts
+                        </p>
+                        <p>
+                            Clients that are important for a team have
+                            characterized jobs and duties, for example, Client,
+                            Supervisor, Manager, or owner. Controls are given
+                            over their capacity to survey reactions, recruit an
+                            imaginative talent, and oversee payments.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div
+                        class="border border-black py-3 px-3 text-center hover-1-div-1 trust-div-2"
+                    >
+                        <p class="font-weight-bold h5 pb-2">
+                            Social Media Sign In
+                        </p>
+                        <p>
+                            Internal security reviews are on-going and we expand
+                            our investigation with outsider administrations who
+                            utilize free security experts to review our
+                            organization and security protocols.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p class="h3 font-weight-bold mt-4 text-center pt-5 pb-4">
+        Additional Resources
+    </p>
+    <div class="row mb-5">
+        <div class="col-sm-4">
+            <div
+                class="border border-black py-3 px-3 text-center hover-1-div-1 trust-div-2"
+            >
+                <p class="font-weight-bold h5 pb-2">Community Guidelines</p>
+                <p>
+                    Voicescity individuals are relied upon to follow these rules
+                    that help keep our locale a conscious and inspiring spot. We
+                    are each of a part of establishing that environment.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div
+                class="border border-black py-3 px-3 text-center hover-1-div-1 trust-div-2"
+            >
+                <p class="font-weight-bold h5 pb-2">Content Guidelines</p>
+                <p>
+                    Our substance rules are an impression of our corporate
+                    qualities. We planned them to give an expert environment
+                    that is inviting, engaging, and valuable to everybody on
+                    Voicescity.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div
+                class="border border-black py-3 px-3 text-center hover-1-div-1 trust-div-2"
+            >
+                <p class="font-weight-bold h5 pb-2">Privacy Policy</p>
+                <p>
+                    Ensuring your security and the secrecy of your own data is
+                    crucial to the manner in which we direct business at
+                    Voicescity. Find out regarding why individuals pick
+                    Voicescity to convey quality.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
